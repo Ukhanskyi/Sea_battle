@@ -32,7 +32,7 @@ public class BattlePlace {
                 }
             }
             for(int i=0;i<size;i++){
-                place[x+i][y]=4;
+                place[x+i][y]=size;
             }
         } else{
             if(x<0 || x>9-(size-1)) throw new InvalidPosition();
