@@ -1,3 +1,5 @@
+import java.awt.Image;
+import java.lang.String;
 import javax.swing.*;
 import java.awt.*;
 

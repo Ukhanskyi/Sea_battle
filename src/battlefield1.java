@@ -47,6 +47,17 @@ public class battlefield1 extends JPanel {
             public void actionPerformed(ActionEvent arg0) {
                 myGP = new Bot();
                 myGP.Bot();
+                for (int i = 0; i < 10; i++){
+                    for (int j = 0; j < 10; j++){
+                        try {
+                            Image img = ImageIO.read(new File("img/sea.png"));
+                            placearea[i][j].setIcon(new ImageIcon(img));
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
+                    }
+                }
+
             }
         });
         add(btn1);
@@ -160,4 +171,5 @@ public class battlefield1 extends JPanel {
                 gr.drawString(""+(char)('A'+i-1), 478+i*30, 93);
             }
         }
+
 }
