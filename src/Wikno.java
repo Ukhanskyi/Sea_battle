@@ -1,13 +1,14 @@
-import java.awt.Image;
-import java.lang.String;
 import javax.swing.*;
 import java.awt.*;
 
-public class wikno extends JFrame {
-    public wikno() {
-        battlefield1 pan = new battlefield1();
+public class Wikno extends JFrame {
+    public Wikno() {
+        Battlefield1 pan = new Battlefield1();
         Container cont = getContentPane();
         cont.add(pan);
+
+        ImageIcon icon = new ImageIcon("img/icon1.png");
+        setIconImage(icon.getImage());
 
         setTitle("GAME \" Sea Battle \""); //заголовок вікна
 

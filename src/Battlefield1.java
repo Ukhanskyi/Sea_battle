@@ -1,22 +1,26 @@
-import java.awt.event.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import javax.imageio.*;
-import java.io.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.URL;
 
-public class battlefield1 extends JPanel {
+public class Battlefield1 extends JPanel {
 
     private Timer tmDraw;
-    private Image fon, paluba, ubit, ranen, end1, end2, bomba;
+    private Image background, ship, ubit, sea, icon;
     private JButton btn1, btn2, btn3;
     private Bot myGP;
     private BattlePlace myBP;
     public JButton[][] placearea = new JButton[10][10];
     public JButton[][] myplacearea = new JButton[10][10];
 
-    public battlefield1() {
+
+
+    public Battlefield1() {
         try {
-            fon = ImageIO.read(new File("img/background.png"));
+            background = ImageIO.read(new File("img/background.png"));
         } catch (Exception ex) {
         }
 
@@ -57,7 +61,7 @@ public class battlefield1 extends JPanel {
                         }
                     }
                 }
-
+                myGP.debug_print(myplacearea);
             }
         });
         add(btn1);
@@ -74,6 +78,20 @@ public class battlefield1 extends JPanel {
 //Обрабка події при натисканні на кнопку "Я здаюсь"
 
             public void actionPerformed(ActionEvent arg0) {
+
+                myGP = new Bot();
+                myGP.Bot();
+                for (int i = 0; i < 10; i++){
+                    for (int j = 0; j < 10; j++){
+                        try {
+                            Image img = ImageIO.read(new File("img/sea.png"));
+                            placearea[i][j].setIcon(new ImageIcon(img));
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
+                    }
+                }
+
                 myGP.debug_print(placearea);
             }
         });
@@ -148,7 +166,7 @@ public class battlefield1 extends JPanel {
         public void paintComponent(Graphics gr)
         {
 //Малювання фону
-            gr.drawImage(fon,0,0,900,600,null);
+            gr.drawImage(background,0,0,900,600,null);
 //Встановлення шрифта
             gr.setFont(new Font("serif",2,40));
 //Встановлення кольору
