@@ -1,3 +1,5 @@
+package seabattlepack;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.net.URL;
 
-public class Battlefield1 extends JPanel {
+public class BattlePlaceView extends JPanel {
 
     private Timer tmDraw;
     private Image background, ship, ubit, sea, icon;
@@ -18,7 +20,7 @@ public class Battlefield1 extends JPanel {
 
 
 
-    public Battlefield1() {
+    public BattlePlaceView() {
         try {
             background = ImageIO.read(new File("img/background.png"));
         } catch (Exception ex) {

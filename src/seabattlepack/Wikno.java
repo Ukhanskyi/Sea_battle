@@ -1,9 +1,11 @@
+package seabattlepack;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class Wikno extends JFrame {
     public Wikno() {
-        Battlefield1 pan = new Battlefield1();
+        BattlePlaceView pan = new BattlePlaceView();
         Container cont = getContentPane();
         cont.add(pan);
 

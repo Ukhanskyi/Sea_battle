@@ -1,3 +1,5 @@
+package seabattlepack;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -20,37 +22,42 @@ public class BattlePlace {
             for(int j=0;j<10;j++)
                 place[i][j]=0;
     }
+    
 
     public void SetSized(int x, int y, int size, boolean direction) throws InvalidPosition{
         int[][] place = this.place;
+        int x_max,y_max;
         if(direction){
             if(x<0 || x>9-(size-1)) throw new InvalidPosition();
             if(y<0 || y>9) throw new InvalidPosition();
-            for(int i=x-1;i<x+size+1;i++){
-                for(int j = y-1;j<y+2;j++){
-                    if(i<10 && j<10 && i>=0 && j>=0){
-                        if(place[i][j]!=0) throw new InvalidPosition();
-                    }
-                }
-            }
-            for(int i=0;i<size;i++){
+            x_max = x+size;
+            y_max = y+2;
+        }
+        else {
+            if(x<0 || x>9) throw new InvalidPosition();
+            if(y<0 || y>9-(size-1)) throw new InvalidPosition();
+            x_max = x+2;
+            y_max = y+size;
+        }
+        checkPlace(x, y, x_max, y_max);
+
+        for(int i=0;i<size;i++){
+            if(direction)
                 place[x+i][y]=size;
-            }
-        } else{
-            if(x<0 || x>9-(size-1)) throw new InvalidPosition();
-            if(y<0 || y>6) throw new InvalidPosition();
-            for(int i=x-1;i<x+2;i++){
-                for(int j = y-1;j<y+size+1;j++){
-                    if(i<10 && j<10 && i>=0 && j>=0){
-                        if(place[i][j]!=0) throw new InvalidPosition();
-                    }
-                }
-            }
-            for(int i=0;i<size;i++){
+            else
                 place[x][y+i]=size;
-            }
         }
         this.place = place;
+    }
+
+    private void checkPlace(int x, int y, int x_max, int y_max) throws InvalidPosition{
+        for(int i=x-1;i<x_max + 1;i++){
+            for(int j = y-1;j<y_max + 1;j++){
+                if(i<10 && j<10 && i>=0 && j>=0){
+                    if(place[i][j]!=0) throw new InvalidPosition();
+                }
+            }
+        }
     }
 
     void debug_print(JButton[][] array){
@@ -71,11 +78,7 @@ public class BattlePlace {
                     System.out.println(ex);
                 }
                 }
-                System.out.print(" ");
             }
-            System.out.print("\n");
         }
-        System.out.print("\n");
     }
-
 }

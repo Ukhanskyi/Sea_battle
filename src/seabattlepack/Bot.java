@@ -1,3 +1,5 @@
+package seabattlepack;
+
 import javax.swing.*;
 
 /**
