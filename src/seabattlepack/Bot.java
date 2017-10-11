@@ -38,6 +38,17 @@ public class Bot {
         }
     }
 
+    public int Attack(int i, int j){
+        int old_value = BotBattlePlace.getPosValue(i,j);
+        if(old_value < 0) return old_value;
+        if(old_value == 0) {
+            BotBattlePlace.setPosValue(i,j,-10);
+            return old_value;
+        }
+        BotBattlePlace.setPosValue(i,j,-1 * BotBattlePlace.getPosValue(i,j));
+        return old_value;
+    }
+
     public void debug_print(JButton[][] array){
         BotBattlePlace.debug_print(array);
     }

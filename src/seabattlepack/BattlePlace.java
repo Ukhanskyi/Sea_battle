@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Zen on 13.09.2017.
@@ -22,7 +23,7 @@ public class BattlePlace {
             for(int j=0;j<10;j++)
                 place[i][j]=0;
     }
-    
+
 
     public void SetSized(int x, int y, int size, boolean direction) throws InvalidPosition{
         int[][] place = this.place;
@@ -60,23 +61,29 @@ public class BattlePlace {
         }
     }
 
+    public int getPosValue(int i, int j){return this.place[i][j];}
+    public void setPosValue(int i, int j, int value){this.place[i][j] = value;}
+
     void debug_print(JButton[][] array){
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if(place[i][j]!=0) {
-                    try {
+                try {
+                    if (place[i][j] == 0) {
+                        Image img = ImageIO.read(new File("img/sea.png"));
+                        array[i][j].setIcon(new ImageIcon(img));
+                    }
+                    else if(place[i][j] > 0){
                         Image img = ImageIO.read(new File("img/ship.png"));
                         array[i][j].setIcon(new ImageIcon(img));
-                    } catch (Exception ex) {
-                        System.out.println(ex);
+                    } else if(place[i][j] != -10){
+                        Image img = ImageIO.read(new File("img/ubit.png"));
+                        array[i][j].setIcon(new ImageIcon(img));
+                    } else{
+                        Image img = ImageIO.read(new File("img/miss.png"));
+                        array[i][j].setIcon(new ImageIcon(img));
                     }
-                }  else {
-                    try {
-                    Image img = ImageIO.read(new File("img/sea.png"));
-                    array[i][j].setIcon(new ImageIcon(img));
-                } catch (Exception ex) {
-                    System.out.println(ex);
-                }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }
