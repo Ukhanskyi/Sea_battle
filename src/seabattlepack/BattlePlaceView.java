@@ -148,6 +148,7 @@ public class BattlePlaceView extends JPanel {
                             else{
                                 Image img = ImageIO.read(new File("img/ubit.png"));
                                 ((JButton) arg0.getSource()).setIcon(new ImageIcon(img));
+                                return;
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -169,6 +170,7 @@ public class BattlePlaceView extends JPanel {
                                 try {
                                     Image img = ImageIO.read(new File("img/ubit.png"));
                                     myplacearea[i][j].setIcon(new ImageIcon(img));
+                                    continue;
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
