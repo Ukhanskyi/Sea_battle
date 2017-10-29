@@ -17,15 +17,19 @@ public class BattlePlace {
 
     private int[][] place = new int[10][10];
 
+    private int s[] = new int[4];
 
     void BattlePlace(){
         for(int i=0;i<10;i++)
             for(int j=0;j<10;j++)
                 place[i][j]=0;
+        for(int i =0;i < 4;i++)
+            s[i] = 0;
     }
 
 
     public void SetSized(int x, int y, int size, boolean direction) throws InvalidPosition{
+        if(s[size-1]>=4 - (size-1)) throw new InvalidPosition();
         int[][] place = this.place;
         int x_max,y_max;
         if(direction){
@@ -49,6 +53,7 @@ public class BattlePlace {
                 place[x][y+i]=size;
         }
         this.place = place;
+        this.s[size-1]++;
     }
 
     private void checkPlace(int x, int y, int x_max, int y_max) throws InvalidPosition{
@@ -87,5 +92,18 @@ public class BattlePlace {
                 }
             }
         }
+    }
+
+    public boolean isFull(){
+        return s[0]==4 && s[1]==3 && s[2]==2 && s[3]==1;
+    }
+
+    boolean IsWin(){
+        for(int i=0; i<10; i++){
+            for(int j=0; j<10; j++){
+                if(place[i][j] > 0) return false;
+            }
+        }
+        return true;
     }
 }

@@ -6,9 +6,9 @@ import javax.swing.*;
  * Created by Zen on 13.09.2017.
  */
 public class Bot {
-    private BattlePlace BotBattlePlace = new BattlePlace();
+    protected BattlePlace BotBattlePlace = new BattlePlace();
 
-    void Bot(){
+    public Bot(){
         GenerateSized(4);
         GenerateSized(3);
         GenerateSized(3);
@@ -19,6 +19,10 @@ public class Bot {
         GenerateSized(1);
         GenerateSized(1);
         GenerateSized(1);
+    }
+
+    public BattlePlace battlePlace(){
+        return BotBattlePlace;
     }
 
     private void GenerateSized(int size){
@@ -51,5 +55,9 @@ public class Bot {
 
     public void debug_print(JButton[][] array){
         BotBattlePlace.debug_print(array);
+    }
+
+    public boolean IsWin(){
+        return BotBattlePlace.IsWin();
     }
 }

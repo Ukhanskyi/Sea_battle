@@ -12,16 +12,15 @@ public class BattlePlaceView extends JPanel {
 
     private Timer tmDraw;
     private Image background, ship, ubit, sea, icon;
-    private JButton btn1, btn2, btn3;
-    private Bot myGP;
-    //TODO: create class for representing user
-    private Bot myBP;
-    public JButton[][] placearea = new JButton[10][10];
-    public JButton[][] myplacearea = new JButton[10][10];
+    private JButton btnNewGame, btnExit, btnIGiveUp;
+    private User user;
+    private Bot computer;
+    public JButton[][] compPlaceArea = new JButton[10][10];
+    public JButton[][] userPlaseArea = new JButton[10][10];
 
+    private boolean isGameStarted = false;
 
-
-    public BattlePlaceView() {
+    public BattlePlaceView(JFrame me) {
         try {
             background = ImageIO.read(new File("img/background.png"));
         } catch (Exception ex) {
@@ -42,72 +41,59 @@ public class BattlePlaceView extends JPanel {
 
 //Створюєм кнопку Нова гра
 
-        btn1 = new JButton();
-        btn1.setText("Нова гра");
-        btn1.setForeground(Color.BLUE);
-        btn1.setFont(new Font("serif", 0, 20));
-        btn1.setBounds(130, 450, 150, 40);
-        btn1.addActionListener(new ActionListener() {
+        btnNewGame = new JButton();
+        btnNewGame.setText("Нова гра");
+        btnNewGame.setForeground(Color.BLUE);
+        btnNewGame.setFont(new Font("serif", 0, 20));
+        btnNewGame.setBounds(130, 450, 150, 40);
+        btnNewGame.addActionListener(new ActionListener() {
 
 //Обрабка події при натисканні на кнопку Нова гра
 
             public void actionPerformed(ActionEvent arg0) {
-                //TODO: create class for representing user
-                myGP = new Bot();
-                myGP.Bot();
-                myBP = new Bot();
-                myBP.Bot();
-                for (int i = 0; i < 10; i++){
-                    for (int j = 0; j < 10; j++){
-                        try {
-                            Image img = ImageIO.read(new File("img/sea.png"));
-                            placearea[i][j].setIcon(new ImageIcon(img));
-                        } catch (Exception ex) {
-                            System.out.println(ex);
-                        }
-                    }
-                }
-                myGP.debug_print(myplacearea);
+                user = new User();
+                computer = new Bot();
+                clear();
+                NewGame new_game = new NewGame(me);
+                user.setBatlePlace(new_game.getPlace());
+                user.debug_print(userPlaseArea);
+                isGameStarted = true;
             }
         });
-        add(btn1);
+        add(btnNewGame);
 
 // Кнопка " Я здаюсь "
 
-        btn3 = new JButton();
-        btn3.setText("Я здаюсь");
-        btn3.setForeground(Color.BLUE);
-        btn3.setFont(new Font("serif", 0, 20));
-        btn3.setBounds(375, 450, 150, 40);
-        btn3.addActionListener(new ActionListener() {
+        btnIGiveUp = new JButton();
+        btnIGiveUp.setText("Я здаюсь");
+        btnIGiveUp.setForeground(Color.BLUE);
+        btnIGiveUp.setFont(new Font("serif", 0, 20));
+        btnIGiveUp.setBounds(375, 450, 150, 40);
+        btnIGiveUp.addActionListener(new ActionListener() {
 
 //Обрабка події при натисканні на кнопку "Я здаюсь"
 
             public void actionPerformed(ActionEvent arg0) {
-                for (int i = 0; i < 10; i++){
-                    for (int j = 0; j < 10; j++){
-                        try {
-                            Image img = ImageIO.read(new File("img/sea.png"));
-                            placearea[i][j].setIcon(new ImageIcon(img));
-                        } catch (Exception ex) {
-                            System.out.println(ex);
-                        }
-                    }
-                }
-
-                myBP.debug_print(placearea);
+                if(!isGameStarted) return;
+                clear();
+                computer.debug_print(compPlaceArea);
+                isGameStarted = false;
+                JOptionPane.showMessageDialog(null,
+                        "You Loser",
+                        "",
+                        JOptionPane.PLAIN_MESSAGE);
             }
         });
-        add(btn3);
+        add(btnIGiveUp);
 
 //Створюєм кнопку Вихід
 
-        btn2 = new JButton();
-        btn2.setText("Вихід");
-        btn2.setForeground(Color.RED);
-        btn2.setFont(new Font("serif", 0, 20));
-        btn2.setBounds(620, 450, 150, 40);
-        btn2.addActionListener(new ActionListener() {
+        btnExit = new JButton();
+        btnExit.setText("Вихід");
+        btnExit.setForeground(Color.RED);
+        btnExit.setFont(new Font("serif", 0, 20));
+        btnExit.setBounds(620, 450, 150, 40);
+        btnExit.addActionListener(new ActionListener() {
 
 // обробник події при натиску на кнопку Вихід
 
@@ -118,28 +104,27 @@ public class BattlePlaceView extends JPanel {
                 System.exit(0);
             }
         });
-        add(btn2);
+        add(btnExit);
 
         for (int i = 0; i < 10; i++){
             for (int j = 0; j < 10; j++){
-                placearea[i][j] = new JButton();
-                placearea[i][j].setFont(new Font("serif", 0, 2));
-                placearea[i][j].setBounds(100+j*30, 100+i*30, 30, 30);
+                compPlaceArea[i][j] = new JButton();
+                compPlaceArea[i][j].setFont(new Font("serif", 0, 2));
+                compPlaceArea[i][j].setBounds(100+j*30, 100+i*30, 30, 30);
                 try {
                     Image img = ImageIO.read(new File("img/sea.png"));
-                    placearea[i][j].setIcon(new ImageIcon(img));
+                    compPlaceArea[i][j].setIcon(new ImageIcon(img));
                 } catch (Exception ex) {
                     System.out.println(ex);
                 }
                 final int _i = i;
                 final int _j = j;
-                placearea[i][j].addActionListener(new ActionListener() {
+                compPlaceArea[i][j].addActionListener(new ActionListener() {
 
-//Обрабка події при натисканні на кнопку Нова гра
 
                     public void actionPerformed(ActionEvent arg0) {
-                        int res = myBP.Attack(_i,_j);
-                        if(res < 0) return;
+                        int res = computer.Attack(_i,_j);
+                        if(res < 0) {WinChecker(); return;}
                         try {
                             if(res == 0) {
                                 Image img = ImageIO.read(new File("img/miss.png"));
@@ -148,65 +133,67 @@ public class BattlePlaceView extends JPanel {
                             else{
                                 Image img = ImageIO.read(new File("img/ubit.png"));
                                 ((JButton) arg0.getSource()).setIcon(new ImageIcon(img));
+                                WinChecker();
                                 return;
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+
                         while(true)
                         {
                             int i = (int)(Math.random() * 10);
                             int j = (int)(Math.random() * 10);
-                            res = myGP.Attack(i,j);
+                            res = user.Attack(i,j);
                             if(res < 0) continue;
                             if(res == 0)
                                 try {
                                     Image img = ImageIO.read(new File("img/miss.png"));
-                                    myplacearea[i][j].setIcon(new ImageIcon(img));
+                                    userPlaseArea[i][j].setIcon(new ImageIcon(img));
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
                             else
                                 try {
                                     Image img = ImageIO.read(new File("img/ubit.png"));
-                                    myplacearea[i][j].setIcon(new ImageIcon(img));
+                                    userPlaseArea[i][j].setIcon(new ImageIcon(img));
                                     continue;
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
                             break;
                         }
+                        WinChecker();
                     }
                 });
-                add(placearea[i][j]);
+                add(compPlaceArea[i][j]);
 
-                myplacearea[i][j] = new JButton();
-                myplacearea[i][j].setForeground(Color.BLUE);
-                myplacearea[i][j].setFont(new Font("serif", 0, 2));
-                myplacearea[i][j].setBounds(500+j*30, 100+i*30, 30, 30);
+                userPlaseArea[i][j] = new JButton();
+                userPlaseArea[i][j].setForeground(Color.BLUE);
+                userPlaseArea[i][j].setFont(new Font("serif", 0, 2));
+                userPlaseArea[i][j].setBounds(500+j*30, 100+i*30, 30, 30);
                 try {
                     Image img = ImageIO.read(new File("img/sea.png"));
-                    myplacearea[i][j].setIcon(new ImageIcon(img));
+                    userPlaseArea[i][j].setIcon(new ImageIcon(img));
                 } catch (Exception ex) {
                     System.out.println(ex);
                 }
-                myplacearea[i][j].addActionListener(new ActionListener() {
+                userPlaseArea[i][j].addActionListener(new ActionListener() {
 
-//Обрабка події при натисканні на кнопку Нова гра
+//Обрабка події
 
                     public void actionPerformed(ActionEvent arg0) {
 
                     }
                 });
-                add(myplacearea[i][j]);
+                add(userPlaseArea[i][j]);
             }
         }
     }
 
 //Графічний метод
 
-    public void paintComponent(Graphics gr)
-    {
+    public void paintComponent(Graphics gr) {
 //Малювання фону
         gr.drawImage(background,0,0,900,600,null);
 //Встановлення шрифта
@@ -232,4 +219,31 @@ public class BattlePlaceView extends JPanel {
         }
     }
 
+    private void clear(){
+        for (int i = 0; i < 10; i++){
+            for (int j = 0; j < 10; j++){
+                try {
+                    Image img = ImageIO.read(new File("img/sea.png"));
+                    compPlaceArea[i][j].setIcon(new ImageIcon(img));
+                } catch (Exception ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    }
+
+    private void WinChecker(){
+        if(computer.IsWin()){
+            JOptionPane.showMessageDialog(null,
+                    "You WIN",
+                    "",
+                    JOptionPane.PLAIN_MESSAGE);
+        }
+        if(user.IsWin()){
+            JOptionPane.showMessageDialog(null,
+                    "You Loser",
+                    "",
+                    JOptionPane.PLAIN_MESSAGE);
+        }
+    }
 }
