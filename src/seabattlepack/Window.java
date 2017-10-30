@@ -1,8 +1,6 @@
 package seabattlepack;
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.JDialog;
-//import javax.swing.ImageIcon;
 
 public class Window extends JFrame {
     public Window() {
