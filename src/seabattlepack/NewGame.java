@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 import static javax.swing.BoxLayout.PAGE_AXIS;
+import static javax.swing.SwingConstants.CENTER;
 
 public class NewGame extends JDialog {
     BattlePlace place;
@@ -20,7 +21,6 @@ public class NewGame extends JDialog {
         setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         place = new BattlePlace();
-        place.BattlePlace();
         BuildWindow();
     }
 
@@ -71,16 +71,20 @@ public class NewGame extends JDialog {
                 buttons_panel.add(buttons[i][j]);
             }
         }
+        buttons_panel.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttons_panel.setPreferredSize(new Dimension(300,300));
         buttons_panel.setMaximumSize(new Dimension(300,300));
         buttons_panel.setMinimumSize(new Dimension(300,300));
         buttons_panel.setForeground(Color.BLUE);
         clear = new JButton("Очистити");
         auto = new JButton("Автоматично розставити");
+        clear.setHorizontalAlignment(CENTER);
+        auto.setHorizontalAlignment(CENTER);
+        auto.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+        clear.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         clear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                place.BattlePlace();
                 place.debug_print(buttons);
             }
         });
@@ -93,11 +97,11 @@ public class NewGame extends JDialog {
                 dispose();
             }
         });
-        content = new JPanel();
+        content = new GameWindowPanel();
         content.setLayout(new BoxLayout(content,PAGE_AXIS));
         content.add(buttons_panel);
-        content.add("Center", clear);
-        content.add("Center",auto);
+        content.add(clear);
+        content.add(auto);
         setForeground(Color.BLUE);
         setContentPane(content);
         setSize(400,400);

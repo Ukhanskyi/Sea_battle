@@ -55,7 +55,7 @@ public class BattlePlaceView extends JPanel {
                 computer = new Bot();
                 clear();
                 NewGame new_game = new NewGame(me);
-                user.setBatlePlace(new_game.getPlace());
+                user.setBattlePlace(new_game.getPlace());
                 user.debug_print(userPlaseArea);
                 isGameStarted = true;
             }
@@ -123,6 +123,14 @@ public class BattlePlaceView extends JPanel {
 
 
                     public void actionPerformed(ActionEvent arg0) {
+                        if(!isGameStarted)
+                        {
+                            JOptionPane.showMessageDialog(me,
+                                    "Game not started",
+                                    "Game",
+                                    JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
                         int res = computer.Attack(_i,_j);
                         if(res < 0) {WinChecker(); return;}
                         try {

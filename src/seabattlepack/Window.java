@@ -7,7 +7,6 @@ public class Window extends JFrame {
         BattlePlaceView pan = new BattlePlaceView(this);
         Container cont = getContentPane();
         cont.add(pan);
-
         ImageIcon icon = new ImageIcon("img/icon1.png");
         setIconImage(icon.getImage());
         setTitle("GAME \" Sea Battle \""); //заголовок вікна

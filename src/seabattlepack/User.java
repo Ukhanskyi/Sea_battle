@@ -1,7 +1,8 @@
 package seabattlepack;
 
 public class User extends Bot {
-    public void setBatlePlace(BattlePlace battlePlace){
+    public void setBattlePlace(BattlePlace battlePlace){
         BotBattlePlace = battlePlace;
     }
 }
+

@@ -28,12 +28,17 @@ public class Bot {
     private void GenerateSized(int size){
         while(true){
             int x_max,y_max;
-            boolean direction = ((int)(Math.random()*100))>50;
-            if(direction) {x_max = 10; y_max=10-(size-1);} else{x_max=10-(size-1);y_max=10;}
+            BattlePlace.Direction direction =
+                    (((int)(Math.random()*100))>50)?
+                            BattlePlace.Direction.Down:
+                            BattlePlace.Direction.Left;
+            if(direction == BattlePlace.Direction.Down)
+                {x_max = 10; y_max=10-(size-1);}
+            else{x_max=10-(size-1);y_max=10;}
             int x = (int)(Math.random()*x_max);
             int y = (int)(Math.random()*y_max);
             try {
-                BotBattlePlace.SetSized(x, y, size, direction);
+                BotBattlePlace.setSized(x, y, size, direction);
             }
             catch (BattlePlace.InvalidPosition e){
                 continue;

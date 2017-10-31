@@ -10,6 +10,9 @@ import java.io.IOException;
  * Created by Zen on 13.09.2017.
  */
 public class BattlePlace {
+    enum Direction{
+        Down,Left
+    }
 
     class InvalidPosition extends Throwable{
         InvalidPosition(){}
@@ -17,22 +20,22 @@ public class BattlePlace {
 
     private int[][] place = new int[10][10];
 
-    private int s[] = new int[4];
+    private int numberShip[] = new int[4];
 
-    void BattlePlace(){
+    BattlePlace(){
         for(int i=0;i<10;i++)
             for(int j=0;j<10;j++)
                 place[i][j]=0;
         for(int i =0;i < 4;i++)
-            s[i] = 0;
+            numberShip[i] = 0;
     }
 
 
-    public void SetSized(int x, int y, int size, boolean direction) throws InvalidPosition{
-        if(s[size-1]>=4 - (size-1)) throw new InvalidPosition();
+    public void setSized(int x, int y, int size, Direction direction) throws InvalidPosition{
+        if(numberShip[size-1]>=4 - (size-1)) throw new InvalidPosition();
         int[][] place = this.place;
         int x_max,y_max;
-        if(direction){
+        if(direction==Direction.Left){
             if(x<0 || x>9-(size-1)) throw new InvalidPosition();
             if(y<0 || y>9) throw new InvalidPosition();
             x_max = x+size;
@@ -47,13 +50,13 @@ public class BattlePlace {
         checkPlace(x, y, x_max, y_max);
 
         for(int i=0;i<size;i++){
-            if(direction)
+            if(direction==Direction.Left)
                 place[x+i][y]=size;
             else
                 place[x][y+i]=size;
         }
         this.place = place;
-        this.s[size-1]++;
+        this.numberShip[size-1]++;
     }
 
     private void checkPlace(int x, int y, int x_max, int y_max) throws InvalidPosition{
@@ -95,7 +98,7 @@ public class BattlePlace {
     }
 
     public boolean isFull(){
-        return s[0]==4 && s[1]==3 && s[2]==2 && s[3]==1;
+        return numberShip[0]==4 && numberShip[1]==3 && numberShip[2]==2 && numberShip[3]==1;
     }
 
     boolean IsWin(){

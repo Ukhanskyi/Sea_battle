@@ -16,8 +16,7 @@ public class PlaceDialog extends JDialog {
         setModal(true);
         setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setBounds(375, 0, 100, 150);//границя вікна
-
+        setBounds(410, 0, 100, 150);//границя вікна
         this.place = place;
         this.I = i; this.J = j;
         BuildWindow();
@@ -28,7 +27,7 @@ public class PlaceDialog extends JDialog {
     JButton button[];
 
     void BuildWindow(){
-        panel = new JPanel();
+        panel = new GameWindowPanel();
         panel.setLayout(new BoxLayout(panel,PAGE_AXIS));
         radioButton = new JRadioButton[4];
         ButtonGroup group = new ButtonGroup();
@@ -41,10 +40,12 @@ public class PlaceDialog extends JDialog {
         }
         radioButton[0].setSelected(true);
         button = new JButton[2];
-        button[0] = new JButton("Горизонтально");
+        button[0] = new JButton("Вертикально");
         button[0].setSize(100,10);
-        button[1] = new JButton("Вертикально");
+        button[1] = new JButton("Горизонтально");
         button[1].setSize(100,10);
+        button[0].setAlignmentX(JComponent.CENTER_ALIGNMENT);
+        button[1].setAlignmentX(JComponent.CENTER_ALIGNMENT);
         panel.add(button[0]); panel.add(button[1]);
         button[0].addActionListener(new ActionListener() {
             @Override
@@ -52,9 +53,15 @@ public class PlaceDialog extends JDialog {
                 for(int i=0;i<4;i++){
                     if(radioButton[i].isSelected()) {
                         try {
-                            place.SetSized(I,J,i+1,false);
+                            place.setSized(I,J,i+1, BattlePlace.Direction.Left);
                             isPlaced = true;
                         } catch (BattlePlace.InvalidPosition invalidPosition) {
+                            JOptionPane.showMessageDialog(PlaceDialog.this,
+                                    "Invalid position, i: " + I + " j: " + J +
+                                            "\nSize: " + i +
+                                            "\nDirection left",
+                                    "New game",
+                                    JOptionPane.ERROR_MESSAGE);
                            break;
                         }
                     }
@@ -69,9 +76,15 @@ public class PlaceDialog extends JDialog {
                 for(int i=0;i<4;i++){
                     if(radioButton[i].isSelected()) {
                         try {
-                            place.SetSized(I,J,i+1,true);
+                            place.setSized(I,J,i+1, BattlePlace.Direction.Down);
                             isPlaced = true;
                         } catch (BattlePlace.InvalidPosition invalidPosition) {
+                            JOptionPane.showMessageDialog(PlaceDialog.this,
+                                    "Invalid position, i: " + I + " j: " + J +
+                                            "\nSize: " + i +
+                                            "\nDirection down",
+                                    "New game",
+                                    JOptionPane.ERROR_MESSAGE);
                             break;
                         }
                     }
