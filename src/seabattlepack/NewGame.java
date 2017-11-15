@@ -28,11 +28,16 @@ public class NewGame extends JDialog {
         return place;
     }
 
+    public int getMode(){
+        return mode[0].isSelected()?1:2;
+    }
+
     JPanel content;
     JPanel buttons_panel;
     JButton[][] buttons;
     JButton clear;
     JButton auto;
+    JRadioButton[] mode;
 
     public void BuildWindow() {
         buttons = new JButton[10][10];
@@ -59,7 +64,7 @@ public class NewGame extends JDialog {
                             PlaceDialog placeDialog = new PlaceDialog((JFrame)ancestor,place,I,J);
                             if(placeDialog.isPlaced()) {
                                 place = placeDialog.getPlace();
-                                place.debug_print(buttons);
+                                Utils.refreshBattlePlace(place,buttons);
                                 if(place.isFull()) NewGame.this.setVisible(false);
                             }
                         }
@@ -78,30 +83,34 @@ public class NewGame extends JDialog {
         buttons_panel.setForeground(Color.BLUE);
         clear = new JButton("Очистити");
         auto = new JButton("Автоматично розставити");
+        mode = new JRadioButton[2];
+        mode[0] = new JRadioButton();
+        mode[0].setSelected(true);
+        mode[0].setName("Простий бот");
+        mode[0].setHorizontalAlignment(CENTER);
+        mode[0].setAlignmentX(JComponent.CENTER_ALIGNMENT);
+        mode[1] = new JRadioButton();
+        mode[1].setSelected(false);
+        mode[1].setName("Складний бот");
+        mode[1].setHorizontalAlignment(CENTER);
+        mode[1].setAlignmentX(JComponent.CENTER_ALIGNMENT);
         clear.setHorizontalAlignment(CENTER);
         auto.setHorizontalAlignment(CENTER);
         auto.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         clear.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-        clear.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                place.debug_print(buttons);
-            }
-        });
-        auto.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Bot bt = new Bot();
-                place = bt.battlePlace();
-                place.debug_print(buttons);
-                dispose();
-            }
+        clear.addActionListener(e -> Utils.refreshBattlePlace(place,buttons));
+        auto.addActionListener(e -> {
+            place = BattlePlace.getAutoGenBatlePlace();
+            Utils.refreshBattlePlace(place,buttons);
+            dispose();
         });
         content = new GameWindowPanel();
         content.setLayout(new BoxLayout(content,PAGE_AXIS));
         content.add(buttons_panel);
         content.add(clear);
         content.add(auto);
+        content.add(mode[0]);
+        content.add(mode[1]);
         setForeground(Color.BLUE);
         setContentPane(content);
         setSize(400,400);

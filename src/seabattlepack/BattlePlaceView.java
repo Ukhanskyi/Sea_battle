@@ -13,8 +13,9 @@ public class BattlePlaceView extends JPanel {
     private Timer tmDraw;
     private Image background, ship, ubit, sea, icon;
     private JButton btnNewGame, btnExit, btnIGiveUp;
-    private User user;
     private Bot computer;
+    private User user;
+    int mode;
     public JButton[][] compPlaceArea = new JButton[10][10];
     public JButton[][] userPlaseArea = new JButton[10][10];
 
@@ -55,8 +56,9 @@ public class BattlePlaceView extends JPanel {
                 computer = new Bot();
                 clear();
                 NewGame new_game = new NewGame(me);
+                mode = new_game.getMode();
                 user.setBattlePlace(new_game.getPlace());
-                user.debug_print(userPlaseArea);
+                Utils.refreshBattlePlace(user.getBattlePlace(),userPlaseArea);
                 isGameStarted = true;
             }
         });
@@ -76,7 +78,7 @@ public class BattlePlaceView extends JPanel {
             public void actionPerformed(ActionEvent arg0) {
                 if(!isGameStarted) return;
                 clear();
-                computer.debug_print(compPlaceArea);
+                Utils.refreshBattlePlace(computer.getBattlePlace(),compPlaceArea);
                 isGameStarted = false;
                 JOptionPane.showMessageDialog(null,
                         "You Loser",
@@ -131,45 +133,9 @@ public class BattlePlaceView extends JPanel {
                                     JOptionPane.ERROR_MESSAGE);
                             return;
                         }
-                        int res = computer.Attack(_i,_j);
-                        if(res < 0) {WinChecker(); return;}
-                        try {
-                            if(res == 0) {
-                                Image img = ImageIO.read(new File("img/miss.png"));
-                                ((JButton) arg0.getSource()).setIcon(new ImageIcon(img));
-                            }
-                            else{
-                                Image img = ImageIO.read(new File("img/ubit.png"));
-                                ((JButton) arg0.getSource()).setIcon(new ImageIcon(img));
-                                WinChecker();
-                                return;
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        while(true)
-                        {
-                            int i = (int)(Math.random() * 10);
-                            int j = (int)(Math.random() * 10);
-                            res = user.Attack(i,j);
-                            if(res < 0) continue;
-                            if(res == 0)
-                                try {
-                                    Image img = ImageIO.read(new File("img/miss.png"));
-                                    userPlaseArea[i][j].setIcon(new ImageIcon(img));
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            else
-                                try {
-                                    Image img = ImageIO.read(new File("img/ubit.png"));
-                                    userPlaseArea[i][j].setIcon(new ImageIcon(img));
-                                    continue;
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            break;
+                        if(userAttack(_i,_j)==0) {
+                            WinChecker();
+                            botAttack();
                         }
                         WinChecker();
                     }
@@ -253,5 +219,43 @@ public class BattlePlaceView extends JPanel {
                     "",
                     JOptionPane.PLAIN_MESSAGE);
         }
+    }
+
+    private void botAttack(){
+        User.point point = user.attack(mode);
+        if(point.status == -10)
+            try {
+                Image img = ImageIO.read(new File("img/miss.png"));
+                userPlaseArea[point.P.x][point.P.y].setIcon(new ImageIcon(img));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        else
+            try {
+                Image img = ImageIO.read(new File("img/ubit.png"));
+                userPlaseArea[point.P.x][point.P.y].setIcon(new ImageIcon(img));
+                botAttack();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+
+    private int userAttack(int i, int j){
+        int res = computer.attack(i,j);
+        if(res < 0) return res;
+        try {
+            if(res == 0) {
+                Image img = ImageIO.read(new File("img/miss.png"));
+                compPlaceArea[i][j].setIcon(new ImageIcon(img));
+            }
+            else{
+                Image img = ImageIO.read(new File("img/ubit.png"));
+                compPlaceArea[i][j].setIcon(new ImageIcon(img));
+                return res;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
