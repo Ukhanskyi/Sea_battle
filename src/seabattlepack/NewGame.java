@@ -34,6 +34,8 @@ public class NewGame extends JDialog {
 
     JPanel content;
     JPanel buttons_panel;
+    JPanel model_panel;
+    ButtonGroup mode_group;
     JButton[][] buttons;
     JButton clear;
     JButton auto;
@@ -83,24 +85,38 @@ public class NewGame extends JDialog {
         buttons_panel.setForeground(Color.BLUE);
         clear = new JButton("Очистити");
         auto = new JButton("Автоматично розставити");
+        model_panel = new JPanel();
         mode = new JRadioButton[2];
-        mode[0] = new JRadioButton();
+        mode[0] = new JRadioButton("Простий бот");
         mode[0].setSelected(true);
-        mode[0].setName("Простий бот");
         mode[0].setHorizontalAlignment(CENTER);
         mode[0].setAlignmentX(JComponent.CENTER_ALIGNMENT);
-        mode[1] = new JRadioButton();
+        mode[0].setOpaque(false);
+        mode[0].setBackground(new Color(0,0,0,0));
+        mode[1] = new JRadioButton("Складний бот");
         mode[1].setSelected(false);
-        mode[1].setName("Складний бот");
         mode[1].setHorizontalAlignment(CENTER);
         mode[1].setAlignmentX(JComponent.CENTER_ALIGNMENT);
+        mode[1].setOpaque(false);
+        mode[1].setBackground(new Color(0,0,0,0));
+        mode_group = new ButtonGroup();
+        mode_group.add(mode[0]);
+        mode_group.add(mode[1]);
+        model_panel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        model_panel.setPreferredSize(new Dimension(200,60));
+        model_panel.setMaximumSize(new Dimension(200,60));
+        model_panel.setMinimumSize(new Dimension(200,60));
+        model_panel.setOpaque(false);
+        model_panel.setBackground(new Color(0,0,0,0));
+        model_panel.add(mode[0]);
+        model_panel.add(mode[1]);
         clear.setHorizontalAlignment(CENTER);
         auto.setHorizontalAlignment(CENTER);
         auto.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         clear.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         clear.addActionListener(e -> Utils.refreshBattlePlace(place,buttons));
         auto.addActionListener(e -> {
-            place = BattlePlace.getAutoGenBatlePlace();
+            place.AutoGen(() -> Utils.refreshBattlePlace(place,buttons));
             Utils.refreshBattlePlace(place,buttons);
             dispose();
         });
@@ -111,9 +127,10 @@ public class NewGame extends JDialog {
         content.add(auto);
         content.add(mode[0]);
         content.add(mode[1]);
+        content.add(model_panel);
         setForeground(Color.BLUE);
         setContentPane(content);
-        setSize(400,400);
+        setSize(400,450);
         setResizable(false);
         setVisible(true);
     }
@@ -121,6 +138,6 @@ public class NewGame extends JDialog {
     @Override
     public void dispose() {
         if(place.isFull())
-        super.dispose();
+            super.dispose();
     }
 }

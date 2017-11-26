@@ -1,125 +1,244 @@
 package seabattlepack;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Zen on 13.09.2017.
  */
+
 public class BattlePlace {
-
-    static BattlePlace getAutoGenBatlePlace(){
-        BattlePlace place = new BattlePlace();
-        GenerateSized(place,4);
-        GenerateSized(place,3);
-        GenerateSized(place,3);
-        GenerateSized(place,2);
-        GenerateSized(place,2);
-        GenerateSized(place,2);
-        GenerateSized(place,1);
-        GenerateSized(place,1);
-        GenerateSized(place,1);
-        GenerateSized(place,1);
-        return place;
+    enum CellState{
+        Sea, Ship, ShipDamaged, ShipKilled, Miss, Border
     }
 
-    private static void GenerateSized(BattlePlace place, int size){
-        while(true){
-            int x_max,y_max;
-            BattlePlace.Direction direction =
-                    (((int)(Math.random()*100))>50)?
-                            BattlePlace.Direction.Down:
-                            BattlePlace.Direction.Left;
-            if(direction == BattlePlace.Direction.Down)
-            {x_max = 10; y_max=10-(size-1);}
-            else{x_max=10-(size-1);y_max=10;}
-            int x = (int)(Math.random()*x_max);
-            int y = (int)(Math.random()*y_max);
-            try {
-                place.setSized(x, y, size, direction);
+    class Ship{
+        List<CellRef> shipPlace = new ArrayList<>();
+        List<CellRef> shipBorderPlace = new ArrayList<>();
+        int life;
+
+        Ship(int life, List<CellRef> shipPlace,List<CellRef> shipBorderPlace){
+            this.life = life;
+            this.shipPlace.addAll(shipPlace);
+            this.shipBorderPlace.addAll(shipBorderPlace);
+            for (CellRef cell: this.shipPlace){
+                cell.getCell().setShip(this);
             }
-            catch (BattlePlace.InvalidPosition e){
-                continue;
+            for(CellRef cell: this.shipBorderPlace){
+                cell.getCell().myState = CellState.Border;
             }
-            break;
         }
-    }
 
-    enum Direction{
-        Down,Left
-    }
-
-    class InvalidPosition extends Throwable{
-        InvalidPosition(){}
-    }
-
-    private int[][] place = new int[10][10];
-
-    private int numberShip[] = new int[4];
-
-    BattlePlace(){
-        for(int i=0;i<10;i++)
-            for(int j=0;j<10;j++)
-                place[i][j]=0;
-        for(int i =0;i < 4;i++)
-            numberShip[i] = 0;
-    }
-
-
-    public void setSized(int x, int y, int size, Direction direction) throws InvalidPosition{
-        if(numberShip[size-1]>=4 - (size-1)) throw new InvalidPosition();
-        int[][] place = this.place;
-        int x_max,y_max;
-        if(direction==Direction.Left){
-            if(x<0 || x>9-(size-1)) throw new InvalidPosition();
-            if(y<0 || y>9) throw new InvalidPosition();
-            x_max = x+size;
-            y_max = y+2;
-        }
-        else {
-            if(x<0 || x>9) throw new InvalidPosition();
-            if(y<0 || y>9-(size-1)) throw new InvalidPosition();
-            x_max = x+2;
-            y_max = y+size;
-        }
-        checkPlace(x, y, x_max, y_max);
-
-        for(int i=0;i<size;i++){
-            if(direction==Direction.Left)
-                place[x+i][y]=size;
-            else
-                place[x][y+i]=size;
-        }
-        this.place = place;
-        this.numberShip[size-1]++;
-    }
-
-    private void checkPlace(int x, int y, int x_max, int y_max) throws InvalidPosition{
-        for(int i=x-1;i<x_max + 1;i++){
-            for(int j = y-1;j<y_max + 1;j++){
-                if(i<10 && j<10 && i>=0 && j>=0){
-                    if(place[i][j]!=0) throw new InvalidPosition();
+        void attack(){
+            life--;
+            if(life==0){
+                for(CellRef cell: this.shipBorderPlace){
+                    cell.getCell().attack();
+                }
+                aliveShips--;
+            } else{
+                for(CellRef cell: this.shipPlace){
+                    if(cell.getCell().myState == CellState.Ship)
+                        cell.getCell().myState = CellState.ShipDamaged;
                 }
             }
         }
     }
+    class Cell{
+        CellState myState;
+        Ship ship = null;
 
-    public int getPosValue(int i, int j){return this.place[i][j];}
-    public void setPosValue(int i, int j, int value){this.place[i][j] = value;}
+        Cell(){
+            this.myState = CellState.Sea;
+        }
 
-    public boolean isFull(){
-        return numberShip[0]==4 && numberShip[1]==3 && numberShip[2]==2 && numberShip[3]==1;
+        void setShip(Ship ship){
+            this.ship = ship;
+            this.myState = CellState.Ship;
+        }
+
+        void attack(){
+            switch (myState){
+                case Sea:
+                    this.myState = CellState.Miss;
+                    break;
+                case Ship:
+                    this.myState = CellState.ShipKilled;
+                    this.ship.attack();
+                    break;
+                case ShipDamaged:
+                    this.myState = CellState.ShipKilled;
+                    this.ship.attack();
+                    break;
+                case ShipKilled:
+                    break;
+                case Miss:
+                    break;
+                case Border:
+                    this.myState = CellState.Miss;
+                    break;
+            }
+        }
     }
 
-    boolean IsWin(){
-        for(int i=0; i<10; i++){
-            for(int j=0; j<10; j++){
-                if(place[i][j] > 0) return false;
+    class CellRef{
+        int x;
+        int y;
+        CellRef(int x, int y){
+            this.x = x;
+            this.y = y;
+        }
+        Cell getCell(){return cells[x][y];}
+    }
+
+    Cell[][] cells;
+    List<Ship> ships;
+    int aliveShips = 10;
+    int[] placedShip;
+
+    BattlePlace(){
+        cells = new Cell[10][10];
+        for(int i=0;i<10;i++){
+            for(int j=0;j<10;j++){
+                cells[i][j] = new Cell();
             }
+        }
+        placedShip = new int[4];
+        for(int i=0;i<4;i++)
+            placedShip[i]=0;
+        ships = new ArrayList<>();
+    }
+
+    BattlePlace(boolean isAutoGen){
+        cells = new Cell[10][10];
+        for(int i=0;i<10;i++){
+            for(int j=0;j<10;j++){
+                cells[i][j] = new Cell();
+            }
+        }
+        placedShip = new int[4];
+        for(int i=0;i<4;i++)
+            placedShip[i]=0;
+        ships = new ArrayList<>();
+        if(isAutoGen)
+            AutoGen(null);
+    }
+
+    boolean CheckPlace(int x,int y, int dx, int dy){
+        if(dx>9 || dy>9) return false;
+        List<CellRef> cells = getShipPlace(x,y,dx,dy);
+        for(CellRef cell: cells){
+            if(!(cell.getCell().myState==CellState.Sea || cell.getCell().myState==CellState.Border)) return false;
+        }
+        cells = getShipBorder(x,y,dx,dy);
+        for(CellRef cell: cells){
+            if(!(cell.getCell().myState==CellState.Sea || cell.getCell().myState==CellState.Border)) return false;
         }
         return true;
     }
+
+    List<CellRef> getShipPlace(int x,int y, int dx, int dy){
+        List<CellRef> shipPlace = new ArrayList<>();
+        for(int i=x;i<=dx;i++)
+            for(int j=y;j<=dy;j++)
+                shipPlace.add(new CellRef(i,j));
+        return shipPlace;
+    }
+
+    List<CellRef> getShipBorder(int x, int y, int dx, int dy) {
+        List<CellRef> shipBorder = new ArrayList<>();
+        for (int i = x - 1; i <= dx + 1; i++){
+            if(i<0||i>9) continue;
+            if(y-1>=0)
+                shipBorder.add(new CellRef(i,y-1));
+            if(dy+1<=9)
+                shipBorder.add(new CellRef(i,dy+1));
+        }
+        for (int i = y - 1; i <= dy + 1; i++){
+            if(i<0||i>9) continue;
+            if(x-1>=0)
+                shipBorder.add(new CellRef(x-1,i));
+            if(dx+1<=9)
+                shipBorder.add(new CellRef(dx+1,i));
+        }
+        return shipBorder;
+    }
+
+    interface ICallback{
+        void exec();
+    }
+
+    void AutoGen(ICallback callback){
+        Generate(4);
+        if(callback!=null) callback.exec();
+        Generate(3);
+        if(callback!=null) callback.exec();
+        Generate(3);
+        if(callback!=null) callback.exec();
+        Generate(2);
+        if(callback!=null) callback.exec();
+        Generate(2);
+        if(callback!=null) callback.exec();
+        Generate(2);
+        if(callback!=null) callback.exec();
+        Generate(1);
+        if(callback!=null) callback.exec();
+        Generate(1);
+        if(callback!=null) callback.exec();
+        Generate(1);
+        if(callback!=null) callback.exec();
+        Generate(1);
+        if(callback!=null) callback.exec();
+        for (int i=0;i<4;i++){
+            placedShip[3 - i]=i + 1;
+        }
+    }
+
+    void Generate(int size){
+        while(true) {
+            int x = (int) (Math.random() * 10);
+            int y = (int) (Math.random() * 10);
+            int dx = x, dy = y;
+            if (Math.random() * 100 > 50)
+                dx = x + size - 1;
+            else
+                dy = y + size - 1;
+            if(!CheckPlace(x,y,dx,dy)) continue;
+            ships.add(
+                    new Ship(
+                            size,
+                            getShipPlace(x,y,dx,dy),
+                            getShipBorder(x,y,dx,dy)
+                    )
+            );
+            break;
+        }
+    }
+
+    boolean ManualPlace(int x, int y, int dx, int dy){
+        if(!CheckPlace(x,y,dx,dy)) return false;
+        int size = (x!=dx)?dx-x:dy-y;
+        if(placedShip[4-size]==size + 1) return false;
+        ships.add(
+                new Ship(
+                        size,
+                        getShipPlace(x,y,dx,dy),
+                        getShipBorder(x,y,dx,dy)
+                )
+        );
+        placedShip[4-size]++;
+        return true;
+    }
+
+    void Attack(int x, int y){
+        cells[x][y].attack();
+    }
+
+    CellState getCellState(int x, int y){
+        return cells[x][y].myState;
+    }
+
+    boolean isWin(){return !(aliveShips > 0);}
+    boolean isFull(){return placedShip[0]==4 && placedShip[1]==3 && placedShip[2] == 2 && placedShip[3] == 1;}
 }

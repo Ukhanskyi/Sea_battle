@@ -7,11 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import static seabattlepack.User.Res.Bad;
+import static seabattlepack.User.Res.Good;
+import static seabattlepack.User.Res.Miss;
+
 /**
  * Created by Zen on 13.09.2017.
  */
 public class User {
-    private BattlePlace place = new BattlePlace();
+
+    public User(){
+        place = new BattlePlace();
+    }
+    private BattlePlace place;
 
     public void setBattlePlace(BattlePlace battlePlace){
         place = battlePlace;
@@ -21,18 +29,13 @@ public class User {
         return place;
     }
 
-    class pos{
+    class ret_pos{
         public int x,y;
-        pos(int x, int y) {this.x = x; this.y = y;}
+        ret_pos(int x, int y) {this.x = x; this.y = y;}
     }
 
-    class point{
-        pos P;
-        int status;
-        point(int i, int j, int status){
-            P = new pos(i,j);
-            this.status = status;
-        }
+    enum Res{
+        Miss, Good, Bad
     }
 
     public enum Directions {
@@ -46,7 +49,7 @@ public class User {
 
     Directions direction;
 
-    Stack<pos> posStack = new Stack<>();
+    Stack<ret_pos> posStack = new Stack<>();
 
     List<Directions> possibleDirection(int i, int j) {
         List<Directions> ret = new ArrayList<>();
@@ -68,37 +71,50 @@ public class User {
         return ret;
     }
 
-    public point attack(int mode){
-        if(mode == 0)
+    public Res attack(int mode){
+        if(mode == 1)
             return randomAttack();
         return  autoAttack();
     }
 
     @NotNull
-    private point autoAttack() {
+    private Res autoAttack() {
         if (availableDirections.isEmpty())
             if (posStack.isEmpty()) {
                 while (true) {
                     int i = (int) (Math.random() * 10);
                     int j = (int) (Math.random() * 10);
-                    int old_value = place.getPosValue(i, j);
-                    if (old_value > 0) {
-                        I = i;
-                        J = j;
-                        availableDirections = possibleDirection(i, j);
-                        place.setPosValue(i, j, -1 * place.getPosValue(i, j));
-                        return new point(I, J, old_value);
-                    } else if (old_value != 0)
-                        continue;
-                    else {
-                        place.setPosValue(i, j, -10);
-                        return new point(i, j, place.getPosValue(i,j));
+                    switch (place.getCellState(i,j)){
+                        case Sea:
+                            place.Attack(i,j);
+                            return Miss;
+                        case Ship:
+                            place.Attack(i,j);
+                            I = i;
+                            J = j;
+                            isFirst = false;
+                            availableDirections = possibleDirection(i, j);
+                            return Good;
+                        case ShipDamaged:
+                            place.Attack(i,j);
+                            I = i;
+                            J = j;
+                            isFirst = false;
+                            availableDirections = possibleDirection(i, j);
+                            return Good;
+                        case Border:
+                            place.Attack(i,j);
+                            return Miss;
+                        case ShipKilled:
+                            continue;
+                        case Miss:
+                            continue;
                     }
                 }
             }
         if (availableDirections.isEmpty()) {
             while(posStack.size()!=1) posStack.pop();
-            pos p = posStack.pop();
+            ret_pos p = posStack.pop();
             I = p.x;
             J = p.y;
             switch (direction) {
@@ -120,6 +136,7 @@ public class User {
                 return autoAttack();
         }
         while (true) {
+            if(availableDirections.size()==0) return autoAttack();
             int n = (int) (Math.random() * availableDirections.size());
             int i = 0, j = 0;
             switch (availableDirections.get(n)) {
@@ -140,50 +157,84 @@ public class User {
                     i = I;
                     break;
             }
-            int old_value = place.getPosValue(i, j);
-            if (old_value < 0) {
-                availableDirections.remove(n);
-                if(availableDirections.isEmpty()){
+            if(i<0||i>9||j<0||j>9) {
+                availableDirections.clear();
+                return autoAttack();
+            }
+            switch (place.getCellState(i,j)){
+                case Sea:
+                    availableDirections.remove(n);
+                    place.Attack(i,j);
+                    return Miss;
+                case Ship:
+                    posStack.push(new ret_pos(i, j));
+                    I = i;
+                    J = j;
+                    direction = availableDirections.get(n);
+                    availableDirections.removeIf(directions -> {
+                        if (direction != directions)
+                            return true;
+                        return false;
+                    });
+                    place.Attack(i,j);
+                    return Good;
+                case ShipDamaged:
+                    posStack.push(new ret_pos(i, j));
+                    I = i;
+                    J = j;
+                    direction = availableDirections.get(n);
+                    availableDirections.removeIf(directions -> {
+                        if (direction != directions)
+                            return true;
+                        return false;
+                    });
+                    if(availableDirections.isEmpty()){
+                        return autoAttack();
+                    }
+                    place.Attack(i,j);
+                    return Good;
+                case ShipKilled:
+                    posStack.empty();
+                    availableDirections.clear();
                     return autoAttack();
-                } else continue;
-            } else if (old_value == 0) {
-                availableDirections.remove(n);
-                place.setPosValue(i, j, -10);
-                return new point(i, j, place.getPosValue(i,j));
-            } else {
-                place.setPosValue(i, j, -1 * place.getPosValue(i, j));
-                posStack.push(new pos(i, j));
-                I = i;
-                J = j;
-                direction = availableDirections.get(n);
-                availableDirections.removeIf(directions -> {
-                    if (direction != directions)
-                        return true;
-                    return false;
-                });
-                availableDirections = possibleDirection(I, J);
-                return new point(i, j, place.getPosValue(i,j));
+                case Miss:
+                    availableDirections.remove(n);
+                    continue;
+                case Border:
+                    availableDirections.remove(n);
+                    place.Attack(i,j);
+                    return Miss;
             }
         }
     }
 
     @NotNull
-    private point randomAttack() {
+    private Res randomAttack() {
         while (true) {
             int i = (int) (Math.random() * 10);
             int j = (int) (Math.random() * 10);
-            int old_value = place.getPosValue(i, j);
-            if (old_value < 0) continue;
-            if (old_value == 0) {
-                place.setPosValue(i, j, -10);
-                return new point(i, j, -10);
+            switch (place.getCellState(i,j)){
+                case Sea:
+                    place.Attack(i,j);
+                    return Miss;
+                case Ship:
+                    place.Attack(i,j);
+                    return Good;
+                case ShipDamaged:
+                    place.Attack(i,j);
+                    return Good;
+                case ShipKilled:
+                    continue;
+                case Miss:
+                    continue;
+                case Border:
+                    place.Attack(i,j);
+                    return Miss;
             }
-            place.setPosValue(i, j, -1 * place.getPosValue(i, j));
-            return new point(i, j, -1 * old_value);
         }
     }
 
-    public boolean IsWin(){
-        return place.IsWin();
+    public boolean isWin(){
+        return place.isWin();
     }
 }
