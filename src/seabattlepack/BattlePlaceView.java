@@ -49,8 +49,6 @@ public class BattlePlaceView extends JPanel {
         btnNewGame.setBounds(130, 450, 150, 40);
         btnNewGame.addActionListener(new ActionListener() {
 
-//Обрабка події при натисканні на кнопку Нова гра
-
             public void actionPerformed(ActionEvent arg0) {
                 user = new User();
                 computer = new Bot();
@@ -145,7 +143,7 @@ public class BattlePlaceView extends JPanel {
                 userPlaseArea[i][j] = new JButton();
                 userPlaseArea[i][j].setForeground(Color.BLUE);
                 userPlaseArea[i][j].setFont(new Font("serif", 0, 2));
-                userPlaseArea[i][j].setBounds(500+j*30, 100+i*30, 30, 30);
+                userPlaseArea[i][j].setBounds(490+j*30, 100+i*30, 30, 30);
                 try {
                     Image img = ImageIO.read(new File("img/sea.png"));
                     userPlaseArea[i][j].setIcon(new ImageIcon(img));
@@ -189,7 +187,7 @@ public class BattlePlaceView extends JPanel {
             gr.drawString(""+i, 473, 93+i*30);
 // Вивід букв
             gr.drawString(""+(char)('A'+i-1), 78+i*30, 93);
-            gr.drawString(""+(char)('A'+i-1), 478+i*30, 93);
+            gr.drawString(""+(char)('A'+i-1), 468+i*30, 93);
         }
     }
 
@@ -207,13 +205,13 @@ public class BattlePlaceView extends JPanel {
     }
 
     private void WinChecker(){
-        if(computer.IsWin()){
+        if(computer.isWin()){
             JOptionPane.showMessageDialog(null,
                     "You WIN",
                     "",
                     JOptionPane.PLAIN_MESSAGE);
         }
-        if(user.IsWin()){
+        if(user.isWin()){
             JOptionPane.showMessageDialog(null,
                     "You Loser",
                     "",
@@ -222,40 +220,95 @@ public class BattlePlaceView extends JPanel {
     }
 
     private void botAttack(){
-        User.point point = user.attack(mode);
-        if(point.status == -10)
-            try {
-                Image img = ImageIO.read(new File("img/miss.png"));
-                userPlaseArea[point.P.x][point.P.y].setIcon(new ImageIcon(img));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        else
-            try {
-                Image img = ImageIO.read(new File("img/ubit.png"));
-                userPlaseArea[point.P.x][point.P.y].setIcon(new ImageIcon(img));
+        switch (user.attack(mode)){
+            case Miss:
+                break;
+            case Good:
                 botAttack();
-            } catch (IOException e) {
-                e.printStackTrace();
+                break;
+            case Bad:
+                break;
+        }
+        drawStateUser();
+    }
+
+    private void drawStateUser(){
+        for(int i=0;i<10;i++){
+            for(int j=0;j<10;j++){
+                switch (user.getBattlePlace().getCellState(i,j)){
+                    case Sea:
+                        break;
+                    case Ship:
+                        break;
+                    case ShipDamaged:
+                        break;
+                    case ShipKilled:
+                        try {
+                            Image img = ImageIO.read(new File("img/ubit.png"));
+                            userPlaseArea[i][j].setIcon(new ImageIcon(img));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case Miss:
+                        try {
+                            Image img = ImageIO.read(new File("img/miss.png"));
+                            userPlaseArea[i][j].setIcon(new ImageIcon(img));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case Border:
+                        break;
+                }
             }
+        }
     }
 
     private int userAttack(int i, int j){
-        int res = computer.attack(i,j);
-        if(res < 0) return res;
+        int state = 0;
+        switch (computer.attack(i,j)){
+            case Miss:
+                state = 0;
+                break;
+            case Good:
+                state = 1;
+                break;
+            case Bad:
+                state = 2;
+                break;
+        }
         try {
-            if(res == 0) {
-                Image img = ImageIO.read(new File("img/miss.png"));
-                compPlaceArea[i][j].setIcon(new ImageIcon(img));
-            }
-            else{
-                Image img = ImageIO.read(new File("img/ubit.png"));
-                compPlaceArea[i][j].setIcon(new ImageIcon(img));
-                return res;
+            Image img;
+            switch (computer.getBattlePlace().getCellState(i,j)){
+                case Sea:
+                    img = ImageIO.read(new File("img/sea.png"));
+                    compPlaceArea[i][j].setIcon(new ImageIcon(img));
+                    break;
+                case Ship:
+                    img = ImageIO.read(new File("img/ship.png"));
+                    compPlaceArea[i][j].setIcon(new ImageIcon(img));
+                    break;
+                case ShipDamaged:
+                    img = ImageIO.read(new File("img/damaged.png"));
+                    compPlaceArea[i][j].setIcon(new ImageIcon(img));
+                    break;
+                case ShipKilled:
+                    img = ImageIO.read(new File("img/ubit.png"));
+                    compPlaceArea[i][j].setIcon(new ImageIcon(img));
+                    break;
+                case Miss:
+                    img = ImageIO.read(new File("img/miss.png"));
+                    compPlaceArea[i][j].setIcon(new ImageIcon(img));
+                    break;
+                case Border:
+                    img = ImageIO.read(new File("img/border.png"));
+                    compPlaceArea[i][j].setIcon(new ImageIcon(img));
+                    break;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return 0;
+        return state;
     }
 }
