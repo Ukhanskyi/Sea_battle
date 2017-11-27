@@ -47,11 +47,11 @@ public class BattlePlace {
     }
     class Cell{
         CellState myState;
-        Ship ship = null;
+            Ship ship = null;
 
-        Cell(){
-            this.myState = CellState.Sea;
-        }
+            Cell(){
+                this.myState = CellState.Sea;
+            }
 
         void setShip(Ship ship){
             this.ship = ship;
@@ -171,25 +171,25 @@ public class BattlePlace {
 
     void AutoGen(ICallback callback){
         Generate(4);
-        if(callback!=null) callback.exec();
+        if(callback!=null);
         Generate(3);
-        if(callback!=null) callback.exec();
+        if(callback!=null);
         Generate(3);
-        if(callback!=null) callback.exec();
+        if(callback!=null);
         Generate(2);
-        if(callback!=null) callback.exec();
+        if(callback!=null);
         Generate(2);
-        if(callback!=null) callback.exec();
+        if(callback!=null);
         Generate(2);
-        if(callback!=null) callback.exec();
+        if(callback!=null);
         Generate(1);
-        if(callback!=null) callback.exec();
+        if(callback!=null);
         Generate(1);
-        if(callback!=null) callback.exec();
+        if(callback!=null);
         Generate(1);
-        if(callback!=null) callback.exec();
+        if(callback!=null);
         Generate(1);
-        if(callback!=null) callback.exec();
+        if(callback!=null);
         for (int i=0;i<4;i++){
             placedShip[3 - i]=i + 1;
         }

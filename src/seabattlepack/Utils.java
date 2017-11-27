@@ -34,7 +34,7 @@ public class Utils {
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
                         case Border:
-                            img = ImageIO.read(new File("img/border.png"));
+                            img = ImageIO.read(new File("img/sea.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
                     }
