@@ -12,7 +12,7 @@ public class BattlePlaceView extends JPanel {
 
     private Timer tmDraw;
     private Image background, ship, ubit, sea, icon;
-    private JButton btnNewGame, btnExit, btnIGiveUp, btnMusicPlay;
+    private JButton btnNewGame, btnExit, btnIGiveUp, btnMusicPlay, btnHint;
     private Bot computer;
     private User user;
     private Audio music = new Audio();
@@ -59,6 +59,8 @@ public class BattlePlaceView extends JPanel {
                 mode = new_game.getMode();
                 user.setBattlePlace(new_game.getPlace());
                 Utils.refreshBattlePlace(user.getBattlePlace(),userPlaseArea);
+                btnIGiveUp.setEnabled(true);
+                btnHint.setEnabled(true);
                 isGameStarted = true;
             }
         });
@@ -71,6 +73,7 @@ public class BattlePlaceView extends JPanel {
         btnIGiveUp.setForeground(Color.BLUE);
         btnIGiveUp.setFont(new Font("serif", 0, 20));
         btnIGiveUp.setBounds(370, 460, 150, 30);
+        btnIGiveUp.setEnabled(false);
         btnIGiveUp.addActionListener(new ActionListener() {
 
 //Обрабка події при натисканні на кнопку "Я здаюсь"
@@ -102,12 +105,22 @@ public class BattlePlaceView extends JPanel {
         });
         add(btnExit);
 
+        btnHint = new JButton();
+        btnHint.setIcon(new ImageIcon("img/hint.png"));
+        btnHint.setBounds(850, 520, 30, 30);
+        btnHint.setEnabled(false);
+        btnHint.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        add(btnHint);
+
 //Створюємо кнопку Music
         btnMusicPlay = new JButton();
         btnMusicPlay.setIcon( new ImageIcon("img/audio.jpg") );
-        btnMusicPlay.setForeground(Color.RED);
-        btnMusicPlay.setFont(new Font("serif", 0, 20));;
-        btnMusicPlay.setBounds(820, 10, 30, 30);
+        btnMusicPlay.setBounds(850, 10, 30, 30);
         btnMusicPlay.addActionListener(new ActionListener() {
             public final void actionPerformed(ActionEvent arg0) {
                 if(playStop == true){
