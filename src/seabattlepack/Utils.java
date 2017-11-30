@@ -22,7 +22,7 @@ public class Utils {
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
                         case ShipDamaged:
-                            img = ImageIO.read(new File("img/damaged.png"));
+                            img = ImageIO.read(new File("img/ship.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
                         case ShipKilled:
