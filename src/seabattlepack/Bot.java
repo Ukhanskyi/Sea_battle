@@ -1,29 +1,29 @@
 package seabattlepack;
 
-import static seabattlepack.User.Res.Bad;
-import static seabattlepack.User.Res.Good;
-import static seabattlepack.User.Res.Miss;
+import static seabattlepack.User.res.Bad;
+import static seabattlepack.User.res.Good;
+import static seabattlepack.User.res.Miss;
 
 public class Bot {
     private BattlePlace place;
 
-    public User.Res attack(int i, int j) {
+    public User.res attack(int i, int j) {
         switch (place.getCellState(i, j)) {
             case Sea:
-                place.Attack(i, j);
+                place.attack(i, j);
                 return Miss;
             case Ship:
-                place.Attack(i, j);
+                place.attack(i, j);
                 return Good;
             case ShipDamaged:
-                place.Attack(i, j);
+                place.attack(i, j);
                 return Good;
             case ShipKilled:
                 return Bad;
             case Miss:
                 return Bad;
             case Border:
-                place.Attack(i, j);
+                place.attack(i, j);
                 return Miss;
         }
         return Bad;

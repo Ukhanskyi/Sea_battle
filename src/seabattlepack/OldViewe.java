@@ -1,3 +1,4 @@
+/*
 package seabattlepack;
 
 import javax.imageio.ImageIO;
@@ -11,12 +12,11 @@ import java.io.IOException;
 public class BattlePlaceView extends JPanel {
 
     private Timer tmDraw;
-    private Image background, ship, ubit, sea, icon;
-    private JButton btnNewGame, btnExit, btnIGiveUp, btnMusicPlay;
+    private Image background, ship, killed, sea, icon;
+    private JButton btnNewGame, btnExit, btnIGiveUp, btnMusic;
     private Bot computer;
     private User user;
     private Audio music = new Audio();
-    private boolean playStop = false;
     int mode;
     public JButton[][] compPlaceArea = new JButton[10][10];
     public JButton[][] userPlaseArea = new JButton[10][10];
@@ -48,7 +48,7 @@ public class BattlePlaceView extends JPanel {
         btnNewGame.setText("Нова гра");
         btnNewGame.setForeground(Color.BLUE);
         btnNewGame.setFont(new Font("serif", 0, 20));
-        btnNewGame.setBounds(130, 450, 150, 40);
+        btnNewGame.setBounds(130, 460, 150, 30);
         btnNewGame.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent arg0) {
@@ -70,7 +70,7 @@ public class BattlePlaceView extends JPanel {
         btnIGiveUp.setText("Я здаюсь");
         btnIGiveUp.setForeground(Color.BLUE);
         btnIGiveUp.setFont(new Font("serif", 0, 20));
-        btnIGiveUp.setBounds(375, 450, 150, 40);
+        btnIGiveUp.setBounds(370, 460, 150, 30);
         btnIGiveUp.addActionListener(new ActionListener() {
 
 //Обрабка події при натисканні на кнопку "Я здаюсь"
@@ -92,35 +92,35 @@ public class BattlePlaceView extends JPanel {
 
         btnExit = new JButton();
         btnExit.setText("Вихід");
-        btnExit.setForeground(Color.RED);
-        btnExit.setFont(new Font("serif", 0, 20));
-        btnExit.setBounds(620, 450, 150, 40);
+        btnExit.setForeground(new Color(205, 0, 0));
+        btnExit.setFont(new Font("monospace", Font.PLAIN, 20));
+        btnExit.setBounds(610, 460, 150, 30);
         btnExit.addActionListener(new ActionListener() {
+
+// обробник події при натиску на кнопку Вихід
+
             public void actionPerformed(ActionEvent arg0) {
+
+// Вихід із гри -завершення роботи програми
+
                 System.exit(0);
             }
         });
         add(btnExit);
 
-//Створюємо кнопку Music
-        btnMusicPlay = new JButton();
-        btnMusicPlay.setText("Music");
-        btnMusicPlay.setForeground(Color.RED);
-        btnMusicPlay.setFont(new Font("serif", 0, 20));;
-        btnMusicPlay.setBounds(620, 500, 150, 40);
-        btnMusicPlay.addActionListener(new ActionListener() {
+        //Створюємо кнопку Music
+
+        btnMusic = new JButton();
+        btnMusic.setIcon( new ImageIcon("img/audio.jpg") );
+        btnMusic.setForeground(Color.RED);
+        btnMusic.setFont(new Font("serif", 0, 20));;
+        btnMusic.setBounds(820, 10, 30, 30);
+        btnMusic.addActionListener(new ActionListener() {
             public final void actionPerformed(ActionEvent arg0) {
-                if(playStop == true){
-                    music.play();
-                    playStop = false;
-                }
-                else{
-                    music.stop();
-                    playStop = true;
-                }
+                music.music();
             }
         });
-        add(btnMusicPlay);
+        add(btnMusic);
 
         for (int i = 0; i < 10; i++){
             for (int j = 0; j < 10; j++){
@@ -148,10 +148,10 @@ public class BattlePlaceView extends JPanel {
                             return;
                         }
                         if(userAttack(_i,_j)==0) {
-                            winChecker();
+                            WinChecker();
                             botAttack();
                         }
-                        winChecker();
+                        WinChecker();
                     }
                 });
                 add(compPlaceArea[i][j]);
@@ -185,22 +185,22 @@ public class BattlePlaceView extends JPanel {
 //Малювання фону
         gr.drawImage(background,0,0,900,600,null);
 //Встановлення шрифта
-        gr.setFont(new Font("serif",2,40));
+        gr.setFont(new Font("Helvetica",Font.BOLD,30));
 //Встановлення кольору
-        gr.setColor(Color.BLACK);
+        gr.setColor(new Color(106, 90, 205));
 //Виведення на дисплей
         gr.drawString("Комп'ютер", 150, 50);
         gr.drawString("Гравець", 590, 50);
 //Встановлення шрифту
-        gr.setFont(new Font("serif",0,20));
+        gr.setFont(new Font("monospace", Font.PLAIN,15));
 //Установка цвета
-        gr.setColor(Color.RED);
+        gr.setColor(new Color(0, 0, 0));
 //Введення цифр і букв
         for (int i = 1; i <= 10; i++)
         {
 // Вивід цифр
             gr.drawString(""+i, 73, 93+i*30);
-            gr.drawString(""+i, 473, 93+i*30);
+            gr.drawString(""+i, 463, 93+i*30);
 // Вивід букв
             gr.drawString(""+(char)('A'+i-1), 78+i*30, 93);
             gr.drawString(""+(char)('A'+i-1), 468+i*30, 93);
@@ -220,7 +220,7 @@ public class BattlePlaceView extends JPanel {
         }
     }
 
-    private void winChecker(){
+    private void WinChecker(){
         if(computer.isWin()){
             JOptionPane.showMessageDialog(null,
                     "You WIN",
@@ -257,12 +257,6 @@ public class BattlePlaceView extends JPanel {
                     case Ship:
                         break;
                     case ShipDamaged:
-                        try {
-                            Image img = ImageIO.read(new File("img/damaged.png"));
-                            userPlaseArea[i][j].setIcon(new ImageIcon(img));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                         break;
                     case ShipKilled:
                         try {
@@ -312,7 +306,7 @@ public class BattlePlaceView extends JPanel {
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
                 case ShipDamaged:
-                    img = ImageIO.read(new File("img/damaged.png"));
+                    img = ImageIO.read(new File("img/killed.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
                 case ShipKilled:
@@ -324,37 +318,13 @@ public class BattlePlaceView extends JPanel {
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
                 case Border:
-                    img = ImageIO.read(new File("img/border.png"));
+                    img = ImageIO.read(new File("img/sea.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for(int I=0;I<10;I++) {
-            for (int J = 0; J < 10; J++) {
-                switch (computer.getBattlePlace().getCellState(I, J)) {
-                    case Sea:
-                        break;
-                    case Ship:
-                        break;
-                    case ShipDamaged:
-                        break;
-                    case ShipKilled:
-                        break;
-                    case Miss:
-                        try {
-                            Image img = ImageIO.read(new File("img/miss.png"));
-                            compPlaceArea[I][J].setIcon(new ImageIcon(img));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case Border:
-                        break;
-                }
-            }
-        }
         return state;
     }
-}
+}*/

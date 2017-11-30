@@ -1,15 +1,13 @@
 package seabattlepack;
 
-import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import static seabattlepack.User.Res.Bad;
-import static seabattlepack.User.Res.Good;
-import static seabattlepack.User.Res.Miss;
+import static seabattlepack.User.res.Good;
+import static seabattlepack.User.res.Miss;
 
 /**
  * Created by Zen on 13.09.2017.
@@ -34,7 +32,7 @@ public class User {
         ret_pos(int x, int y) {this.x = x; this.y = y;}
     }
 
-    enum Res{
+    enum res {
         Miss, Good, Bad
     }
 
@@ -71,39 +69,42 @@ public class User {
         return ret;
     }
 
-    public Res attack(int mode){
+    public res attack(int mode){
         if(mode == 1)
             return randomAttack();
         return  autoAttack();
     }
 
-    @NotNull
-    private Res autoAttack() {
+
+    private res autoAttack() {
         if (availableDirections.isEmpty())
             if (posStack.isEmpty()) {
+                direction = null;
                 while (true) {
                     int i = (int) (Math.random() * 10);
                     int j = (int) (Math.random() * 10);
                     switch (place.getCellState(i,j)){
                         case Sea:
-                            place.Attack(i,j);
+                            place.attack(i,j);
                             return Miss;
                         case Ship:
-                            place.Attack(i,j);
+                            place.attack(i,j);
                             I = i;
                             J = j;
                             isFirst = false;
                             availableDirections = possibleDirection(i, j);
+                            posStack.push(new ret_pos(i, j));
                             return Good;
                         case ShipDamaged:
-                            place.Attack(i,j);
+                            place.attack(i,j);
                             I = i;
                             J = j;
                             isFirst = false;
+                            posStack.push(new ret_pos(i, j));
                             availableDirections = possibleDirection(i, j);
                             return Good;
                         case Border:
-                            place.Attack(i,j);
+                            place.attack(i,j);
                             return Miss;
                         case ShipKilled:
                             continue;
@@ -117,6 +118,7 @@ public class User {
             ret_pos p = posStack.pop();
             I = p.x;
             J = p.y;
+            if(direction==null) return autoAttack();
             switch (direction) {
                 case Up:
                     availableDirections.add(Directions.Down);
@@ -164,7 +166,7 @@ public class User {
             switch (place.getCellState(i,j)){
                 case Sea:
                     availableDirections.remove(n);
-                    place.Attack(i,j);
+                    place.attack(i,j);
                     return Miss;
                 case Ship:
                     posStack.push(new ret_pos(i, j));
@@ -176,7 +178,7 @@ public class User {
                             return true;
                         return false;
                     });
-                    place.Attack(i,j);
+                    place.attack(i,j);
                     return Good;
                 case ShipDamaged:
                     posStack.push(new ret_pos(i, j));
@@ -191,7 +193,7 @@ public class User {
                     if(availableDirections.isEmpty()){
                         return autoAttack();
                     }
-                    place.Attack(i,j);
+                    place.attack(i,j);
                     return Good;
                 case ShipKilled:
                     posStack.empty();
@@ -202,33 +204,32 @@ public class User {
                     continue;
                 case Border:
                     availableDirections.remove(n);
-                    place.Attack(i,j);
+                    place.attack(i,j);
                     return Miss;
             }
         }
     }
 
-    @NotNull
-    private Res randomAttack() {
+    private res randomAttack() {
         while (true) {
             int i = (int) (Math.random() * 10);
             int j = (int) (Math.random() * 10);
             switch (place.getCellState(i,j)){
                 case Sea:
-                    place.Attack(i,j);
+                    place.attack(i,j);
                     return Miss;
                 case Ship:
-                    place.Attack(i,j);
+                    place.attack(i,j);
                     return Good;
                 case ShipDamaged:
-                    place.Attack(i,j);
+                    place.attack(i,j);
                     return Good;
                 case ShipKilled:
                     continue;
                 case Miss:
                     continue;
                 case Border:
-                    place.Attack(i,j);
+                    place.attack(i,j);
                     return Miss;
             }
         }

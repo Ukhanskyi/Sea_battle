@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Window extends JFrame {
+    private Audio music = new Audio();
     public Window() {
         BattlePlaceView pan = new BattlePlaceView(this);
         Container cont = getContentPane();
@@ -14,6 +15,7 @@ public class Window extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);
+        music.play();
     }
 
 }

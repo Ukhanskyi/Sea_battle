@@ -26,7 +26,7 @@ public class Utils {
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
                         case ShipKilled:
-                            img = ImageIO.read(new File("img/ubit.png"));
+                            img = ImageIO.read(new File("img/killed.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
                         case Miss:

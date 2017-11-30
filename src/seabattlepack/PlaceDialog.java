@@ -19,14 +19,14 @@ public class PlaceDialog extends JDialog {
         setBounds(410, 0, 100, 150);//границя вікна
         this.place = place;
         this.I = i; this.J = j;
-        BuildWindow();
+        buildWindow();
     }
 
     JPanel panel;
     JRadioButton radioButton[];
     JButton button[];
 
-    void BuildWindow(){
+    void buildWindow(){
         panel = new GameWindowPanel();
         panel.setLayout(new BoxLayout(panel,PAGE_AXIS));
         radioButton = new JRadioButton[4];

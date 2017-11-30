@@ -21,7 +21,7 @@ public class NewGame extends JDialog {
         setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         place = new BattlePlace();
-        BuildWindow();
+        buildWindow();
     }
 
     public BattlePlace getPlace() {
@@ -41,9 +41,10 @@ public class NewGame extends JDialog {
     JButton auto;
     JRadioButton[] mode;
 
-    public void BuildWindow() {
+    public void buildWindow() {
         buttons = new JButton[10][10];
-        //GridBagLayout  bl = new GridBagLayout();
+        //GridBag
+        // Layout  bl = new GridBagLayout();
         buttons_panel = new JPanel();
         buttons_panel.setLayout(null);
         //Add window controls to the panel pl.
@@ -66,9 +67,9 @@ public class NewGame extends JDialog {
                             PlaceDialog placeDialog = new PlaceDialog((JFrame)ancestor,place,I,J);
                             if(placeDialog.isPlaced()) {
                                 place = placeDialog.getPlace();
-                                Utils.refreshBattlePlace(place,buttons);
                                 if(place.isFull()) NewGame.this.setVisible(false);
                             }
+                            Utils.refreshBattlePlace(place,buttons);
                         }
                     });
                 }
