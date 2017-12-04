@@ -58,7 +58,7 @@ public class BattlePlaceView extends JPanel {
                 NewGame new_game = new NewGame(me);
                 mode = new_game.getMode();
                 user.setBattlePlace(new_game.getPlace());
-                Utils.refreshBattlePlace(user.getBattlePlace(),userPlaseArea);
+                Utils.refreshBattlePlace(user.getBattlePlace(), userPlaseArea);
                 btnIGiveUp.setEnabled(true);
                 btnHint.setEnabled(true);
                 isGameStarted = true;
@@ -79,9 +79,9 @@ public class BattlePlaceView extends JPanel {
 //Обрабка події при натисканні на кнопку "Я здаюсь"
 
             public void actionPerformed(ActionEvent arg0) {
-                if(!isGameStarted) return;
+                if (!isGameStarted) return;
                 clear();
-                Utils.refreshBattlePlace(computer.getBattlePlace(),compPlaceArea);
+                Utils.refreshBattlePlace(computer.getBattlePlace(), compPlaceArea);
                 isGameStarted = false;
                 JOptionPane.showMessageDialog(null,
                         "You Loser",
@@ -119,30 +119,29 @@ public class BattlePlaceView extends JPanel {
 
 //Створюємо кнопку Music
         btnMusicPlay = new JButton();
-        btnMusicPlay.setIcon( new ImageIcon("img/audio.jpg") );
+        btnMusicPlay.setIcon(new ImageIcon("img/audio.jpg"));
         btnMusicPlay.setBounds(850, 10, 30, 30);
         btnMusicPlay.addActionListener(new ActionListener() {
             public final void actionPerformed(ActionEvent arg0) {
-                if(playStop == true){
+                if (playStop) {
                     music.play();
                     playStop = false;
-                    btnMusicPlay.setIcon( new ImageIcon("img/audio.jpg") );
-                }
-                else{
+                    btnMusicPlay.setIcon(new ImageIcon("img/audio.jpg"));
+                } else {
                     music.stop();
                     playStop = true;
-                    btnMusicPlay.setIcon( new ImageIcon(" ") );
+                    btnMusicPlay.setIcon(new ImageIcon(" "));
 
                 }
             }
         });
         add(btnMusicPlay);
 
-        for (int i = 0; i < 10; i++){
-            for (int j = 0; j < 10; j++){
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
                 compPlaceArea[i][j] = new JButton();
                 compPlaceArea[i][j].setFont(new Font("serif", 0, 2));
-                compPlaceArea[i][j].setBounds(100+j*30, 100+i*30, 30, 30);
+                compPlaceArea[i][j].setBounds(100 + j * 30, 100 + i * 30, 30, 30);
                 try {
                     Image img = ImageIO.read(new File("img/sea.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
@@ -155,15 +154,14 @@ public class BattlePlaceView extends JPanel {
 
 
                     public void actionPerformed(ActionEvent arg0) {
-                        if(!isGameStarted)
-                        {
+                        if (!isGameStarted) {
                             JOptionPane.showMessageDialog(me,
                                     "Game not started",
                                     "Game",
                                     JOptionPane.ERROR_MESSAGE);
                             return;
                         }
-                        if(userAttack(_i,_j)==0) {
+                        if (userAttack(_i, _j) == 0) {
                             winChecker();
                             botAttack();
                         }
@@ -175,7 +173,7 @@ public class BattlePlaceView extends JPanel {
                 userPlaseArea[i][j] = new JButton();
                 userPlaseArea[i][j].setForeground(Color.BLUE);
                 userPlaseArea[i][j].setFont(new Font("serif", 0, 2));
-                userPlaseArea[i][j].setBounds(490+j*30, 100+i*30, 30, 30);
+                userPlaseArea[i][j].setBounds(490 + j * 30, 100 + i * 30, 30, 30);
                 try {
                     Image img = ImageIO.read(new File("img/sea.png"));
                     userPlaseArea[i][j].setIcon(new ImageIcon(img));
@@ -199,33 +197,32 @@ public class BattlePlaceView extends JPanel {
 
     public void paintComponent(Graphics gr) {
 //Малювання фону
-        gr.drawImage(background,0,0,900,600,null);
+        gr.drawImage(background, 0, 0, 900, 600, null);
 //Встановлення шрифта
-        gr.setFont(new Font("Helvetica",Font.BOLD,30));
+        gr.setFont(new Font("Helvetica", Font.BOLD, 30));
 //Встановлення кольору
         gr.setColor(new Color(106, 90, 205));
 //Виведення на дисплей
         gr.drawString("Комп'ютер", 150, 50);
         gr.drawString("Гравець", 590, 50);
 //Встановлення шрифту
-        gr.setFont(new Font("monospace", Font.PLAIN,15));
+        gr.setFont(new Font("monospace", Font.PLAIN, 15));
 //Установка цвета
         gr.setColor(new Color(0, 0, 0));
 //Введення цифр і букв
-        for (int i = 1; i <= 10; i++)
-        {
+        for (int i = 1; i <= 10; i++) {
 // Вивід цифр
-            gr.drawString(""+i, 73, 93+i*30);
-            gr.drawString(""+i, 463, 93+i*30);
+            gr.drawString("" + i, 73, 93 + i * 30);
+            gr.drawString("" + i, 463, 93 + i * 30);
 // Вивід букв
-            gr.drawString(""+(char)('A'+i-1), 78+i*30, 93);
-            gr.drawString(""+(char)('A'+i-1), 468+i*30, 93);
+            gr.drawString("" + (char) ('A' + i - 1), 78 + i * 30, 93);
+            gr.drawString("" + (char) ('A' + i - 1), 468 + i * 30, 93);
         }
     }
 
-    private void clear(){
-        for (int i = 0; i < 10; i++){
-            for (int j = 0; j < 10; j++){
+    private void clear() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
                 try {
                     Image img = ImageIO.read(new File("img/sea.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
@@ -236,14 +233,14 @@ public class BattlePlaceView extends JPanel {
         }
     }
 
-    private void winChecker(){
-        if(computer.isWin()){
+    private void winChecker() {
+        if (computer.isWin()) {
             JOptionPane.showMessageDialog(null,
                     "You WIN",
                     "",
                     JOptionPane.PLAIN_MESSAGE);
         }
-        if(user.isWin()){
+        if (user.isWin()) {
             JOptionPane.showMessageDialog(null,
                     "You Loser",
                     "",
@@ -251,8 +248,8 @@ public class BattlePlaceView extends JPanel {
         }
     }
 
-    private void botAttack(){
-        switch (user.attack(mode)){
+    private void botAttack() {
+        switch (user.attack(mode)) {
             case Miss:
                 break;
             case Good:
@@ -264,10 +261,10 @@ public class BattlePlaceView extends JPanel {
         drawStateUser();
     }
 
-    private void drawStateUser(){
-        for(int i=0;i<10;i++){
-            for(int j=0;j<10;j++){
-                switch (user.getBattlePlace().getCellState(i,j)){
+    private void drawStateUser() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                switch (user.getBattlePlace().getCellState(i, j)) {
                     case Sea:
                         break;
                     case Ship:
@@ -303,9 +300,9 @@ public class BattlePlaceView extends JPanel {
         }
     }
 
-    private int userAttack(int i, int j){
+    private int userAttack(int i, int j) {
         int state = 0;
-        switch (computer.attack(i,j)){
+        switch (computer.attack(i, j)) {
             case Miss:
                 state = 0;
                 break;
@@ -318,7 +315,7 @@ public class BattlePlaceView extends JPanel {
         }
         try {
             Image img;
-            switch (computer.getBattlePlace().getCellState(i,j)){
+            switch (computer.getBattlePlace().getCellState(i, j)) {
                 case Sea:
                     img = ImageIO.read(new File("img/sea.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
@@ -347,7 +344,7 @@ public class BattlePlaceView extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for(int I=0;I<10;I++) {
+        for (int I = 0; I < 10; I++) {
             for (int J = 0; J < 10; J++) {
                 switch (computer.getBattlePlace().getCellState(I, J)) {
                     case Sea:

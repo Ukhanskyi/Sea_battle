@@ -67,8 +67,8 @@ public class NewGame extends JDialog {
                             PlaceDialog placeDialog = new PlaceDialog((JFrame)ancestor,place,I,J);
                             if(placeDialog.isPlaced()) {
                                 place = placeDialog.getPlace();
-                                if(place.isFull()) NewGame.this.setVisible(false);
                             }
+                            if(place.isFull()) NewGame.this.setVisible(false);
                             Utils.refreshBattlePlace(place,buttons);
                         }
                     });
@@ -117,7 +117,7 @@ public class NewGame extends JDialog {
         clear.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         clear.addActionListener(e -> Utils.refreshBattlePlace(place,buttons));
         auto.addActionListener(e -> {
-            place.AutoGen(() -> Utils.refreshBattlePlace(place,buttons));
+            place.AutoGen();
             Utils.refreshBattlePlace(place,buttons);
             dispose();
         });

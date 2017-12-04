@@ -29,15 +29,15 @@ public class Bot {
         return Bad;
     }
 
-    public Bot(){
+    public Bot() {
         place = new BattlePlace(true);
     }
 
-    public boolean isWin(){
+    public boolean isWin() {
         return place.isWin();
     }
 
-    public BattlePlace getBattlePlace(){
+    public BattlePlace getBattlePlace() {
         return place;
     }
 }

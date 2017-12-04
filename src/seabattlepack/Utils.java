@@ -7,12 +7,12 @@ import java.io.File;
 import java.io.IOException;
 
 public class Utils {
-    static void refreshBattlePlace(BattlePlace place, JButton[][] array){
+    static void refreshBattlePlace(BattlePlace place, JButton[][] array) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 try {
                     Image img;
-                    switch (place.getCellState(i,j)){
+                    switch (place.getCellState(i, j)) {
                         case Sea:
                             img = ImageIO.read(new File("img/sea.png"));
                             array[i][j].setIcon(new ImageIcon(img));

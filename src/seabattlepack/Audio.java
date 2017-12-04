@@ -8,7 +8,10 @@ public class Audio {
     public void play() {
         sound.play();
     }
-    public void stop() { sound.stop(); }
+
+    public void stop() {
+        sound.stop();
+    }
 }
 
 
