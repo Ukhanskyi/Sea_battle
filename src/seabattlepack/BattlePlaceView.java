@@ -16,6 +16,7 @@ public class BattlePlaceView extends JPanel {
     private Bot computer;
     private User user;
     private Audio music = new Audio();
+    private Utils utils = new Utils();
     private boolean playStop = false;
     int mode;
     public JButton[][] compPlaceArea = new JButton[10][10];
@@ -25,7 +26,7 @@ public class BattlePlaceView extends JPanel {
 
     public BattlePlaceView(JFrame me) {
         try {
-            background = ImageIO.read(new File("img/background.png"));
+            background = ImageIO.read(getClass().getResourceAsStream("/img/background.png"));
         } catch (Exception ex) {
         }
 
@@ -58,7 +59,7 @@ public class BattlePlaceView extends JPanel {
                 NewGame new_game = new NewGame(me);
                 mode = new_game.getMode();
                 user.setBattlePlace(new_game.getPlace());
-                Utils.refreshBattlePlace(user.getBattlePlace(), userPlaseArea);
+                utils.refreshBattlePlace(user.getBattlePlace(), userPlaseArea);
                 btnIGiveUp.setEnabled(true);
                 btnHint.setEnabled(true);
                 isGameStarted = true;
@@ -81,7 +82,7 @@ public class BattlePlaceView extends JPanel {
             public void actionPerformed(ActionEvent arg0) {
                 if (!isGameStarted) return;
                 clear();
-                Utils.refreshBattlePlace(computer.getBattlePlace(), compPlaceArea);
+                utils.refreshBattlePlace(computer.getBattlePlace(), compPlaceArea);
                 isGameStarted = false;
                 JOptionPane.showMessageDialog(null,
                         "You Loser",
@@ -106,7 +107,7 @@ public class BattlePlaceView extends JPanel {
         add(btnExit);
 
         btnHint = new JButton();
-        btnHint.setIcon(new ImageIcon("img/hint.png"));
+        btnHint.setIcon(new ImageIcon(getClass().getResource("/img/hint.png")));
         btnHint.setBounds(850, 520, 30, 30);
         btnHint.setEnabled(false);
         btnHint.addActionListener(new ActionListener() {
@@ -119,18 +120,18 @@ public class BattlePlaceView extends JPanel {
 
 //Створюємо кнопку Music
         btnMusicPlay = new JButton();
-        btnMusicPlay.setIcon(new ImageIcon("img/audio.jpg"));
+        btnMusicPlay.setIcon(new ImageIcon(getClass().getResource("/img/audio.jpg")));
         btnMusicPlay.setBounds(850, 10, 30, 30);
         btnMusicPlay.addActionListener(new ActionListener() {
             public final void actionPerformed(ActionEvent arg0) {
                 if (playStop) {
                     music.play();
                     playStop = false;
-                    btnMusicPlay.setIcon(new ImageIcon("img/audio.jpg"));
+                    btnMusicPlay.setIcon(new ImageIcon(getClass().getResource("/img/audio.jpg")));
                 } else {
                     music.stop();
                     playStop = true;
-                    btnMusicPlay.setIcon(new ImageIcon(" "));
+                    btnMusicPlay.setIcon(new ImageIcon(getClass().getResource("/img/noaudio.jpg")));
 
                 }
             }
@@ -143,7 +144,7 @@ public class BattlePlaceView extends JPanel {
                 compPlaceArea[i][j].setFont(new Font("serif", 0, 2));
                 compPlaceArea[i][j].setBounds(100 + j * 30, 100 + i * 30, 30, 30);
                 try {
-                    Image img = ImageIO.read(new File("img/sea.png"));
+                    Image img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                 } catch (Exception ex) {
                     System.out.println(ex);
@@ -175,7 +176,7 @@ public class BattlePlaceView extends JPanel {
                 userPlaseArea[i][j].setFont(new Font("serif", 0, 2));
                 userPlaseArea[i][j].setBounds(490 + j * 30, 100 + i * 30, 30, 30);
                 try {
-                    Image img = ImageIO.read(new File("img/sea.png"));
+                    Image img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                     userPlaseArea[i][j].setIcon(new ImageIcon(img));
                 } catch (Exception ex) {
                     System.out.println(ex);
@@ -224,7 +225,7 @@ public class BattlePlaceView extends JPanel {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 try {
-                    Image img = ImageIO.read(new File("img/sea.png"));
+                    Image img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                 } catch (Exception ex) {
                     System.out.println(ex);
@@ -271,7 +272,7 @@ public class BattlePlaceView extends JPanel {
                         break;
                     case ShipDamaged:
                         try {
-                            Image img = ImageIO.read(new File("img/ship.png"));
+                            Image img = ImageIO.read(getClass().getResourceAsStream("/img/ship.png"));
                             userPlaseArea[i][j].setIcon(new ImageIcon(img));
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -279,7 +280,7 @@ public class BattlePlaceView extends JPanel {
                         break;
                     case ShipKilled:
                         try {
-                            Image img = ImageIO.read(new File("img/killed.png"));
+                            Image img = ImageIO.read(getClass().getResourceAsStream("/img/killed.png"));
                             userPlaseArea[i][j].setIcon(new ImageIcon(img));
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -287,7 +288,7 @@ public class BattlePlaceView extends JPanel {
                         break;
                     case Miss:
                         try {
-                            Image img = ImageIO.read(new File("img/miss.png"));
+                            Image img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
                             userPlaseArea[i][j].setIcon(new ImageIcon(img));
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -317,27 +318,27 @@ public class BattlePlaceView extends JPanel {
             Image img;
             switch (computer.getBattlePlace().getCellState(i, j)) {
                 case Sea:
-                    img = ImageIO.read(new File("img/sea.png"));
+                    img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
                 case Ship:
-                    img = ImageIO.read(new File("img/ship.png"));
+                    img = ImageIO.read(getClass().getResourceAsStream("/img/ship.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
                 case ShipDamaged:
-                    img = ImageIO.read(new File("img/ship.png"));
+                    img = ImageIO.read(getClass().getResourceAsStream("/img/ship.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
                 case ShipKilled:
-                    img = ImageIO.read(new File("img/killed.png"));
+                    img = ImageIO.read(getClass().getResourceAsStream("/img/killed.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
                 case Miss:
-                    img = ImageIO.read(new File("img/miss.png"));
+                    img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
                 case Border:
-                    img = ImageIO.read(new File("img/border.png"));
+                    img = ImageIO.read(getClass().getResourceAsStream("/img/border.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
             }
@@ -357,7 +358,7 @@ public class BattlePlaceView extends JPanel {
                         break;
                     case Miss:
                         try {
-                            Image img = ImageIO.read(new File("img/miss.png"));
+                            Image img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
                             compPlaceArea[I][J].setIcon(new ImageIcon(img));
                         } catch (IOException e) {
                             e.printStackTrace();

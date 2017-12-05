@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+sourceSets {
+    main.java.srcDir "src"
+    main.resources {
+        srcDir "resource"
+    }
+}
+
+jar {
+    manifest.attributes "Main-Class": "seabattlepack.SeaBattle"
+}

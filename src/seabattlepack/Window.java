@@ -11,7 +11,7 @@ public class Window extends JFrame {
         BattlePlaceView pan = new BattlePlaceView(this);
         Container cont = getContentPane();
         cont.add(pan);
-        ImageIcon icon = new ImageIcon("img/icon1.png");
+        ImageIcon icon = new ImageIcon(getClass().getResource("/img/icon1.png"));
         setIconImage(icon.getImage());
         setTitle("GAME \" Sea Battle \""); //заголовок вікна
         setBounds(0, 0, 900, 600);//границя вікна
