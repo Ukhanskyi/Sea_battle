@@ -1,11 +1,11 @@
 package seabattlepack;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 
 public class BattlePlaceView extends JPanel {
@@ -15,7 +15,8 @@ public class BattlePlaceView extends JPanel {
     private JButton btnNewGame, btnExit, btnIGiveUp, btnMusicPlay, btnHint;
     private Bot computer;
     private User user;
-    private Audio music = new Audio();
+    private Clip myClip;
+    private Sound music = new Sound();
     private Utils utils = new Utils();
     private boolean playStop = false;
     int mode;
@@ -23,6 +24,10 @@ public class BattlePlaceView extends JPanel {
     public JButton[][] userPlaseArea = new JButton[10][10];
 
     private boolean isGameStarted = false;
+
+    public void playAudio() {
+        music.play();
+    }
 
     public BattlePlaceView(JFrame me) {
         try {
@@ -113,7 +118,8 @@ public class BattlePlaceView extends JPanel {
         btnHint.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                computer.hint();
+                utils.printHint(computer.getBattlePlace(), compPlaceArea);
             }
         });
         add(btnHint);

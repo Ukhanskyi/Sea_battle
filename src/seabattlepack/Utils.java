@@ -44,4 +44,22 @@ public class Utils {
             }
         }
     }
+
+    void printHint(BattlePlace place, JButton[][] array) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                try {
+                    Image img;
+                    switch (place.getCellState(i, j)) {
+                        case Miss:
+                            img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
+                            array[i][j].setIcon(new ImageIcon(img));
+                            break;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }

@@ -40,5 +40,19 @@ public class Bot {
     public BattlePlace getBattlePlace() {
         return place;
     }
+
+    public void hint (){
+        for(int i = 0; i < 10; i++){
+            for (int j = 0; j < 10; j++){
+                if (place.getCellState(i,j)==BattlePlace.CellState.ShipKilled){
+                    place.attack(i+1, j+1);
+                    place.attack(i+1, j-1);
+                    place.attack(i-1, j+1);
+                    place.attack(i-1, j-1);
+                }
+            }
+        }
+    }
+
 }
 

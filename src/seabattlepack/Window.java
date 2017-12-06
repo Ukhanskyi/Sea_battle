@@ -1,11 +1,14 @@
 package seabattlepack;
 
+/*import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;*/
+
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 
 public class Window extends JFrame {
-
-    private Audio music = new Audio();
 
     public Window() {
         BattlePlaceView pan = new BattlePlaceView(this);
@@ -18,8 +21,8 @@ public class Window extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);
-
-        music.play();
+        pan.playAudio();
+        //music.timerMusic(5);
     }
 }
 
