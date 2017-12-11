@@ -9,15 +9,17 @@ import static seabattlepack.User.res.Good;
 import static seabattlepack.User.res.Miss;
 
 /**
- * Created by Zen on 13.09.2017.
+ * Created by Dzykan on 13.09.2017.
  */
 public class User {
+
+    private int I, J;
+
+    private BattlePlace place = new BattlePlace();
 
     public User() {
         place = new BattlePlace();
     }
-
-    private BattlePlace place;
 
     public void setBattlePlace(BattlePlace battlePlace) {
         place = battlePlace;
@@ -43,8 +45,6 @@ public class User {
     public enum Directions {
         Up, Down, Left, Right
     }
-
-    private int I, J;
 
     List<Directions> availableDirections = new ArrayList<>();
 
@@ -84,8 +84,8 @@ public class User {
             if (posStack.isEmpty()) {
                 direction = null;
                 while (true) {
-                    int i = (int) (Math.random() * 10);
-                    int j = (int) (Math.random() * 10);
+                    int i = place.getRandomPoint();
+                    int j = place.getRandomPoint();
                     switch (place.getCellState(i, j)) {
                         case Sea:
                             place.attack(i, j);
@@ -212,8 +212,8 @@ public class User {
 
     private res randomAttack() {
         while (true) {
-            int i = (int) (Math.random() * 10);
-            int j = (int) (Math.random() * 10);
+            int i = place.getRandomPoint();
+            int j = place.getRandomPoint();
             switch (place.getCellState(i, j)) {
                 case Sea:
                     place.attack(i, j);

@@ -3,7 +3,6 @@ package seabattlepack;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 public class GameWindowPanel extends JPanel {
     private Image background;

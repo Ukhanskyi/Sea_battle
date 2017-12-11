@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Zen on 13.09.2017.
+ * Created by DZYKAN on 13.09.2017.
  */
 
 public class BattlePlace {
@@ -115,27 +115,21 @@ public class BattlePlace {
     }
 
     BattlePlace(boolean isAutoGen) {
-        cells = new Cell[10][10];
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                cells[i][j] = new Cell();
-            }
-        }
-        placedShip = new int[4];
-        for (int i = 0; i < 4; i++)
-            placedShip[i] = 0;
-        ships = new ArrayList<>();
+        this();
         if (isAutoGen)
             AutoGen();
     }
 
     boolean checkPlace(int x, int y, int dx, int dy) {
         if (dx > 9 || dy > 9) return false;
-        List<CellRef> cells = getShipPlace(x, y, dx, dy);
-        for (CellRef cell : cells) {
-            if (!(cell.getCell().myState == CellState.Sea || cell.getCell().myState == CellState.Border)) return false;
-        }
-        cells = getShipBorder(x, y, dx, dy);
+
+        if (!checkCells(getShipPlace(x, y, dx, dy)) || (!checkCells(getShipBorder(x, y, dx, dy))))
+            return false;
+
+        return true;
+    }
+
+    private boolean checkCells(List<CellRef> cells) {
         for (CellRef cell : cells) {
             if (!(cell.getCell().myState == CellState.Sea || cell.getCell().myState == CellState.Border)) return false;
         }
@@ -187,36 +181,36 @@ public class BattlePlace {
 
     void generate(int size) {
         while (true) {
-            int x = (int) (Math.random() * 10);
-            int y = (int) (Math.random() * 10);
+            int x = getRandomPoint();
+            int y = getRandomPoint();
             int dx = x, dy = y;
             if (Math.random() * 100 > 50)
                 dx = x + size - 1;
             else
                 dy = y + size - 1;
             if (!checkPlace(x, y, dx, dy)) continue;
-            ships.add(
-                    new Ship(
-                            size,
-                            getShipPlace(x, y, dx, dy),
-                            getShipBorder(x, y, dx, dy)
-                    )
-            );
+            ships.add(getShipByCoord(size, x, y, dx, dy));
             break;
         }
+    }
+
+    public Ship getShipByCoord(int size, int x, int y, int dx, int dy) {
+        return new Ship(
+                size,
+                getShipPlace(x, y, dx, dy),
+                getShipBorder(x, y, dx, dy)
+        );
+    }
+
+    public int getRandomPoint() {
+        return (int) (Math.random() * 10);
     }
 
     boolean ManualPlace(int x, int y, int dx, int dy) {
         if (!checkPlace(x, y, dx, dy)) return false;
         int size = (x != dx) ? dx - x : dy - y;
         if (placedShip[3 - size] == 4 - size) return false;
-        ships.add(
-                new Ship(
-                        size,
-                        getShipPlace(x, y, dx, dy),
-                        getShipBorder(x, y, dx, dy)
-                )
-        );
+        ships.add(getShipByCoord(size, x, y, dx, dy));
         placedShip[3 - size]++;
         return true;
     }

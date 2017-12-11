@@ -1,10 +1,5 @@
 package seabattlepack;
 
-/*import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;*/
-
-import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 
