@@ -8,7 +8,7 @@ import java.util.List;
  */
 
 public class BattlePlace {
-    protected enum CellState {
+    public enum CellState {
         Sea, Ship, ShipDamaged, ShipKilled, Miss, Border
     }
 

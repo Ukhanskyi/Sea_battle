@@ -15,7 +15,7 @@ import java.io.IOException;
 public class BattlePlaceView extends JPanel {
 
     private Timer tmDraw;
-    private Image background, ship, ubit, sea, icon;
+    private Image background;
     private JButton btnNewGame, btnExit, btnIGiveUp, btnMusicPlay, btnHint;
     private Bot computer;
     private User user;
@@ -24,12 +24,12 @@ public class BattlePlaceView extends JPanel {
     private Utils utils = new Utils();
     private boolean playStop = false;
     int mode;
-    public JButton[][] compPlaceArea = new JButton[10][10];
-    public JButton[][] userPlaseArea = new JButton[10][10];
+    private JButton[][] compPlaceArea = new JButton[10][10];
+    private JButton[][] userPlaseArea = new JButton[10][10];
 
     private boolean isGameStarted = false;
 
-    public void playAudio() {
+    void playAudio() {
         music.play();
     }
 
