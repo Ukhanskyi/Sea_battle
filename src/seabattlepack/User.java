@@ -84,7 +84,7 @@ public class User {
             if (posStack.isEmpty()) {
                 direction = null;
                 while (true) {
-                    Point point = new Point();
+                    RandomPoint point = new RandomPoint();
                     int i = point.getX();
                     int j = point.getY();
 
@@ -214,7 +214,7 @@ public class User {
 
     private res randomAttack() {
         while (true) {
-            Point point = new Point();
+            RandomPoint point = new RandomPoint();
             int i = point.getX();
             int j = point.getY();
 

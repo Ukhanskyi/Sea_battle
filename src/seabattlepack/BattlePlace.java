@@ -182,7 +182,7 @@ public class BattlePlace {
 
     void generate(int size) {
         while (true) {
-            Point point = new Point();
+            RandomPoint point = new RandomPoint();
             int x = point.getX();
             int y = point.getY();
 
