@@ -5,7 +5,7 @@ import static seabattlepack.logic.User.res.Good;
 import static seabattlepack.logic.User.res.Miss;
 
 public class Bot {
-    private BattlePlace place;
+    protected BattlePlace place;
 
     public User.res attack(int i, int j) {
         switch (place.getCellState(i, j)) {

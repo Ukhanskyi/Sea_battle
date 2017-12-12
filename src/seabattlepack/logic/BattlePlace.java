@@ -131,7 +131,8 @@ public class BattlePlace {
 
     public boolean checkCells(List<CellRef> cells) {
         for (CellRef cell : cells) {
-            if (!(cell.getCell().myState == CellState.Sea) && !(cell.getCell().myState == CellState.Border)) return false;
+            if (!(cell.getCell().myState == CellState.Sea) && !(cell.getCell().myState == CellState.Border))
+                return false;
         }
         return true;
     }
