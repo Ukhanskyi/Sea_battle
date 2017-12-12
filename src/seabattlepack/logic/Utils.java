@@ -1,13 +1,14 @@
-package seabattlepack;
+package seabattlepack.logic;
+
+import seabattlepack.logic.BattlePlace;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 
 public class Utils {
-    void refreshBattlePlace(BattlePlace place, JButton[][] array) {
+    public void refreshBattlePlace(BattlePlace place, JButton[][] array) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 try {
@@ -45,7 +46,7 @@ public class Utils {
         }
     }
 
-    void printHint(BattlePlace place, JButton[][] array) {
+    public void printHint(BattlePlace place, JButton[][] array) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 try {

@@ -1,4 +1,8 @@
-package seabattlepack;
+package seabattlepack.view;
+
+import seabattlepack.logic.Bot;
+import seabattlepack.logic.User;
+import seabattlepack.logic.Utils;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
@@ -144,7 +148,7 @@ public class BattlePlaceView extends JPanel {
         });
         add(btnMusicPlay);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++)
             for (int j = 0; j < 10; j++) {
                 compPlaceArea[i][j] = new JButton();
                 compPlaceArea[i][j].setFont(new Font("serif", 0, 2));
@@ -197,7 +201,6 @@ public class BattlePlaceView extends JPanel {
                 });
                 add(userPlaseArea[i][j]);
             }
-        }
     }
 
 //Графічний метод
@@ -228,34 +231,28 @@ public class BattlePlaceView extends JPanel {
     }
 
     private void clear() {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < 10; i++)
+            for (int j = 0; j < 10; j++)
                 try {
                     Image img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                 } catch (Exception ex) {
                     System.out.println(ex);
                 }
-            }
-        }
     }
 
     private void winChecker() {
-        if (computer.isWin()) {
-            JOptionPane.showMessageDialog(null,
-                    "You WIN",
-                    "",
-                    JOptionPane.PLAIN_MESSAGE);
-        }
-        if (user.isWin()) {
-            JOptionPane.showMessageDialog(null,
-                    "You Loser",
-                    "",
-                    JOptionPane.PLAIN_MESSAGE);
-        }
+        if (computer.isWin()) JOptionPane.showMessageDialog(null,
+                "You WIN",
+                "",
+                JOptionPane.PLAIN_MESSAGE);
+        if (user.isWin()) JOptionPane.showMessageDialog(null,
+                "You Loser",
+                "",
+                JOptionPane.PLAIN_MESSAGE);
     }
 
-    private void botAttack() {
+    public void botAttack() {
         switch (user.attack(mode)) {
             case Miss:
                 break;
@@ -268,9 +265,9 @@ public class BattlePlaceView extends JPanel {
         drawStateUser();
     }
 
-    private void drawStateUser() {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+    public void drawStateUser() {
+        for (int i = 0; i < 10; i++)
+            for (int j = 0; j < 10; j++)
                 switch (user.getBattlePlace().getCellState(i, j)) {
                     case Sea:
                         break;
@@ -303,11 +300,9 @@ public class BattlePlaceView extends JPanel {
                     case Border:
                         break;
                 }
-            }
-        }
     }
 
-    private int userAttack(int i, int j) {
+    public int userAttack(int i, int j) {
         int state = 0;
         switch (computer.attack(i, j)) {
             case Miss:
@@ -351,8 +346,8 @@ public class BattlePlaceView extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (int I = 0; I < 10; I++) {
-            for (int J = 0; J < 10; J++) {
+        for (int I = 0; I < 10; I++)
+            for (int J = 0; J < 10; J++)
                 switch (computer.getBattlePlace().getCellState(I, J)) {
                     case Sea:
                         break;
@@ -373,8 +368,6 @@ public class BattlePlaceView extends JPanel {
                     case Border:
                         break;
                 }
-            }
-        }
         return state;
     }
 }

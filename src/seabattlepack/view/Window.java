@@ -1,4 +1,6 @@
-package seabattlepack;
+package seabattlepack.view;
+
+import seabattlepack.view.BattlePlaceView;
 
 import javax.swing.*;
 import java.awt.*;

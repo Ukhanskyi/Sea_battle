@@ -1,8 +1,8 @@
-package seabattlepack;
+package seabattlepack.logic;
 
-import static seabattlepack.User.res.Bad;
-import static seabattlepack.User.res.Good;
-import static seabattlepack.User.res.Miss;
+import static seabattlepack.logic.User.res.Bad;
+import static seabattlepack.logic.User.res.Good;
+import static seabattlepack.logic.User.res.Miss;
 
 public class Bot {
     private BattlePlace place;

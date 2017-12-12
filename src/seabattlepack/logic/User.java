@@ -1,19 +1,19 @@
-package seabattlepack;
+package seabattlepack.logic;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import static seabattlepack.User.res.Good;
-import static seabattlepack.User.res.Miss;
+import static seabattlepack.logic.User.res.Good;
+import static seabattlepack.logic.User.res.Miss;
 
 /**
  * Created by Dzykan on 13.09.2017.
  */
 public class User {
 
-    private int I, J;
+    public int I, J;
 
     private BattlePlace place = new BattlePlace();
 
@@ -38,7 +38,7 @@ public class User {
         }
     }
 
-    enum res {
+    public enum res {
         Miss, Good, Bad
     }
 
@@ -84,8 +84,9 @@ public class User {
             if (posStack.isEmpty()) {
                 direction = null;
                 while (true) {
-                    int i = place.getRandomPoint();
-                    int j = place.getRandomPoint();
+                    RandomPoint point = new RandomPoint();
+                    int i = point.getX();
+                    int j = point.getY();
                     switch (place.getCellState(i, j)) {
                         case Sea:
                             place.attack(i, j);
@@ -212,8 +213,9 @@ public class User {
 
     private res randomAttack() {
         while (true) {
-            int i = place.getRandomPoint();
-            int j = place.getRandomPoint();
+            RandomPoint point = new RandomPoint();
+            int i = point.getX();
+            int j = point.getY();
             switch (place.getCellState(i, j)) {
                 case Sea:
                     place.attack(i, j);

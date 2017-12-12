@@ -1,4 +1,4 @@
-package seabattlepack;
+package seabattlepack.view;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

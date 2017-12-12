@@ -1,9 +1,6 @@
-package seabattlepack;
-
-import javafx.scene.media.AudioClip;
+package seabattlepack.view;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;

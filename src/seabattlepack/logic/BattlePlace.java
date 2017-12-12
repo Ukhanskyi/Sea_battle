@@ -1,4 +1,4 @@
-package seabattlepack;
+package seabattlepack.logic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
  */
 
 public class BattlePlace {
-    enum CellState {
+    protected enum CellState {
         Sea, Ship, ShipDamaged, ShipKilled, Miss, Border
     }
 
@@ -101,7 +101,7 @@ public class BattlePlace {
     int aliveShips = 10;
     int[] placedShip;
 
-    BattlePlace() {
+    public BattlePlace() {
         cells = new Cell[10][10];
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -117,7 +117,7 @@ public class BattlePlace {
     BattlePlace(boolean isAutoGen) {
         this();
         if (isAutoGen)
-            AutoGen();
+            autoGen();
     }
 
     boolean checkPlace(int x, int y, int dx, int dy) {
@@ -129,9 +129,9 @@ public class BattlePlace {
         return true;
     }
 
-    private boolean checkCells(List<CellRef> cells) {
+    public boolean checkCells(List<CellRef> cells) {
         for (CellRef cell : cells) {
-            if (!(cell.getCell().myState == CellState.Sea || cell.getCell().myState == CellState.Border)) return false;
+            if (!(cell.getCell().myState == CellState.Sea) && !(cell.getCell().myState == CellState.Border)) return false;
         }
         return true;
     }
@@ -163,7 +163,7 @@ public class BattlePlace {
         return shipBorder;
     }
 
-    void AutoGen() {
+    public void autoGen() {
         generate(4);
         generate(3);
         generate(3);
@@ -181,8 +181,9 @@ public class BattlePlace {
 
     void generate(int size) {
         while (true) {
-            int x = getRandomPoint();
-            int y = getRandomPoint();
+            RandomPoint point = new RandomPoint();
+            int x = point.getX();
+            int y = point.getY();
             int dx = x, dy = y;
             if (Math.random() * 100 > 50)
                 dx = x + size - 1;
@@ -202,14 +203,11 @@ public class BattlePlace {
         );
     }
 
-    public int getRandomPoint() {
-        return (int) (Math.random() * 10);
-    }
-
-    boolean ManualPlace(int x, int y, int dx, int dy) {
+    public boolean manualPlace(int x, int y, int dx, int dy) {
         if (!checkPlace(x, y, dx, dy)) return false;
         int size = (x != dx) ? dx - x : dy - y;
         if (placedShip[3 - size] == 4 - size) return false;
+
         ships.add(getShipByCoord(size, x, y, dx, dy));
         placedShip[3 - size]++;
         return true;
@@ -219,7 +217,7 @@ public class BattlePlace {
         cells[x][y].attack();
     }
 
-    CellState getCellState(int x, int y) {
+    public CellState getCellState(int x, int y) {
         return cells[x][y].myState;
     }
 
@@ -227,7 +225,7 @@ public class BattlePlace {
         return !(aliveShips > 0);
     }
 
-    boolean isFull() {
+    public boolean isFull() {
         return placedShip[0] == 1 && placedShip[1] == 2 && placedShip[2] == 3 && placedShip[3] == 4;
     }
 }
