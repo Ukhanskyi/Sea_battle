@@ -84,8 +84,10 @@ public class User {
             if (posStack.isEmpty()) {
                 direction = null;
                 while (true) {
-                    int i = place.getRandomPoint();
-                    int j = place.getRandomPoint();
+                    Point point = new Point();
+                    int i = point.getX();
+                    int j = point.getY();
+
                     switch (place.getCellState(i, j)) {
                         case Sea:
                             place.attack(i, j);
@@ -212,8 +214,10 @@ public class User {
 
     private res randomAttack() {
         while (true) {
-            int i = place.getRandomPoint();
-            int j = place.getRandomPoint();
+            Point point = new Point();
+            int i = point.getX();
+            int j = point.getY();
+
             switch (place.getCellState(i, j)) {
                 case Sea:
                     place.attack(i, j);

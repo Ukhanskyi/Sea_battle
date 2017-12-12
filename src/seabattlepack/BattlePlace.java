@@ -117,7 +117,7 @@ public class BattlePlace {
     BattlePlace(boolean isAutoGen) {
         this();
         if (isAutoGen)
-            AutoGen();
+            autoGen();
     }
 
     boolean checkPlace(int x, int y, int dx, int dy) {
@@ -131,7 +131,8 @@ public class BattlePlace {
 
     private boolean checkCells(List<CellRef> cells) {
         for (CellRef cell : cells) {
-            if (!(cell.getCell().myState == CellState.Sea || cell.getCell().myState == CellState.Border)) return false;
+            if (!(cell.getCell().myState == CellState.Sea) && !(cell.getCell().myState == CellState.Border))
+                return false;
         }
         return true;
     }
@@ -163,7 +164,7 @@ public class BattlePlace {
         return shipBorder;
     }
 
-    void AutoGen() {
+    void autoGen() {
         generate(4);
         generate(3);
         generate(3);
@@ -181,8 +182,10 @@ public class BattlePlace {
 
     void generate(int size) {
         while (true) {
-            int x = getRandomPoint();
-            int y = getRandomPoint();
+            Point point = new Point();
+            int x = point.getX();
+            int y = point.getY();
+
             int dx = x, dy = y;
             if (Math.random() * 100 > 50)
                 dx = x + size - 1;
@@ -202,11 +205,7 @@ public class BattlePlace {
         );
     }
 
-    public int getRandomPoint() {
-        return (int) (Math.random() * 10);
-    }
-
-    boolean ManualPlace(int x, int y, int dx, int dy) {
+    boolean manualPlace(int x, int y, int dx, int dy) {
         if (!checkPlace(x, y, dx, dy)) return false;
         int size = (x != dx) ? dx - x : dy - y;
         if (placedShip[3 - size] == 4 - size) return false;

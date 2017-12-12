@@ -55,7 +55,7 @@ public class PlaceDialog extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < 4; i++) {
                     if (radioButton[i].isSelected()) {
-                        if (!place.ManualPlace(I, J, I + i, J))
+                        if (!place.manualPlace(I, J, I + i, J))
                             JOptionPane.showMessageDialog(PlaceDialog.this,
                                     "Invalid position, i: " + I + " j: " + J +
                                             "\nSize: " + i +
@@ -74,7 +74,7 @@ public class PlaceDialog extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < 4; i++) {
                     if (radioButton[i].isSelected()) {
-                        if (!place.ManualPlace(I, J, I, J + i))
+                        if (!place.manualPlace(I, J, I, J + i))
                             JOptionPane.showMessageDialog(PlaceDialog.this,
                                     "Invalid position, i: " + I + " j: " + J +
                                             "\nSize: " + i +

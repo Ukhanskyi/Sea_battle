@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 
 import static javax.swing.BoxLayout.PAGE_AXIS;
@@ -117,7 +116,7 @@ public class NewGame extends JDialog {
         clear.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         clear.addActionListener(e -> utils.refreshBattlePlace(place, buttons));
         auto.addActionListener(e -> {
-            place.AutoGen();
+            place.autoGen();
             utils.refreshBattlePlace(place, buttons);
             dispose();
         });
