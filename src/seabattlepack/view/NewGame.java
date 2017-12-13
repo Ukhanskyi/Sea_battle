@@ -1,7 +1,6 @@
 package seabattlepack.view;
 
 import seabattlepack.logic.BattlePlace;
-import seabattlepack.logic.Utils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
