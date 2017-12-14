@@ -123,7 +123,7 @@ public class BattlePlace {
     boolean checkPlace(int x, int y, int dx, int dy) {
         if (dx > 9 || dy > 9) return false;
 
-        if (!checkCells(getShipPlace(x, y, dx, dy)) || (!checkCells(getShipBorder(x, y, dx, dy))))
+        if (checkCells(getShipPlace(x, y, dx, dy)) && (checkCells(getShipBorder(x, y, dx, dy))))
             return false;
 
         return true;

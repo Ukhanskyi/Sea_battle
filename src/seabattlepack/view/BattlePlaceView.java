@@ -2,7 +2,6 @@ package seabattlepack.view;
 
 import seabattlepack.logic.Bot;
 import seabattlepack.logic.User;
-import seabattlepack.logic.Utils;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
@@ -23,7 +22,7 @@ public class BattlePlaceView extends JPanel {
     private Sound music = new Sound();
     private Utils utils = new Utils();
     private boolean playStop = false;
-    int mode;
+    private int mode;
     private JButton[][] compPlaceArea = new JButton[10][10];
     private JButton[][] userPlaseArea = new JButton[10][10];
 
