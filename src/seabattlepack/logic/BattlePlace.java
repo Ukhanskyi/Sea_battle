@@ -121,9 +121,7 @@ public class BattlePlace {
     }
 
     boolean checkPlace(int x, int y, int dx, int dy) {
-        if (dx > 9 || dy > 9) return false;
-
-        if (checkCells(getShipPlace(x, y, dx, dy)) && (checkCells(getShipBorder(x, y, dx, dy))))
+        if ((dx > 9 || dy > 9) || !(checkCells(getShipPlace(x, y, dx, dy)) && (checkCells(getShipBorder(x, y, dx, dy)))))
             return false;
 
         return true;
@@ -131,7 +129,7 @@ public class BattlePlace {
 
     public boolean checkCells(List<CellRef> cells) {
         for (CellRef cell : cells) {
-            if (!(cell.getCell().myState == CellState.Sea) && !(cell.getCell().myState == CellState.Border))
+            if (!((cell.getCell().myState == CellState.Sea) || (cell.getCell().myState == CellState.Border)))
                 return false;
         }
         return true;
