@@ -150,21 +150,36 @@ public class BattlePlace {
         return shipPlace;
     }
 
-    List<CellRef> getShipBorder(int x, int y, int dx, int dy) {
+     List<CellRef> getShipBorder(int x, int y, int dx, int dy) {
         List<CellRef> shipBorder = new ArrayList<>();
-        for (int i = x - 1; i <= dx + 1; i++) {
-            if (i < 0 || i > 9) continue;
-            if (y - 1 >= 0)
-                shipBorder.add(new CellRef(i, y - 1));
-            if (dy + 1 <= 9)
-                shipBorder.add(new CellRef(i, dy + 1));
-        }
-        for (int i = y - 1; i <= dy + 1; i++) {
-            if (i < 0 || i > 9) continue;
-            if (x - 1 >= 0)
-                shipBorder.add(new CellRef(x - 1, i));
-            if (dx + 1 <= 9)
-                shipBorder.add(new CellRef(dx + 1, i));
+//        for (int i = x - 1; i <= dx + 1; i++) {
+//            if (i < 0 || i > 9) continue;
+//            if (y - 1 >= 0)
+//                shipBorder.add(new CellRef(i, y - 1));
+//            if (dy + 1 <= 9)
+//                shipBorder.add(new CellRef(i, dy + 1));
+//        }
+//        for (int i = y - 1; i <= dy + 1; i++) {
+//            if (i < 0 || i > 9) continue;
+//            if (x - 1 >= 0)
+//                shipBorder.add(new CellRef(x - 1, i));
+//            if (dx + 1 <= 9)
+//                shipBorder.add(new CellRef(dx + 1, i));
+//        }
+        int size = (((dx+1) - (x-1))>((dy+1) - (y-1)))?((dx+1) - (x-1)):((dy+1) - (y-1));
+        for(int i = -1;i<size;i++){
+            if(i+x>=0 && i+x<=9){
+                if(y-1>=0)
+                    shipBorder.add(new CellRef(i+x,y-1));
+                if(dy+1<=9)
+                    shipBorder.add(new CellRef(i+x,dy+1));
+            }
+            if(i+y>=0 && i+y<=9){
+                if(x-1>=0)
+                    shipBorder.add(new CellRef(x-1,i+y));
+                if(dx+1<=9)
+                    shipBorder.add(new CellRef(dx+1,i+y));
+            }
         }
         return shipBorder;
     }
