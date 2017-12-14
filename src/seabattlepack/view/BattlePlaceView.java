@@ -4,7 +4,6 @@ import seabattlepack.logic.Bot;
 import seabattlepack.logic.User;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,7 +17,6 @@ public class BattlePlaceView extends JPanel {
     private JButton btnNewGame, btnExit, btnIGiveUp, btnMusicPlay, btnHint;
     private Bot computer;
     private User user;
-    private Clip myClip;
     private Sound music = new Sound();
     private Utils utils = new Utils();
     private boolean playStop = false;
