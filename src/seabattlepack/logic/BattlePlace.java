@@ -121,22 +121,18 @@ public class BattlePlace {
     }
 
     boolean checkPlace(int x, int y, int dx, int dy) {
-        boolean p = true;
 
-        if ((dx > 9 || dy > 9) || !(checkCells(getShipPlace(x, y, dx, dy)) && (checkCells(getShipBorder(x, y, dx, dy)))))
-            p = false;
+        return  (!((dx > 9 || dy > 9) || !(checkCells(getShipPlace(x, y, dx, dy)) && (checkCells(getShipBorder(x, y, dx, dy))))));
 
-        return p;
     }
 
     public boolean checkCells(List<CellRef> cells) {
-        boolean p = true;
 
         for (CellRef cell : cells) {
             if (!((cell.getCell().myState == CellState.Sea) || (cell.getCell().myState == CellState.Border)))
-                p = false;
+                return false;
         }
-        return p;
+        return true;
     }
 
     List<CellRef> getShipPlace(int x, int y, int dx, int dy) {
