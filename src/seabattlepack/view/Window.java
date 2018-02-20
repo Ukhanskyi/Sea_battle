@@ -19,6 +19,7 @@ public class Window extends JFrame {
         pan.playAudio();
         //music.timerMusic(5);
     }
+    //превірка
 }
 
 
