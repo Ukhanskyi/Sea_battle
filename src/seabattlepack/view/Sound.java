@@ -10,32 +10,32 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class Sound {
+    public class Sound {
 
-    private Clip myClip;
+        private Clip myClip;
 
     public Sound() {
-        try {
-            InputStream is = Sound.class.getResourceAsStream("/audio/pirate.wav");
-            AudioInputStream sound = AudioSystem.getAudioInputStream(new BufferedInputStream(is));
+                try {
+                   InputStream is = Sound.class.getResourceAsStream("/audio/pirate.wav");
+                    AudioInputStream sound = AudioSystem.getAudioInputStream(new BufferedInputStream(is));
 
-            myClip = AudioSystem.getClip();
-            myClip.open(sound);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Sound: Malformed URL: " + e);
-        } catch (UnsupportedAudioFileException e) {
-            throw new RuntimeException("Sound: Unsupported Audio File: " + e);
-        } catch (IOException e) {
-            throw new RuntimeException("Sound: Input/Output Error: " + e);
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        }
-    }
+                     myClip = AudioSystem.getClip();
+                     myClip.open(sound);
+                 } catch (MalformedURLException e) {
+                     throw new RuntimeException("Sound: Malformed URL: " + e);
+                 } catch (UnsupportedAudioFileException e) {
+                     throw new RuntimeException("Sound: Unsupported Audio File: " + e);
+                 } catch (IOException e) {
+                     throw new RuntimeException("Sound: Input/Output Error: " + e);
+                 } catch (LineUnavailableException e) {
+                     e.printStackTrace();
+                 }
+           }
 
     //hhvkkvavkavksbksb
     
     public void play() {
-        myClip.setFramePosition(0);  // Must always rewind!
+       myClip.setFramePosition(0);  // Must always rewind!
         myClip.loop(-1);
         myClip.start();
     }
@@ -49,4 +49,3 @@ public class Sound {
     }
 
 }
-
