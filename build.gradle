@@ -3,14 +3,13 @@ apply plugin: 'java'
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
-
-sourceSets {
-    main.java.srcDir "src"
-    main.resources {
-        srcDir "resource"
-    }
+repositories{
+    mavenCentral()
 }
-
+dependencies{
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'junit:junit:4.12'
+}
 jar {
     manifest.attributes "Main-Class": "seabattlepack.SeaBattle"
 }

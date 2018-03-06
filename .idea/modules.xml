@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/See_Battle.iml" filepath="$PROJECT_DIR$/.idea/modules/See_Battle.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/See_Battle_main.iml" filepath="$PROJECT_DIR$/.idea/modules/See_Battle_main.iml" group="See_Battle" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/See_Battle_test.iml" filepath="$PROJECT_DIR$/.idea/modules/See_Battle_test.iml" group="See_Battle" />
+      <module fileurl="file://$PROJECT_DIR$/Sea_battle.iml" filepath="$PROJECT_DIR$/Sea_battle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Sea_battle_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Sea_battle_main.iml" group="Sea_battle" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Sea_battle_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Sea_battle_test.iml" group="Sea_battle" />
     </modules>
   </component>
 </project>
