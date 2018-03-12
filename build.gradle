@@ -1,15 +1,56 @@
+apply plugin: 'idea'
+apply plugin: 'application'
 apply plugin: 'java'
+apply plugin: 'jacoco'
 
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+mainClassName = "src.java.app.Application"
+
+sourceSets {
+    main {
+        java.srcDir("src/main")
+    }
+    test {
+        java.srcDir("src/test")
+    }
 }
-repositories{
-    mavenCentral()
-}
-dependencies{
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile 'junit:junit:4.12'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+buildscript {
+
+    repositories {
+    }
+
+    dependencies {
+    }
 }
 jar {
     manifest.attributes "Main-Class": "seabattlepack.SeaBattle"
 }
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile("junit:junit:4.12")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.5'
+}
+
+jacoco {
+    toolVersion = "0.7.4+"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.enabled true
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+check.dependsOn jacocoTestReport
