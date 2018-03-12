@@ -10,8 +10,8 @@ mainClassName = "src.java.app.Application"
 
 sourceSets {
     main {
-        java.srcDir("src/main/java")
-        resources.srcDir("src/main/resources")
+        java.srcDir("src/java")
+        resources.srcDir("src/resources")
     }
     test {
         java.srcDir("src/test")

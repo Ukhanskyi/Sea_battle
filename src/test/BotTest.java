@@ -1,6 +1,5 @@
-package seabattlepack.logic;
-
 import org.junit.Test;
+import seabattlepack.logic.Bot;
 
 import static org.junit.Assert.*;
 

@@ -11,6 +11,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
+    <orderEntry type="module" module-name="Sea_battle_main" scope="TEST" />
   </component>
   <component name="TestModuleProperties" production-module="Sea_battle_main" />
 </module>
