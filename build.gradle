@@ -24,8 +24,6 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 task wrapper(type: Wrapper) {
     gradleVersion = '4.5'
-
-
 }
 dependencies{
     testCompile("junit:junit:4.12")
@@ -33,6 +31,17 @@ dependencies{
 jar {
     manifest.attributes "Main-Class": "seabattlepack.SeaBattle"
 }
+/*
 jacoco{
-    toolVersion='0.7.4+'
+    toolVersion='0.7.9'
 }
+jacocoTestReport{
+    reports{
+        html.enabled = true;
+        xml.enabled = true;
+        csv.enabled = true;
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+check.dependsOn jacocoTestReport
+test.finalizedBy jacocoTestReport*/
