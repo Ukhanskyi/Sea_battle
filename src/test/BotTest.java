@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 
 public class BotTest {
 
+    
+
     @Test
     public void isWin() {
         Bot bot = new Bot();
