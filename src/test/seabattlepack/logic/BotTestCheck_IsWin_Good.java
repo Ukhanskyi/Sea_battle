@@ -13,6 +13,5 @@ public class BotTestCheck_IsWin_Good {
         boolean actual = bot.isWin();
         boolean expected = false;
         assertEquals(expected,actual);
-
     }
 }
