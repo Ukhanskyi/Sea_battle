@@ -1,4 +1,4 @@
-install: gradle wrapper —gradle-version 4.6
+install: gradle wrapper --gradle-version 4.6
 language: java
 +jdk: oraclejdk8
 sudo: true
