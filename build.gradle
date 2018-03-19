@@ -3,6 +3,7 @@ apply plugin: 'application'
 apply plugin: 'java'
 apply plugin: 'jacoco'
 
+version = "1.0-SNAPSHOT"
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -30,13 +31,19 @@ dependencies{
     testCompile("junit:junit:4.12")
 }
 jar {
-    manifest.attributes "Main-Class": "seabattlepack.SeaBattle"
+    from configurations.compile.collect { zipTree it }
+    manifest {
+        attributes "Main-Class": "seabattlepack.SeaBattle",
+                "Implementation-Title": "Gradle Jar File",
+                "Implementation-Version": version
+    }
+    baseName =  project.name
 }
-
 
 jacoco{
     toolVersion='0.7.9'
 }
+
 jacocoTestReport{
     reports{
         html.enabled = true;
