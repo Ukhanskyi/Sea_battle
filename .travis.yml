@@ -7,4 +7,4 @@ after_success:
 addons:
   artifacts:
       path:
-      - /home/travis/build/project/Sea_battle/build/libs/
+      - /home/travis/build/Ukhanskyi/Sea_battle/build/libs/
