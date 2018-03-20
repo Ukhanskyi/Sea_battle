@@ -5,8 +5,6 @@ sudo: true
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 addons:
-  artifacts:
-    target_paths:
-    - /artifacts
-    paths:
-    - $(ls $HOME/build/Ukhanskyi/Sea_battle/build/libs | tr "\n" ":")
+    artifacts:
+        paths:
+        - /home/travis/build/Ukhanskyi/Sea_battle/build/libs
