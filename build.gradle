@@ -4,6 +4,8 @@ apply plugin: 'java'
 apply plugin: 'jacoco'
 
 version = "1.0-SNAPSHOT"
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -22,8 +24,7 @@ sourceSets {
         java.srcDir("src/test")
     }
 }
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+
 task wrapper(type: Wrapper) {
     gradleVersion = '4.5'
 }
@@ -53,5 +54,6 @@ jacocoTestReport{
     }
 }
 check.dependsOn jacocoTestReport
+check.dependsOn jar
 test.finalizedBy jacocoTestReport
 
