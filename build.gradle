@@ -42,11 +42,9 @@ jar {
     }
     baseName =  project.name
 }
-
 jacoco{
     toolVersion='0.7.9'
 }
-
 jacocoTestReport{
     reports{
         html.enabled = true;
@@ -55,7 +53,6 @@ jacocoTestReport{
         html.destination "${buildDir}/jacocoHtml"
     }
 }
-
 buildscript {
     repositories {
         maven {
