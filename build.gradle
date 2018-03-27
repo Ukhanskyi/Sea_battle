@@ -3,7 +3,6 @@ apply plugin: 'application'
 apply plugin: 'java'
 apply plugin: 'jacoco'
 
-version = "1.33"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -53,6 +52,20 @@ jacocoTestReport{
         html.destination "${buildDir}/jacocoHtml"
     }
 }
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.zoltu.gradle.plugin:git-versioning:3.0.3"
+    }
+}
+
+apply plugin: "com.zoltu.git-versioning"
+
 check.dependsOn jacocoTestReport
 check.dependsOn jar
 test.finalizedBy jacocoTestReport
