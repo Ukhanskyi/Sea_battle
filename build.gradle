@@ -1,3 +1,6 @@
+group 'Gradle'
+version '1.0-SNAPSHOT'
+
 apply plugin: 'idea'
 apply plugin: 'application'
 apply plugin: 'java'
