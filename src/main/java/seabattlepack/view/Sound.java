@@ -21,11 +21,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
                      myClip = AudioSystem.getClip();
                      myClip.open(sound);
                  } catch (MalformedURLException e) {
-                     throw new RuntimeException("Sound: Malformed URL: " + e);
+                     throw new IllegalArgumentException("Sound: Malformed URL: " + e);
                  } catch (UnsupportedAudioFileException e) {
-                     throw new RuntimeException("Sound: Unsupported Audio File: " + e);
+                     throw new IllegalArgumentException("Sound: Unsupported Audio File: " + e);
                  } catch (IOException e) {
-                     throw new RuntimeException("Sound: Input/Output Error: " + e);
+                     throw new IllegalArgumentException("Sound: Input/Output Error: " + e);
                  } catch (LineUnavailableException e) {
                      e.printStackTrace();
                  }
