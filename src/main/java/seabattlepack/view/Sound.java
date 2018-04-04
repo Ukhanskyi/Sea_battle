@@ -15,8 +15,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
         private Clip myClip;
 
     public Sound() {
-                try (InputStream is = Sound.class.getResourceAsStream("/audio/pirate.wav")){
-                    AudioInputStream sound = AudioSystem.getAudioInputStream(new BufferedInputStream(is));
+                try (InputStream is = Sound.class.getResourceAsStream("/audio/pirate.wav");
+                     AudioInputStream sound = AudioSystem.getAudioInputStream(new BufferedInputStream(is))){
 
                      myClip = AudioSystem.getClip();
                      myClip.open(sound);
