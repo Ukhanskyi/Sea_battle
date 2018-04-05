@@ -25,8 +25,8 @@ public class BattlePlaceView extends JPanel {
     private int mode;
     private JButton[][] compPlaceArea = new JButton[10][10];
     private JButton[][] userPlaseArea = new JButton[10][10];
-
     private boolean isGameStarted = false;
+    private static final String action_1 = "an exception was thrown";
 
     void playAudio() {
         music.play();
@@ -156,7 +156,7 @@ public class BattlePlaceView extends JPanel {
                     Image img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                 } catch (Exception e) {
-                    Logger.getAnonymousLogger().log(Level.SEVERE, "an exception was thrown", e);
+                    Logger.getAnonymousLogger().log(Level.SEVERE, action_1, e);
                 }
                 final int _i = i;
                 final int _j = j;
@@ -188,7 +188,7 @@ public class BattlePlaceView extends JPanel {
                     Image img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                     userPlaseArea[i][j].setIcon(new ImageIcon(img));
                 } catch (Exception e) {
-                    Logger.getAnonymousLogger().log(Level.SEVERE, "an exception was thrown", e);
+                    Logger.getAnonymousLogger().log(Level.SEVERE, action_1, e);
                 }
                 userPlaseArea[i][j].addActionListener(new ActionListener() {
 
@@ -236,7 +236,7 @@ public class BattlePlaceView extends JPanel {
                     Image img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                 } catch (Exception e) {
-                    Logger.getAnonymousLogger().log(Level.SEVERE, "an exception was thrown", e);
+                    Logger.getAnonymousLogger().log(Level.SEVERE, action_1, e);
                 }
     }
 
@@ -343,7 +343,7 @@ public class BattlePlaceView extends JPanel {
                     break;
             }
         } catch (Exception e) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, "an exception was thrown", e);
+            Logger.getAnonymousLogger().log(Level.SEVERE, action_1, e);
         }
         for (int I = 0; I < 10; I++)
             for (int J = 0; J < 10; J++)
@@ -361,7 +361,7 @@ public class BattlePlaceView extends JPanel {
                             Image img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
                             compPlaceArea[I][J].setIcon(new ImageIcon(img));
                         } catch (Exception e) {
-                            Logger.getAnonymousLogger().log(Level.SEVERE, "an exception was thrown", e);
+                            Logger.getAnonymousLogger().log(Level.SEVERE, action_1, e);
                         }
                         break;
                     case Border:
