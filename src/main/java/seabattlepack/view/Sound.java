@@ -27,8 +27,7 @@ import java.util.logging.*;
                  } catch (IOException e) {
                      throw new IllegalArgumentException("Sound: Input/Output Error: " + e);
                  } catch (Exception e) {
-                    Logger logger = Logger.getAnonymousLogger();
-                    logger.log(Level.SEVERE, "an exception was thrown", e);
+                    Logger.getAnonymousLogger().log(Level.SEVERE, "an exception was thrown", e);
                  }
            }
 
@@ -45,5 +44,4 @@ import java.util.logging.*;
     public void stop() {
         myClip.stop();
     }
-
 }
