@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BattlePlaceView extends JPanel {
 
@@ -153,8 +155,8 @@ public class BattlePlaceView extends JPanel {
                 try {
                     Image img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
-                } catch (Exception ex) {
-                    System.out.println(ex);
+                } catch (Exception e) {
+                    Logger.getAnonymousLogger().log(Level.SEVERE, "an exception was thrown", e);
                 }
                 final int _i = i;
                 final int _j = j;
@@ -185,8 +187,8 @@ public class BattlePlaceView extends JPanel {
                 try {
                     Image img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                     userPlaseArea[i][j].setIcon(new ImageIcon(img));
-                } catch (Exception ex) {
-                    System.out.println(ex);
+                } catch (Exception e) {
+                    Logger.getAnonymousLogger().log(Level.SEVERE, "an exception was thrown", e);
                 }
                 userPlaseArea[i][j].addActionListener(new ActionListener() {
 
@@ -233,8 +235,8 @@ public class BattlePlaceView extends JPanel {
                 try {
                     Image img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
-                } catch (Exception ex) {
-                    System.out.println(ex);
+                } catch (Exception e) {
+                    Logger.getAnonymousLogger().log(Level.SEVERE, "an exception was thrown", e);
                 }
     }
 
@@ -340,8 +342,8 @@ public class BattlePlaceView extends JPanel {
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Logger.getAnonymousLogger().log(Level.SEVERE, "an exception was thrown", e);
         }
         for (int I = 0; I < 10; I++)
             for (int J = 0; J < 10; J++)
@@ -358,8 +360,8 @@ public class BattlePlaceView extends JPanel {
                         try {
                             Image img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
                             compPlaceArea[I][J].setIcon(new ImageIcon(img));
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        } catch (Exception e) {
+                            Logger.getAnonymousLogger().log(Level.SEVERE, "an exception was thrown", e);
                         }
                         break;
                     case Border:
