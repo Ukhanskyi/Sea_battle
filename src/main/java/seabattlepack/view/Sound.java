@@ -9,6 +9,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import java.util.logging.*;
 
     public class Sound {
 
@@ -26,8 +27,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
                      throw new IllegalArgumentException("Sound: Unsupported Audio File: " + e);
                  } catch (IOException e) {
                      throw new IllegalArgumentException("Sound: Input/Output Error: " + e);
-                 } catch (LineUnavailableException e) {
-                     e.printStackTrace();
+                 } catch (Exception e) {
+                    Logger logger = Logger.getAnonymousLogger();
+                    logger.log(Level.SEVERE, "an exception was thrown", e);
                  }
            }
 
