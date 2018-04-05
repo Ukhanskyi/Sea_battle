@@ -6,8 +6,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Utils {
+    private static final String EXEP = "an exception was thrown";
     public void refreshBattlePlace(BattlePlace place, JButton[][] array) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -39,8 +42,8 @@ public class Utils {
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    Logger.getAnonymousLogger().log(Level.SEVERE, EXEP, e);
                 }
             }
         }
@@ -57,8 +60,8 @@ public class Utils {
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    Logger.getAnonymousLogger().log(Level.SEVERE, EXEP, e);
                 }
             }
         }
