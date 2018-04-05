@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static javax.swing.BoxLayout.PAGE_AXIS;
 import static javax.swing.SwingConstants.CENTER;
@@ -15,6 +17,7 @@ import static javax.swing.SwingConstants.CENTER;
 public class NewGame extends JDialog {
     private BattlePlace place;
     private Utils utils = new Utils();
+    private static final String EXEP = "an exception was thrown";
 
     NewGame(JFrame parent) {
 
@@ -74,8 +77,8 @@ public class NewGame extends JDialog {
                             utils.refreshBattlePlace(place, buttons);
                         }
                     });
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    Logger.getAnonymousLogger().log(Level.SEVERE, EXEP, e);
                 }
                 buttons_panel.add(buttons[i][j]);
             }
