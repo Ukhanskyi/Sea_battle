@@ -276,24 +276,24 @@ public class BattlePlaceView extends JPanel {
                         try {
                             Image img = ImageIO.read(getClass().getResourceAsStream("/img/ship.png"));
                             userPlaseArea[i][j].setIcon(new ImageIcon(img));
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        } catch (Exception e) {
+                            Logger.getAnonymousLogger().log(Level.SEVERE, EXEPT, e);
                         }
                         break;
                     case ShipKilled:
                         try {
                             Image img = ImageIO.read(getClass().getResourceAsStream("/img/killed.png"));
                             userPlaseArea[i][j].setIcon(new ImageIcon(img));
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        } catch (Exception e) {
+                            Logger.getAnonymousLogger().log(Level.SEVERE, EXEPT, e);
                         }
                         break;
                     case Miss:
                         try {
                             Image img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
                             userPlaseArea[i][j].setIcon(new ImageIcon(img));
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        } catch (Exception e) {
+                            Logger.getAnonymousLogger().log(Level.SEVERE, EXEPT, e);
                         }
                         break;
                     case Border:
