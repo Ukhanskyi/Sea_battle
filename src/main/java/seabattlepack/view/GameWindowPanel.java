@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameWindowPanel extends JPanel {
-    private Image background;
+    private transient Image background;
 
     public void paintComponent(Graphics gr) {
         try {
