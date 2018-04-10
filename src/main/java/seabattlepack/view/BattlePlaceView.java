@@ -8,10 +8,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BattlePlaceView extends JPanel implements Serializable {
+
+    private static final long serialVersionUID = 1905122041950251207L;
+
 
     private Timer tmDraw;
     private Image background;
