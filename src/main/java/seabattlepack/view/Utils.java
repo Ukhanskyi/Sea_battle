@@ -5,7 +5,6 @@ import seabattlepack.logic.BattlePlace;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,27 +16,27 @@ public class Utils {
                 try {
                     Image img;
                     switch (place.getCellState(i, j)) {
-                        case Sea:
+                        case sea:
                             img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
-                        case Ship:
+                        case ship:
                             img = ImageIO.read(getClass().getResourceAsStream("/img/ship.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
-                        case ShipDamaged:
+                        case shipDamaged:
                             img = ImageIO.read(getClass().getResourceAsStream("/img/ship.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
-                        case ShipKilled:
+                        case shipKilled:
                             img = ImageIO.read(getClass().getResourceAsStream("/img/killed.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
-                        case Miss:
+                        case miss:
                             img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
-                        case Border:
+                        case border:
                             img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
@@ -55,7 +54,7 @@ public class Utils {
                 try {
                     Image img;
                     switch (place.getCellState(i, j)) {
-                        case Miss:
+                        case miss:
                             img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;

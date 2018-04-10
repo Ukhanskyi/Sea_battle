@@ -88,29 +88,29 @@ public class User {
                     int i = point.getX();
                     int j = point.getY();
                     switch (place.getCellState(i, j)) {
-                        case Sea:
+                        case sea:
                             place.attack(i, j);
                             return Miss;
-                        case Ship:
+                        case ship:
                             place.attack(i, j);
                             I = i;
                             J = j;
                             availableDirections = possibleDirection(i, j);
                             posStack.push(new ret_pos(i, j));
                             return Good;
-                        case ShipDamaged:
+                        case shipDamaged:
                             place.attack(i, j);
                             I = i;
                             J = j;
                             posStack.push(new ret_pos(i, j));
                             availableDirections = possibleDirection(i, j);
                             return Good;
-                        case Border:
+                        case border:
                             place.attack(i, j);
                             return Miss;
-                        case ShipKilled:
+                        case shipKilled:
                             continue;
-                        case Miss:
+                        case miss:
                     }
                 }
             }
@@ -165,11 +165,11 @@ public class User {
                 return autoAttack();
             }
             switch (place.getCellState(i, j)) {
-                case Sea:
+                case sea:
                     availableDirections.remove(n);
                     place.attack(i, j);
                     return Miss;
-                case Ship:
+                case ship:
                     posStack.push(new ret_pos(i, j));
                     I = i;
                     J = j;
@@ -181,7 +181,7 @@ public class User {
                     });
                     place.attack(i, j);
                     return Good;
-                case ShipDamaged:
+                case shipDamaged:
                     posStack.push(new ret_pos(i, j));
                     I = i;
                     J = j;
@@ -196,14 +196,14 @@ public class User {
                     }
                     place.attack(i, j);
                     return Good;
-                case ShipKilled:
+                case shipKilled:
                     posStack.empty();
                     availableDirections.clear();
                     return autoAttack();
-                case Miss:
+                case miss:
                     availableDirections.remove(n);
                     continue;
-                case Border:
+                case border:
                     availableDirections.remove(n);
                     place.attack(i, j);
                     return Miss;
@@ -217,20 +217,20 @@ public class User {
             int i = point.getX();
             int j = point.getY();
             switch (place.getCellState(i, j)) {
-                case Sea:
+                case sea:
                     place.attack(i, j);
                     return Miss;
-                case Ship:
+                case ship:
                     place.attack(i, j);
                     return Good;
-                case ShipDamaged:
+                case shipDamaged:
                     place.attack(i, j);
                     return Good;
-                case ShipKilled:
+                case shipKilled:
                     continue;
-                case Miss:
+                case miss:
                     continue;
-                case Border:
+                case border:
                     place.attack(i, j);
                     return Miss;
             }

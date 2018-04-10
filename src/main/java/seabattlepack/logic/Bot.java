@@ -9,20 +9,20 @@ public class Bot {
 
     public User.res attack(int i, int j) {
         switch (place.getCellState(i, j)) {
-            case Sea:
+            case sea:
                 place.attack(i, j);
                 return Miss;
-            case Ship:
+            case ship:
                 place.attack(i, j);
                 return Good;
-            case ShipDamaged:
+            case shipDamaged:
                 place.attack(i, j);
                 return Good;
-            case ShipKilled:
+            case shipKilled:
                 return Bad;
-            case Miss:
+            case miss:
                 return Bad;
-            case Border:
+            case border:
                 place.attack(i, j);
                 return Miss;
         }
@@ -44,7 +44,7 @@ public class Bot {
     public void hint() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if (place.getCellState(i, j) == BattlePlace.CellState.ShipKilled) {
+                if (place.getCellState(i, j) == BattlePlace.CellState.shipKilled) {
                     place.attack(i + 1, j + 1);
                     place.attack(i + 1, j - 1);
                     place.attack(i - 1, j + 1);

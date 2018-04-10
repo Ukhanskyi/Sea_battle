@@ -9,8 +9,9 @@ import java.util.List;
 
 public class BattlePlace {
     public enum CellState {
-        Sea, Ship, ShipDamaged, ShipKilled, Miss, Border
+        sea, ship, shipDamaged, shipKilled, miss, border
     }
+
 
     class Ship {
         List<CellRef> shipPlace = new ArrayList<>();
@@ -25,7 +26,7 @@ public class BattlePlace {
                 cell.getCell().setShip(this);
             }
             for (CellRef cell : this.shipBorderPlace) {
-                cell.getCell().myState = CellState.Border;
+                cell.getCell().myState = CellState.border;
             }
         }
 
@@ -38,8 +39,8 @@ public class BattlePlace {
                 aliveShips--;
             } else {
                 for (CellRef cell : this.shipPlace) {
-                    if (cell.getCell().myState == CellState.Ship)
-                        cell.getCell().myState = CellState.ShipDamaged;
+                    if (cell.getCell().myState == CellState.ship)
+                        cell.getCell().myState = CellState.shipDamaged;
                 }
             }
         }
@@ -50,33 +51,33 @@ public class BattlePlace {
         Ship ship = null;
 
         Cell() {
-            this.myState = CellState.Sea;
+            this.myState = CellState.sea;
         }
 
         void setShip(Ship ship) {
             this.ship = ship;
-            this.myState = CellState.Ship;
+            this.myState = CellState.ship;
         }
 
         void attack() {
             switch (myState) {
-                case Sea:
-                    this.myState = CellState.Miss;
+                case sea:
+                    this.myState = CellState.miss;
                     break;
-                case Ship:
-                    this.myState = CellState.ShipKilled;
+                case ship:
+                    this.myState = CellState.shipKilled;
                     this.ship.attack();
                     break;
-                case ShipDamaged:
-                    this.myState = CellState.ShipKilled;
+                case shipDamaged:
+                    this.myState = CellState.shipKilled;
                     this.ship.attack();
                     break;
-                case ShipKilled:
+                case shipKilled:
                     break;
-                case Miss:
+                case miss:
                     break;
-                case Border:
-                    this.myState = CellState.Miss;
+                case border:
+                    this.myState = CellState.miss;
                     break;
             }
         }
@@ -129,7 +130,7 @@ public class BattlePlace {
     public boolean checkCells(List<CellRef> cells) {
 
         for (CellRef cell : cells) {
-            if (!((cell.getCell().myState == CellState.Sea) || (cell.getCell().myState == CellState.Border)))
+            if (!((cell.getCell().myState == CellState.sea) || (cell.getCell().myState == CellState.border)))
                 return false;
         }
         return true;
