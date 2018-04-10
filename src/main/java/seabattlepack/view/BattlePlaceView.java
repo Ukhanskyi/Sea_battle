@@ -268,11 +268,11 @@ public class BattlePlaceView extends JPanel {
         for (int i = 0; i < 10; i++)
             for (int j = 0; j < 10; j++)
                 switch (user.getBattlePlace().getCellState(i, j)) {
-                    case sea:
+                    case SEA:
                         break;
-                    case ship:
+                    case SHIP:
                         break;
-                    case shipDamaged:
+                    case SHIP_DAMAGED:
                         try {
                             Image img = ImageIO.read(getClass().getResourceAsStream("/img/ship.png"));
                             userPlaseArea[i][j].setIcon(new ImageIcon(img));
@@ -280,7 +280,7 @@ public class BattlePlaceView extends JPanel {
                             Logger.getAnonymousLogger().log(Level.SEVERE, EXEPT, e);
                         }
                         break;
-                    case shipKilled:
+                    case SHIP_KILLED:
                         try {
                             Image img = ImageIO.read(getClass().getResourceAsStream("/img/killed.png"));
                             userPlaseArea[i][j].setIcon(new ImageIcon(img));
@@ -288,7 +288,7 @@ public class BattlePlaceView extends JPanel {
                             Logger.getAnonymousLogger().log(Level.SEVERE, EXEPT, e);
                         }
                         break;
-                    case miss:
+                    case MISS:
                         try {
                             Image img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
                             userPlaseArea[i][j].setIcon(new ImageIcon(img));
@@ -317,23 +317,23 @@ public class BattlePlaceView extends JPanel {
         try {
             Image img;
             switch (computer.getBattlePlace().getCellState(i, j)) {
-                case sea:
+                case SEA:
                     img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
-                case ship:
+                case SHIP:
                     img = ImageIO.read(getClass().getResourceAsStream("/img/ship.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
-                case shipDamaged:
+                case SHIP_DAMAGED:
                     img = ImageIO.read(getClass().getResourceAsStream("/img/ship.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
-                case shipKilled:
+                case SHIP_KILLED:
                     img = ImageIO.read(getClass().getResourceAsStream("/img/killed.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
-                case miss:
+                case MISS:
                     img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
@@ -348,15 +348,15 @@ public class BattlePlaceView extends JPanel {
         for (int I = 0; I < 10; I++)
             for (int J = 0; J < 10; J++)
                 switch (computer.getBattlePlace().getCellState(I, J)) {
-                    case sea:
+                    case SEA:
                         break;
-                    case ship:
+                    case SHIP:
                         break;
-                    case shipDamaged:
+                    case SHIP_DAMAGED:
                         break;
-                    case shipKilled:
+                    case SHIP_KILLED:
                         break;
-                    case miss:
+                    case MISS:
                         try {
                             Image img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
                             compPlaceArea[I][J].setIcon(new ImageIcon(img));

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class BattlePlace {
     public enum CellState {
-        sea, ship, shipDamaged, shipKilled, miss, border
+        SEA, SHIP, SHIP_DAMAGED, SHIP_KILLED, MISS, border
     }
 
 
@@ -39,8 +39,8 @@ public class BattlePlace {
                 aliveShips--;
             } else {
                 for (CellRef cell : this.shipPlace) {
-                    if (cell.getCell().myState == CellState.ship)
-                        cell.getCell().myState = CellState.shipDamaged;
+                    if (cell.getCell().myState == CellState.SHIP)
+                        cell.getCell().myState = CellState.SHIP_DAMAGED;
                 }
             }
         }
@@ -51,33 +51,33 @@ public class BattlePlace {
         Ship ship = null;
 
         Cell() {
-            this.myState = CellState.sea;
+            this.myState = CellState.SEA;
         }
 
         void setShip(Ship ship) {
             this.ship = ship;
-            this.myState = CellState.ship;
+            this.myState = CellState.SHIP;
         }
 
         void attack() {
             switch (myState) {
-                case sea:
-                    this.myState = CellState.miss;
+                case SEA:
+                    this.myState = CellState.MISS;
                     break;
-                case ship:
-                    this.myState = CellState.shipKilled;
+                case SHIP:
+                    this.myState = CellState.SHIP_KILLED;
                     this.ship.attack();
                     break;
-                case shipDamaged:
-                    this.myState = CellState.shipKilled;
+                case SHIP_DAMAGED:
+                    this.myState = CellState.SHIP_KILLED;
                     this.ship.attack();
                     break;
-                case shipKilled:
+                case SHIP_KILLED:
                     break;
-                case miss:
+                case MISS:
                     break;
                 case border:
-                    this.myState = CellState.miss;
+                    this.myState = CellState.MISS;
                     break;
             }
         }
@@ -130,7 +130,7 @@ public class BattlePlace {
     public boolean checkCells(List<CellRef> cells) {
 
         for (CellRef cell : cells) {
-            if (!((cell.getCell().myState == CellState.sea) || (cell.getCell().myState == CellState.border)))
+            if (!((cell.getCell().myState == CellState.SEA) || (cell.getCell().myState == CellState.border)))
                 return false;
         }
         return true;
