@@ -2,23 +2,20 @@ package seabattlepack.view;
 
 import seabattlepack.logic.Bot;
 import seabattlepack.logic.User;
-import java.io.Serializable;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class BattlePlaceView extends JPanel implements Serializable {
+public class BattlePlaceView extends JPanel {
 
     private static final long serialVersionUID = 1905122041950251207L;
 
-
     private Timer tmDraw;
-    private Image background;
+    private transient Image background;
     private JButton btnNewGame, btnExit, btnIGiveUp, btnMusicPlay, btnHint;
     private Bot computer;
     private User user;
