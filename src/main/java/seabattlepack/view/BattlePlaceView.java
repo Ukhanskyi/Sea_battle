@@ -296,7 +296,7 @@ public class BattlePlaceView extends JPanel {
                             Logger.getAnonymousLogger().log(Level.SEVERE, EXEPT, e);
                         }
                         break;
-                    case border:
+                    case BORDER:
                         break;
                 }
     }
@@ -337,7 +337,7 @@ public class BattlePlaceView extends JPanel {
                     img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
-                case border:
+                case BORDER:
                     img = ImageIO.read(getClass().getResourceAsStream("/img/border.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
@@ -364,7 +364,7 @@ public class BattlePlaceView extends JPanel {
                             Logger.getAnonymousLogger().log(Level.SEVERE, EXEPT, e);
                         }
                         break;
-                    case border:
+                    case BORDER:
                         break;
                 }
         return state;

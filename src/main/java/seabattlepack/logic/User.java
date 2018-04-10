@@ -105,7 +105,7 @@ public class User {
                             posStack.push(new ret_pos(i, j));
                             availableDirections = possibleDirection(i, j);
                             return Good;
-                        case border:
+                        case BORDER:
                             place.attack(i, j);
                             return Miss;
                         case SHIP_KILLED:
@@ -203,7 +203,7 @@ public class User {
                 case MISS:
                     availableDirections.remove(n);
                     continue;
-                case border:
+                case BORDER:
                     availableDirections.remove(n);
                     place.attack(i, j);
                     return Miss;
@@ -230,7 +230,7 @@ public class User {
                     continue;
                 case MISS:
                     continue;
-                case border:
+                case BORDER:
                     place.attack(i, j);
                     return Miss;
             }

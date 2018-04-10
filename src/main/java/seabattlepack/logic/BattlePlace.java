@@ -9,7 +9,7 @@ import java.util.List;
 
 public class BattlePlace {
     public enum CellState {
-        SEA, SHIP, SHIP_DAMAGED, SHIP_KILLED, MISS, border
+        SEA, SHIP, SHIP_DAMAGED, SHIP_KILLED, MISS, BORDER
     }
 
 
@@ -26,7 +26,7 @@ public class BattlePlace {
                 cell.getCell().setShip(this);
             }
             for (CellRef cell : this.shipBorderPlace) {
-                cell.getCell().myState = CellState.border;
+                cell.getCell().myState = CellState.BORDER;
             }
         }
 
@@ -76,7 +76,7 @@ public class BattlePlace {
                     break;
                 case MISS:
                     break;
-                case border:
+                case BORDER:
                     this.myState = CellState.MISS;
                     break;
             }
@@ -130,7 +130,7 @@ public class BattlePlace {
     public boolean checkCells(List<CellRef> cells) {
 
         for (CellRef cell : cells) {
-            if (!((cell.getCell().myState == CellState.SEA) || (cell.getCell().myState == CellState.border)))
+            if (!((cell.getCell().myState == CellState.SEA) || (cell.getCell().myState == CellState.BORDER)))
                 return false;
         }
         return true;

@@ -36,7 +36,7 @@ public class Utils {
                             img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
-                        case border:
+                        case BORDER:
                             img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;

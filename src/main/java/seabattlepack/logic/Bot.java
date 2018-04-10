@@ -22,7 +22,7 @@ public class Bot {
                 return Bad;
             case MISS:
                 return Bad;
-            case border:
+            case BORDER:
                 place.attack(i, j);
                 return Miss;
         }
