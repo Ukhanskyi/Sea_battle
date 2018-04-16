@@ -14,11 +14,4 @@ public class UserTest {
         boolean expected = false;
         assertEquals(expected,actual);
     }
-
-    @Test
-    public void isWin_Bad() {
-        boolean actual = user.isWin();
-        boolean expected = true;
-        assertEquals(expected,actual);
-    }
 }
