@@ -253,12 +253,12 @@ public class BattlePlaceView extends JPanel {
 
     public void botAttack() {
         switch (user.attack(mode)) {
-            case Miss:
+            case MISS:
                 break;
-            case Good:
+            case GOOD:
                 botAttack();
                 break;
-            case Bad:
+            case BAD:
                 break;
         }
         drawStateUser();
@@ -304,13 +304,13 @@ public class BattlePlaceView extends JPanel {
     public int userAttack(int i, int j) {
         int state = 0;
         switch (computer.attack(i, j)) {
-            case Miss:
+            case MISS:
                 state = 0;
                 break;
-            case Good:
+            case GOOD:
                 state = 1;
                 break;
-            case Bad:
+            case BAD:
                 state = 2;
                 break;
         }

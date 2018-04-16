@@ -1,8 +1,8 @@
 package seabattlepack.logic;
 
-import static seabattlepack.logic.User.res.Bad;
-import static seabattlepack.logic.User.res.Good;
-import static seabattlepack.logic.User.res.Miss;
+import static seabattlepack.logic.User.res.BAD;
+import static seabattlepack.logic.User.res.GOOD;
+import static seabattlepack.logic.User.res.MISS;
 
 public class Bot {
     protected BattlePlace place;
@@ -11,22 +11,22 @@ public class Bot {
         switch (place.getCellState(i, j)) {
             case SEA:
                 place.attack(i, j);
-                return Miss;
+                return MISS;
             case SHIP:
                 place.attack(i, j);
-                return Good;
+                return GOOD;
             case SHIP_DAMAGED:
                 place.attack(i, j);
-                return Good;
+                return GOOD;
             case SHIP_KILLED:
-                return Bad;
+                return BAD;
             case MISS:
-                return Bad;
+                return BAD;
             case BORDER:
                 place.attack(i, j);
-                return Miss;
+                return MISS;
         }
-        return Bad;
+        return BAD;
     }
 
     public Bot() {

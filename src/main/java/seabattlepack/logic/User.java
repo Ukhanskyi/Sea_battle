@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import static seabattlepack.logic.User.res.Good;
-import static seabattlepack.logic.User.res.Miss;
+import static seabattlepack.logic.User.res.GOOD;
+import static seabattlepack.logic.User.res.MISS;
 
 /**
  * Created by Dzykan on 13.09.2017.
@@ -30,35 +30,36 @@ public class User {
         return place;
     }
 
-    class ret_pos {
-        private int x, y;
+    class RetPos {
+        private int x;
+        private int y;
 
-        ret_pos(int x, int y) {
+        RetPos(int x, int y) {
             this.x = x;
             this.y = y;
         }
     }
 
     public enum res {
-        Miss, Good, Bad
+        MISS, GOOD, BAD
     }
 
     public enum Directions {
-        Up, Down, Left, Right
+        UP, DOWN, LEFT, RIGHT
     }
 
     List<Directions> availableDirections = new ArrayList<>();
 
     Directions direction;
 
-    Stack<ret_pos> posStack = new Stack<>();
+    Stack<RetPos> posStack = new Stack<>();
 
     List<Directions> possibleDirection(int i, int j) {
         List<Directions> ret = new ArrayList<>();
-        if (i > 0) ret.add(Directions.Up);
-        if (i < 9) ret.add(Directions.Down);
-        if (j > 0) ret.add(Directions.Left);
-        if (j < 9) ret.add(Directions.Right);
+        if (i > 0) ret.add(Directions.UP);
+        if (i < 9) ret.add(Directions.DOWN);
+        if (j > 0) ret.add(Directions.LEFT);
+        if (j < 9) ret.add(Directions.RIGHT);
         return ret;
     }
 
@@ -91,24 +92,24 @@ public class User {
                     switch (place.getCellState(i, j)) {
                         case SEA:
                             place.attack(i, j);
-                            return Miss;
+                            return MISS;
                         case SHIP:
                             place.attack(i, j);
                             dI = i;
                             dJ = j;
                             availableDirections = possibleDirection(i, j);
-                            posStack.push(new ret_pos(i, j));
-                            return Good;
+                            posStack.push(new RetPos(i, j));
+                            return GOOD;
                         case SHIP_DAMAGED:
                             place.attack(i, j);
                             dI = i;
                             dJ = j;
-                            posStack.push(new ret_pos(i, j));
+                            posStack.push(new RetPos(i, j));
                             availableDirections = possibleDirection(i, j);
-                            return Good;
+                            return GOOD;
                         case BORDER:
                             place.attack(i, j);
-                            return Miss;
+                            return MISS;
                         case SHIP_KILLED:
                             continue;
                         case MISS:
@@ -117,22 +118,22 @@ public class User {
             }
         if (availableDirections.isEmpty()) {
             while (posStack.size() != 1) posStack.pop();
-            ret_pos p = posStack.pop();
+            RetPos p = posStack.pop();
             dI = p.x;
             dJ = p.y;
             if (direction == null) return autoAttack();
             switch (direction) {
-                case Up:
-                    availableDirections.add(Directions.Down);
+                case UP:
+                    availableDirections.add(Directions.DOWN);
                     break;
-                case Down:
-                    availableDirections.add(Directions.Up);
+                case DOWN:
+                    availableDirections.add(Directions.UP);
                     break;
-                case Left:
-                    availableDirections.add(Directions.Right);
+                case LEFT:
+                    availableDirections.add(Directions.RIGHT);
                     break;
-                case Right:
-                    availableDirections.add(Directions.Left);
+                case RIGHT:
+                    availableDirections.add(Directions.LEFT);
                     break;
             }
             availableDirections = possibleDirection(dI, dJ, availableDirections);
@@ -144,19 +145,19 @@ public class User {
             int n = (int) (Math.random() * availableDirections.size());
             int i = 0, j = 0;
             switch (availableDirections.get(n)) {
-                case Up:
+                case UP:
                     i = dI - 1;
                     j = dJ;
                     break;
-                case Down:
+                case DOWN:
                     i = dI + 1;
                     j = dJ;
                     break;
-                case Left:
+                case LEFT:
                     j = dJ - 1;
                     i = dI;
                     break;
-                case Right:
+                case RIGHT:
                     j = dJ + 1;
                     i = dI;
                     break;
@@ -169,9 +170,9 @@ public class User {
                 case SEA:
                     availableDirections.remove(n);
                     place.attack(i, j);
-                    return Miss;
+                    return MISS;
                 case SHIP:
-                    posStack.push(new ret_pos(i, j));
+                    posStack.push(new RetPos(i, j));
                     dI = i;
                     dJ = j;
                     direction = availableDirections.get(n);
@@ -181,9 +182,9 @@ public class User {
                         return false;
                     });
                     place.attack(i, j);
-                    return Good;
+                    return GOOD;
                 case SHIP_DAMAGED:
-                    posStack.push(new ret_pos(i, j));
+                    posStack.push(new RetPos(i, j));
                     dI = i;
                     dJ = j;
                     direction = availableDirections.get(n);
@@ -196,7 +197,7 @@ public class User {
                         return autoAttack();
                     }
                     place.attack(i, j);
-                    return Good;
+                    return GOOD;
                 case SHIP_KILLED:
                     posStack.empty();
                     availableDirections.clear();
@@ -207,7 +208,7 @@ public class User {
                 case BORDER:
                     availableDirections.remove(n);
                     place.attack(i, j);
-                    return Miss;
+                    return MISS;
             }
         }
     }
@@ -220,20 +221,20 @@ public class User {
             switch (place.getCellState(i, j)) {
                 case SEA:
                     place.attack(i, j);
-                    return Miss;
+                    return MISS;
                 case SHIP:
                     place.attack(i, j);
-                    return Good;
+                    return GOOD;
                 case SHIP_DAMAGED:
                     place.attack(i, j);
-                    return Good;
+                    return GOOD;
                 case SHIP_KILLED:
                     continue;
                 case MISS:
                     continue;
                 case BORDER:
                     place.attack(i, j);
-                    return Miss;
+                    return MISS;
             }
         }
     }
