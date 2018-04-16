@@ -4,8 +4,6 @@ import seabattlepack.logic.BattlePlace;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static javax.swing.BoxLayout.PAGE_AXIS;
 
