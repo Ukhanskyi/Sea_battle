@@ -9,8 +9,16 @@ public class UserTest {
     User user = new User();
 
     @Test
-    public void isWin() {
+    public void isWin_Good() {
         boolean actual = user.isWin();
         boolean expected = false;
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void isWin_Bad() {
+        boolean actual = user.isWin();
+        boolean expected = true;
+        assertEquals(expected,actual);
     }
 }
