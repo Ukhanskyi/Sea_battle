@@ -3,6 +3,7 @@ package seabattlepack.logic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Stack;
 
 import static seabattlepack.logic.User.res.GOOD;
@@ -142,7 +143,8 @@ public class User {
         }
         while (true) {
             if (availableDirections.isEmpty()) return autoAttack();
-            int n = (int) (Math.random() * availableDirections.size());
+            Random r = new Random();
+            int n = r.nextInt(availableDirections.size());
             int i = 0, j = 0;
             switch (availableDirections.get(n)) {
                 case UP:
