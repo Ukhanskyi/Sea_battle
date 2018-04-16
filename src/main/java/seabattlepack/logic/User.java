@@ -13,7 +13,7 @@ import static seabattlepack.logic.User.res.Miss;
  */
 public class User {
 
-    public int I, J;
+    private int I, J;
 
     private BattlePlace place = new BattlePlace();
 
@@ -30,7 +30,7 @@ public class User {
     }
 
     class ret_pos {
-        public int x, y;
+        private int x, y;
 
         ret_pos(int x, int y) {
             this.x = x;
