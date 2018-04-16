@@ -13,7 +13,8 @@ import static seabattlepack.logic.User.res.Miss;
  */
 public class User {
 
-    private int I, J;
+    private int dI;
+    private int dJ;
 
     private BattlePlace place = new BattlePlace();
 
@@ -93,15 +94,15 @@ public class User {
                             return Miss;
                         case SHIP:
                             place.attack(i, j);
-                            I = i;
-                            J = j;
+                            dI = i;
+                            dJ = j;
                             availableDirections = possibleDirection(i, j);
                             posStack.push(new ret_pos(i, j));
                             return Good;
                         case SHIP_DAMAGED:
                             place.attack(i, j);
-                            I = i;
-                            J = j;
+                            dI = i;
+                            dJ = j;
                             posStack.push(new ret_pos(i, j));
                             availableDirections = possibleDirection(i, j);
                             return Good;
@@ -117,8 +118,8 @@ public class User {
         if (availableDirections.isEmpty()) {
             while (posStack.size() != 1) posStack.pop();
             ret_pos p = posStack.pop();
-            I = p.x;
-            J = p.y;
+            dI = p.x;
+            dJ = p.y;
             if (direction == null) return autoAttack();
             switch (direction) {
                 case Up:
@@ -134,7 +135,7 @@ public class User {
                     availableDirections.add(Directions.Left);
                     break;
             }
-            availableDirections = possibleDirection(I, J, availableDirections);
+            availableDirections = possibleDirection(dI, dJ, availableDirections);
             if (availableDirections.isEmpty())
                 return autoAttack();
         }
@@ -144,20 +145,20 @@ public class User {
             int i = 0, j = 0;
             switch (availableDirections.get(n)) {
                 case Up:
-                    i = I - 1;
-                    j = J;
+                    i = dI - 1;
+                    j = dJ;
                     break;
                 case Down:
-                    i = I + 1;
-                    j = J;
+                    i = dI + 1;
+                    j = dJ;
                     break;
                 case Left:
-                    j = J - 1;
-                    i = I;
+                    j = dJ - 1;
+                    i = dI;
                     break;
                 case Right:
-                    j = J + 1;
-                    i = I;
+                    j = dJ + 1;
+                    i = dI;
                     break;
             }
             if (i < 0 || i > 9 || j < 0 || j > 9) {
@@ -171,8 +172,8 @@ public class User {
                     return Miss;
                 case SHIP:
                     posStack.push(new ret_pos(i, j));
-                    I = i;
-                    J = j;
+                    dI = i;
+                    dJ = j;
                     direction = availableDirections.get(n);
                     availableDirections.removeIf(directions -> {
                         if (direction != directions)
@@ -183,8 +184,8 @@ public class User {
                     return Good;
                 case SHIP_DAMAGED:
                     posStack.push(new ret_pos(i, j));
-                    I = i;
-                    J = j;
+                    dI = i;
+                    dJ = j;
                     direction = availableDirections.get(n);
                     availableDirections.removeIf(directions -> {
                         if (direction != directions)
