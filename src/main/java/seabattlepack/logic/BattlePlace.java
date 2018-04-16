@@ -184,7 +184,8 @@ public class BattlePlace {
             RandomPoint point = new RandomPoint();
             int x = point.getX();
             int y = point.getY();
-            int dx = x, dy = y;
+            int dx = x;
+            int     dy = y;
             if (Math.random() * 100 > 50)
                 dx = x + size - 1;
             else

@@ -30,6 +30,23 @@ public class PlaceDialog extends JDialog {
     JRadioButton radioButton[];
     JButton button[];
 
+    void ButtonAction(boolean flag){
+        for (int i = 0; i < 4; i++) {
+            if (radioButton[i].isSelected()) {
+                if (!place.manualPlace(I, J, I + ((flag)?i:0), J+((!flag)?i:0)))
+                    JOptionPane.showMessageDialog(PlaceDialog.this,
+                            "Invalid position, i: " + I + " j: " + J +
+                                    "\nSize: " + i +
+                                    "\nDirection left",
+                            "New game",
+                            JOptionPane.ERROR_MESSAGE);
+                break;
+            }
+        }
+        setVisible(false);
+        dispose();
+    }
+
     void buildWindow() {
         panel = new GameWindowPanel();
         panel.setLayout(new BoxLayout(panel, PAGE_AXIS));
@@ -52,43 +69,11 @@ public class PlaceDialog extends JDialog {
         button[1].setAlignmentX(JComponent.CENTER_ALIGNMENT);
         panel.add(button[0]);
         panel.add(button[1]);
-        button[0].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (int i = 0; i < 4; i++) {
-                    if (radioButton[i].isSelected()) {
-                        if (!place.manualPlace(I, J, I + i, J))
-                            JOptionPane.showMessageDialog(PlaceDialog.this,
-                                    "Invalid position, i: " + I + " j: " + J +
-                                            "\nSize: " + i +
-                                            "\nDirection left",
-                                    "New game",
-                                    JOptionPane.ERROR_MESSAGE);
-                        break;
-                    }
-                }
-                setVisible(false);
-                dispose();
-            }
+        button[0].addActionListener(e -> {
+            ButtonAction(true);
         });
-        button[1].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (int i = 0; i < 4; i++) {
-                    if (radioButton[i].isSelected()) {
-                        if (!place.manualPlace(I, J, I, J + i))
-                            JOptionPane.showMessageDialog(PlaceDialog.this,
-                                    "Invalid position, i: " + I + " j: " + J +
-                                            "\nSize: " + i +
-                                            "\nDirection left",
-                                    "New game",
-                                    JOptionPane.ERROR_MESSAGE);
-                        break;
-                    }
-                }
-                setVisible(false);
-                dispose();
-            }
+        button[1].addActionListener(e -> {
+            ButtonAction(false);
         });
         setContentPane(panel);
         setSize(110, 300);
