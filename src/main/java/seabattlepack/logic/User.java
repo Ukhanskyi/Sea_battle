@@ -145,7 +145,8 @@ public class User {
             if (availableDirections.isEmpty()) return autoAttack();
             Random r = new Random();
             int n = r.nextInt(availableDirections.size());
-            int i = 0, j = 0;
+            int i = 0;
+            int j = 0;
             switch (availableDirections.get(n)) {
                 case UP:
                     i = dI - 1;

@@ -16,7 +16,11 @@ public class BattlePlaceView extends JPanel {
 
     private Timer tmDraw;
     private transient Image background;
-    private JButton btnNewGame, btnExit, btnIGiveUp, btnMusicPlay, btnHint;
+    private JButton btnNewGame;
+    private JButton btnExit;
+    private JButton btnIGiveUp;
+    private JButton btnMusicPlay;
+    private JButton btnHint;
     private Bot computer;
     private User user;
     private Sound music = new Sound();
@@ -64,9 +68,9 @@ public class BattlePlaceView extends JPanel {
                 user = new User();
                 computer = new Bot();
                 clear();
-                NewGame new_game = new NewGame(me);
-                mode = new_game.getMode();
-                user.setBattlePlace(new_game.getPlace());
+                NewGame newGame = new NewGame(me);
+                mode = newGame.getMode();
+                user.setBattlePlace(newGame.getPlace());
                 utils.refreshBattlePlace(user.getBattlePlace(), userPlaseArea);
                 btnIGiveUp.setEnabled(true);
                 btnHint.setEnabled(true);
@@ -158,8 +162,8 @@ public class BattlePlaceView extends JPanel {
                 } catch (Exception e) {
                     Logger.getAnonymousLogger().log(Level.SEVERE, EXEPT, e);
                 }
-                final int _i = i;
-                final int _j = j;
+                final int di = i;
+                final int dj = j;
                 compPlaceArea[i][j].addActionListener(new ActionListener() {
 
 
@@ -171,7 +175,7 @@ public class BattlePlaceView extends JPanel {
                                     JOptionPane.ERROR_MESSAGE);
                             return;
                         }
-                        if (userAttack(_i, _j) == 0) {
+                        if (userAttack(di, dj) == 0) {
                             winChecker();
                             botAttack();
                         }
