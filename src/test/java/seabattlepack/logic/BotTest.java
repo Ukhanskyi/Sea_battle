@@ -4,12 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class BotTestCheck_IsWin_Good {
+public class BotTest {
+    Bot bot = new Bot();
 
     @Test
     public void isWin() {
-
-        Bot bot = new Bot();
         boolean actual = bot.isWin();
         boolean expected = false;
         assertEquals(expected,actual);
