@@ -11,7 +11,7 @@ public class BattlePlaceTest {
 
     @Before
     public void setBattlePlace(){
-        BattlePlace battlePlace = new BattlePlace();
+        battlePlace = new BattlePlace();
     }
 
     @Test
@@ -26,8 +26,6 @@ public class BattlePlaceTest {
     }
 
     @Test
-    public void checkPlace_isBad() {
-        assertFalse(battlePlace.checkPlace(0, 0, 10, 10));
-    }
+    public void checkPlace_isBad() { assertFalse(battlePlace.checkPlace(0, 0, 10, 10));}
 }
 
