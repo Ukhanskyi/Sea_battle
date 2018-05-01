@@ -179,7 +179,11 @@ public class User {
                     dI = i;
                     dJ = j;
                     direction = availableDirections.get(n);
-                    availableDirections.removeIf(directions -> (direction != directions));
+                    availableDirections.removeIf(directions -> {
+                        if (direction != directions)
+                            return true;
+                        return false;
+                    });
                     place.attack(i, j);
                     return GOOD;
                 case SHIP_DAMAGED:
