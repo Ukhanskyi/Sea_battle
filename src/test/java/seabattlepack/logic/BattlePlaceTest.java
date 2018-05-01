@@ -1,35 +1,33 @@
 package seabattlepack.logic;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class BattlePlaceTest {
 
-    BattlePlace battlePlace = new BattlePlace();
+    private BattlePlace battlePlace;
 
-    @Test
-    public void isFull() {
-        boolean actual = battlePlace.isFull();
-        boolean expected = false;
-        assertEquals(expected, actual);
+    @Before
+    public void setBattlePlace(){
+        BattlePlace battlePlace = new BattlePlace();
     }
 
     @Test
-    public void isWin() {
-        boolean actual = battlePlace.isWin();
-        boolean expected = false;
-        assertEquals(expected, actual);
-    }
+    public void isFull() { assertFalse(battlePlace.isFull());}
+
+    @Test
+    public void isWin() { assertFalse(battlePlace.isWin());}
 
     @Test
     public void checkPlace_isGood() {
-        assertEquals(true, battlePlace.checkPlace(0, 0, 9, 9));
+        assertTrue(battlePlace.checkPlace(0, 0, 9, 9));
     }
 
     @Test
     public void checkPlace_isBad() {
-        assertEquals(false, battlePlace.checkPlace(0, 0, 10, 10));
+        assertFalse(battlePlace.checkPlace(0, 0, 10, 10));
     }
 }
 

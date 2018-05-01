@@ -223,7 +223,7 @@ public class BattlePlace {
     }
 
     boolean isWin() {
-        return !(aliveShips > 0);
+        return (aliveShips <= 0);
     }
 
     public boolean isFull() {
