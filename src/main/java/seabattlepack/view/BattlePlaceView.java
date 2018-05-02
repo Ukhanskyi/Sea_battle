@@ -31,6 +31,7 @@ public class BattlePlaceView extends JPanel {
     private JButton[][] userPlaseArea = new JButton[10][10];
     private boolean isGameStarted = false;
     private static final String EXEPT = "an exception was thrown";
+    private static final String FONT_SERIF = "serif";
 
     void playAudio() {
         music.play();
@@ -60,7 +61,7 @@ public class BattlePlaceView extends JPanel {
         btnNewGame = new JButton();
         btnNewGame.setText("Нова гра");
         btnNewGame.setForeground(Color.BLUE);
-        btnNewGame.setFont(new Font("serif", 0, 20));
+        btnNewGame.setFont(new Font(FONT_SERIF, 0, 20));
         btnNewGame.setBounds(130, 460, 150, 30);
         btnNewGame.addActionListener(new ActionListener() {
 
@@ -84,7 +85,7 @@ public class BattlePlaceView extends JPanel {
         btnIGiveUp = new JButton();
         btnIGiveUp.setText("Я здаюсь");
         btnIGiveUp.setForeground(Color.BLUE);
-        btnIGiveUp.setFont(new Font("serif", 0, 20));
+        btnIGiveUp.setFont(new Font(FONT_SERIF, 0, 20));
         btnIGiveUp.setBounds(370, 460, 150, 30);
         btnIGiveUp.setEnabled(false);
         btnIGiveUp.addActionListener(new ActionListener() {
@@ -154,7 +155,7 @@ public class BattlePlaceView extends JPanel {
         for (int i = 0; i < 10; i++)
             for (int j = 0; j < 10; j++) {
                 compPlaceArea[i][j] = new JButton();
-                compPlaceArea[i][j].setFont(new Font("serif", 0, 2));
+                compPlaceArea[i][j].setFont(new Font(FONT_SERIF, 0, 2));
                 compPlaceArea[i][j].setBounds(100 + j * 30, 100 + i * 30, 30, 30);
                 try {
                     Image img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
@@ -186,7 +187,7 @@ public class BattlePlaceView extends JPanel {
 
                 userPlaseArea[i][j] = new JButton();
                 userPlaseArea[i][j].setForeground(Color.BLUE);
-                userPlaseArea[i][j].setFont(new Font("serif", 0, 2));
+                userPlaseArea[i][j].setFont(new Font(FONT_SERIF, 0, 2));
                 userPlaseArea[i][j].setBounds(490 + j * 30, 100 + i * 30, 30, 30);
                 try {
                     Image img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
