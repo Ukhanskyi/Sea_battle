@@ -15,7 +15,7 @@ public class BattlePlaceView extends JPanel {
     private static final long serialVersionUID = 1905122041950251207L;
 
     private Timer tmDraw;
-    private transient Image BACKGROUND;
+    private transient Image backgrounder;
     private JButton btnNewGame;
     private JButton btnExit;
     private JButton btnIGiveUp;
@@ -39,7 +39,7 @@ public class BattlePlaceView extends JPanel {
 
     public BattlePlaceView(JFrame me) {
         try {
-            BACKGROUND = ImageIO.read(getClass().getResourceAsStream("/img/background.png"));
+            backgrounder = ImageIO.read(getClass().getResourceAsStream("/img/background.png"));
         } catch (Exception ex) {
         }
 
@@ -211,7 +211,7 @@ public class BattlePlaceView extends JPanel {
 
     public void paintComponent(Graphics gr) {
 //Малювання фону
-        gr.drawImage(BACKGROUND, 0, 0, 900, 600, null);
+        gr.drawImage(backgrounder, 0, 0, 900, 600, null);
 //Встановлення шрифта
         gr.setFont(new Font("Helvetica", Font.BOLD, 30));
 //Встановлення кольору
