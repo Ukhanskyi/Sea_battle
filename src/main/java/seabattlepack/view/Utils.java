@@ -53,12 +53,19 @@ public class Utils {
             for (int j = 0; j < 10; j++) {
                 try {
                     Image img;
-                    switch (place.getCellState(i, j)) {
+                    if ((place.getCellState(i, j))== BattlePlace.CellState.MISS){
+                        img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
+                        array[i][j].setIcon(new ImageIcon(img));
+                    }
+                    else{
+                        break;
+                    }
+                    /*switch (place.getCellState(i, j)) {
                         case MISS:
                             img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
-                    }
+                    }*/
                 } catch (Exception e) {
                     Logger.getAnonymousLogger().log(Level.SEVERE, EXEP, e);
                 }
