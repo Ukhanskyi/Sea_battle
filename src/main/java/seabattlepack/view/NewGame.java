@@ -36,9 +36,9 @@ public class NewGame extends JDialog {
     }
 
     JPanel content;
-    JPanel buttons_panel;
-    JPanel model_panel;
-    ButtonGroup mode_group;
+    JPanel buttonsPanel;
+    JPanel modelPanel;
+    ButtonGroup modeGroup;
     JButton[][] buttons;
     JButton clear;
     JButton auto;
@@ -46,11 +46,8 @@ public class NewGame extends JDialog {
 
     public void buildWindow() {
         buttons = new JButton[10][10];
-        //GridBag
-        // Layout  bl = new GridBagLayout();
-        buttons_panel = new JPanel();
-        buttons_panel.setLayout(null);
-        //Add window controls to the panel pl.
+        buttonsPanel = new JPanel();
+        buttonsPanel.setLayout(null);         //Add window controls to the panel pl.
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -61,34 +58,31 @@ public class NewGame extends JDialog {
                     buttons[i][j].setFont(new Font("serif", 0, 2));
                     buttons[i][j].setBounds(j * 30, i * 30, 30, 30);
                     buttons[i][j].setIcon(new ImageIcon(img));
-                    final int I = i;
-                    final int J = j;
-                    buttons[i][j].addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            java.awt.Window ancestor = SwingUtilities.getWindowAncestor(NewGame.this);
-                            PlaceDialog placeDialog = new PlaceDialog((JFrame) ancestor, place, I, J);
-                            if (placeDialog.isPlaced()) {
-                                place = placeDialog.getPlace();
-                            }
-                            if (place.isFull()) NewGame.this.setVisible(false);
-                            utils.refreshBattlePlace(place, buttons);
+                    final int dI = i;
+                    final int dJ = j;
+                    buttons[i][j].addActionListener(e -> {
+                        java.awt.Window ancestor = SwingUtilities.getWindowAncestor(NewGame.this);
+                        PlaceDialog placeDialog = new PlaceDialog((JFrame) ancestor, place, dI, dJ);
+                        if (placeDialog.isPlaced()) {
+                            place = placeDialog.getPlace();
                         }
+                        if (place.isFull()) NewGame.this.setVisible(false);
+                        utils.refreshBattlePlace(place, buttons);
                     });
                 } catch (Exception e) {
                     Logger.getAnonymousLogger().log(Level.SEVERE, EXEP, e);
                 }
-                buttons_panel.add(buttons[i][j]);
+                buttonsPanel.add(buttons[i][j]);
             }
         }
-        buttons_panel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        buttons_panel.setPreferredSize(new Dimension(300, 300));
-        buttons_panel.setMaximumSize(new Dimension(300, 300));
-        buttons_panel.setMinimumSize(new Dimension(300, 300));
-        buttons_panel.setForeground(Color.BLUE);
+        buttonsPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonsPanel.setPreferredSize(new Dimension(300, 300));
+        buttonsPanel.setMaximumSize(new Dimension(300, 300));
+        buttonsPanel.setMinimumSize(new Dimension(300, 300));
+        buttonsPanel.setForeground(Color.BLUE);
         clear = new JButton("Очистити");
         auto = new JButton("Автоматично розставити");
-        model_panel = new JPanel();
+        modelPanel = new JPanel();
         mode = new JRadioButton[2];
         mode[0] = new JRadioButton("Простий бот");
         mode[0].setSelected(true);
@@ -102,17 +96,17 @@ public class NewGame extends JDialog {
         mode[1].setAlignmentX(JComponent.CENTER_ALIGNMENT);
         mode[1].setOpaque(false);
         mode[1].setBackground(new Color(0, 0, 0, 0));
-        mode_group = new ButtonGroup();
-        mode_group.add(mode[0]);
-        mode_group.add(mode[1]);
-        model_panel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        model_panel.setPreferredSize(new Dimension(200, 60));
-        model_panel.setMaximumSize(new Dimension(200, 60));
-        model_panel.setMinimumSize(new Dimension(200, 60));
-        model_panel.setOpaque(false);
-        model_panel.setBackground(new Color(0, 0, 0, 0));
-        model_panel.add(mode[0]);
-        model_panel.add(mode[1]);
+        modeGroup = new ButtonGroup();
+        modeGroup.add(mode[0]);
+        modeGroup.add(mode[1]);
+        modelPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        modelPanel.setPreferredSize(new Dimension(200, 60));
+        modelPanel.setMaximumSize(new Dimension(200, 60));
+        modelPanel.setMinimumSize(new Dimension(200, 60));
+        modelPanel.setOpaque(false);
+        modelPanel.setBackground(new Color(0, 0, 0, 0));
+        modelPanel.add(mode[0]);
+        modelPanel.add(mode[1]);
         clear.setHorizontalAlignment(CENTER);
         auto.setHorizontalAlignment(CENTER);
         auto.setAlignmentX(JComponent.CENTER_ALIGNMENT);
@@ -125,12 +119,12 @@ public class NewGame extends JDialog {
         });
         content = new GameWindowPanel();
         content.setLayout(new BoxLayout(content, PAGE_AXIS));
-        content.add(buttons_panel);
+        content.add(buttonsPanel);
         content.add(clear);
         content.add(auto);
         content.add(mode[0]);
         content.add(mode[1]);
-        content.add(model_panel);
+        content.add(modelPanel);
         setForeground(Color.BLUE);
         setContentPane(content);
         setSize(400, 450);
