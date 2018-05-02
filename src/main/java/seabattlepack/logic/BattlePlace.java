@@ -190,7 +190,9 @@ public class BattlePlace {
                 dx = x + size - 1;
             else
                 dy = y + size - 1;
-            if (!checkPlace(x, y, dx, dy)) continue;
+            if (!checkPlace(x, y, dx, dy)) {
+                continue;
+            }
             ships.add(getShipByCoord(size, x, y, dx, dy));
             break;
         }
