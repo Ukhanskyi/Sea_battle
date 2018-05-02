@@ -60,12 +60,6 @@ public class Utils {
                     else{
                         break;
                     }
-                    /*switch (place.getCellState(i, j)) {
-                        case MISS:
-                            img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
-                            array[i][j].setIcon(new ImageIcon(img));
-                            break;
-                    }*/
                 } catch (Exception e) {
                     Logger.getAnonymousLogger().log(Level.SEVERE, EXEP, e);
                 }
