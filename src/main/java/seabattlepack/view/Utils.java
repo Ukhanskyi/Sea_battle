@@ -17,14 +17,12 @@ public class Utils {
                     Image img;
                     switch (place.getCellState(i, j)) {
                         case SEA:
+                        case BORDER:
                             img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
-                        case SHIP:
-                            img = ImageIO.read(getClass().getResourceAsStream("/img/ship.png"));
-                            array[i][j].setIcon(new ImageIcon(img));
-                            break;
                         case SHIP_DAMAGED:
+                        case SHIP:
                             img = ImageIO.read(getClass().getResourceAsStream("/img/ship.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
@@ -34,10 +32,6 @@ public class Utils {
                             break;
                         case MISS:
                             img = ImageIO.read(getClass().getResourceAsStream("/img/miss.png"));
-                            array[i][j].setIcon(new ImageIcon(img));
-                            break;
-                        case BORDER:
-                            img = ImageIO.read(getClass().getResourceAsStream("/img/sea.png"));
                             array[i][j].setIcon(new ImageIcon(img));
                             break;
                     }

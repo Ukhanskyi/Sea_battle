@@ -327,9 +327,6 @@ public class BattlePlaceView extends JPanel {
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
                     break;
                 case SHIP:
-                    img = ImageIO.read(getClass().getResourceAsStream("/img/ship.png"));
-                    compPlaceArea[i][j].setIcon(new ImageIcon(img));
-                    break;
                 case SHIP_DAMAGED:
                     img = ImageIO.read(getClass().getResourceAsStream("/img/ship.png"));
                     compPlaceArea[i][j].setIcon(new ImageIcon(img));
