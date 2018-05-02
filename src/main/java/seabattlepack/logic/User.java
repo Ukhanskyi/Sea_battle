@@ -180,12 +180,7 @@ public class User {
                     dJ = j;
                     direction = availableDirections.get(n);
                     availableDirections.removeIf(directions -> {
-                        if (direction != directions) {
-                            return true;
-                        }
-                        else {
-                            return false;
-                        }
+                       return (direction != directions);
                     });
                     place.attack(i, j);
                     return GOOD;
@@ -195,12 +190,7 @@ public class User {
                     dJ = j;
                     direction = availableDirections.get(n);
                     availableDirections.removeIf(directions -> {
-                        if (direction != directions){
-                            return true;
-                        }
-                        else {
-                            return false;
-                        }
+                        return (direction != directions);
                     });
                     if (availableDirections.isEmpty()) {
                         return autoAttack();

@@ -9,7 +9,8 @@ import static javax.swing.BoxLayout.PAGE_AXIS;
 
 public class PlaceDialog extends JDialog {
     BattlePlace place;
-    int I, J;
+    private int dI;
+    private int dJ;
     boolean isPlaced = false;
 
     PlaceDialog(JFrame parent, BattlePlace place, int i, int j) {
@@ -19,21 +20,21 @@ public class PlaceDialog extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setBounds(410, 0, 100, 150);//границя вікна
         this.place = place;
-        this.I = i;
-        this.J = j;
+        this.dI = i;
+        this.dJ = j;
         buildWindow();
     }
 
     JPanel panel;
-    JRadioButton radioButton[];
-    JButton button[];
+    JRadioButton[] radioButton;
+    JButton[] button;
 
-    void ButtonAction(boolean flag){
+    void buttonAction(boolean flag){
         for (int i = 0; i < 4; i++) {
             if (radioButton[i].isSelected()) {
-                if (!place.manualPlace(I, J, I + ((flag)?i:0), J+((!flag)?i:0)))
+                if (!place.manualPlace(dI, dJ, dI + ((flag)?i:0), dJ +((!flag)?i:0)))
                     JOptionPane.showMessageDialog(PlaceDialog.this,
-                            "Invalid position, i: " + I + " j: " + J +
+                            "Invalid position, i: " + dI + " j: " + dJ +
                                     "\nSize: " + i +
                                     "\nDirection left",
                             "New game",
@@ -67,12 +68,8 @@ public class PlaceDialog extends JDialog {
         button[1].setAlignmentX(JComponent.CENTER_ALIGNMENT);
         panel.add(button[0]);
         panel.add(button[1]);
-        button[0].addActionListener(e -> {
-            ButtonAction(true);
-        });
-        button[1].addActionListener(e -> {
-            ButtonAction(false);
-        });
+        button[0].addActionListener(e -> buttonAction(true));
+        button[1].addActionListener(e -> buttonAction(false));
         setContentPane(panel);
         setSize(110, 300);
         setResizable(false);
