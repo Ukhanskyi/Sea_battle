@@ -62,12 +62,10 @@ public class BattlePlace {
         void attack() {
             switch (myState) {
                 case SEA:
+                case BORDER:
                     this.myState = CellState.MISS;
                     break;
                 case SHIP:
-                    this.myState = CellState.SHIP_KILLED;
-                    this.ship.attack();
-                    break;
                 case SHIP_DAMAGED:
                     this.myState = CellState.SHIP_KILLED;
                     this.ship.attack();
@@ -75,9 +73,6 @@ public class BattlePlace {
                 case SHIP_KILLED:
                     break;
                 case MISS:
-                    break;
-                case BORDER:
-                    this.myState = CellState.MISS;
                     break;
             }
         }
