@@ -35,5 +35,10 @@ public class BattlePlaceTest {
     @Test
     public void checkPlace_isBad_isAutoGen_false() { assertFalse(battlePlace.checkPlace(0, 0, 10, 10));}
 
+    @Test
+    public void func_manualPlace_isAutoGen_false() {assertTrue(battlePlace.manualPlace(2,2, 5,2));}
+
+    @Test
+    public void func_manualPlace_isAutoGen_true() {assertFalse(bp.manualPlace(5,2, 5,6));}
 }
 
