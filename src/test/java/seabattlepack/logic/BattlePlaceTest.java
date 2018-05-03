@@ -40,5 +40,10 @@ public class BattlePlaceTest {
     @Test
     public void func_manualPlace_isAutoGen_true() {assertFalse(bp.manualPlace(5,2, 5,6));}
 
+    @Test
+    public void getShipPlace() {assertNotNull(battlePlace.getShipPlace(1,2,1,5));}
+
+    @Test
+    public void getShipPlace_bad() {assertNotNull(bp.getShipPlace(1,2,4,2));}
 }
 
