@@ -8,14 +8,19 @@ import static org.junit.Assert.*;
 public class BattlePlaceTest {
 
     private BattlePlace battlePlace;
+    private BattlePlace bp;
 
     @Before
     public void setBattlePlace(){
-        battlePlace = new BattlePlace();
+        battlePlace = new BattlePlace(false);
+        bp = new BattlePlace(true);
     }
 
     @Test
-    public void isFull() { assertFalse(battlePlace.isFull());}
+    public void func_isFull_when_isAutoGen_false() { assertFalse(battlePlace.isFull());}
+
+    @Test
+    public void func_isFull_when_isAutoGen_true() { assertTrue(bp.isFull());}
 
     @Test
     public void isWin() { assertFalse(battlePlace.isWin());}
