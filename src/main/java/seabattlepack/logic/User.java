@@ -17,7 +17,7 @@ public class User {
     private int dI;
     private int dJ;
 
-    private BattlePlace place = new BattlePlace();
+    private BattlePlace place;
 
     public User() {
         place = new BattlePlace();

@@ -39,5 +39,6 @@ public class BattlePlaceTest {
 
     @Test
     public void func_manualPlace_isAutoGen_true() {assertFalse(bp.manualPlace(5,2, 5,6));}
+
 }
 

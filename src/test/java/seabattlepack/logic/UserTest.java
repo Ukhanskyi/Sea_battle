@@ -18,4 +18,8 @@ public class UserTest {
     public void isWin() {
         assertFalse(user.isWin());
     }
+
+    @Test
+    public void possibleDirection() {assertNotNull(user.possibleDirection(2,5));
+    }
 }
