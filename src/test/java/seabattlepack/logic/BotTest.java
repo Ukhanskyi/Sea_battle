@@ -17,4 +17,8 @@ public class BotTest {
     public void isWin() {
         assertFalse(bot.isWin());
     }
+
+    @Test
+    public void getBattlePlace() {assertNotNull(bot.getBattlePlace());
+    }
 }
