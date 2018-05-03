@@ -23,14 +23,13 @@ public class BattlePlaceTest {
     public void func_isFull_when_isAutoGen_true() { assertTrue(bp.isFull());}
 
     @Test
-    public void isWin() { assertFalse(battlePlace.isWin());}
+    public void isWin_ReturnFalse() { assertFalse(battlePlace.isWin());}
 
     @Test
     public void func_checkPlace_isAutoGen_false() {assertTrue(battlePlace.checkPlace(0, 0, 9, 9));}
 
     @Test
     public void checkPlace_isGood_isAutoGen_true() {assertFalse(bp.checkPlace(0, 0, 9, 9));}
-
 
     @Test
     public void checkPlace_isBad_isAutoGen_false() { assertFalse(battlePlace.checkPlace(0, 0, 10, 10));}
