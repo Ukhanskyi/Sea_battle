@@ -26,6 +26,9 @@ public class BattlePlaceTest {
     public void isWin() { assertFalse(battlePlace.isWin());}
 
     @Test
+    public void isWin_skg() { assertFalse(bp.isWin());}
+
+    @Test
     public void checkPlace_isGood() {
         assertTrue(battlePlace.checkPlace(0, 0, 9, 9));
     }
