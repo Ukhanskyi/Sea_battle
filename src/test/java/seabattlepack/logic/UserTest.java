@@ -22,4 +22,9 @@ public class UserTest {
     @Test
     public void possibleDirection() {assertNotNull(user.possibleDirection(2,5));
     }
+
+    @Test
+    public void possibleDirection_kskg() {
+        assertNotNull(user.possibleDirection(7, 3));
+    }
 }
