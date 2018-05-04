@@ -15,11 +15,11 @@ public class UserTest {
     }
 
     @Test
-    public void isWin() {
+    public void isWin_should_Return_False() {
         assertFalse(user.isWin());
     }
 
     @Test
-    public void possibleDirection() {assertNotNull(user.possibleDirection(2,5));
+    public void possibleDirection_should_Be_NotNull() {assertNotNull(user.possibleDirection(2,5));
     }
 }

@@ -14,11 +14,11 @@ public class BotTest {
     }
 
     @Test
-    public void isWin() {
+    public void isWin_should_return_False() {
         assertFalse(bot.isWin());
     }
 
     @Test
-    public void getBattlePlace() {assertNotNull(bot.getBattlePlace());
+    public void getBattlePlace_should_be_NotNull() {assertNotNull(bot.getBattlePlace());
     }
 }

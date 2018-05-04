@@ -15,12 +15,10 @@ public class RandomPointTest {
     }
 
     @Test
-    public void getX() {
-        assertNotNull(randomPoint.getX());
-    }
+    public void getX_should_be_NotNull() {assertNotNull(randomPoint.getX());}
 
     @Test
-    public void getY() {
+    public void getY_should_be_NotNull() {
         assertNotNull(randomPoint.getY());
     }
 }

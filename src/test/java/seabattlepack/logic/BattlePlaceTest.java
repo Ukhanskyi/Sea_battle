@@ -23,27 +23,27 @@ public class BattlePlaceTest {
     public void func_isFull_when_isAutoGen_true() { assertTrue(bp.isFull());}
 
     @Test
-    public void isWin_ReturnFalse() { assertFalse(battlePlace.isWin());}
+    public void isWin_should_Return_False() { assertFalse(battlePlace.isWin());}
 
     @Test
-    public void func_checkPlace_isAutoGen_false() {assertTrue(battlePlace.checkPlace(0, 0, 9, 9));}
+    public void func_checkPlace_isAutoGen_should_return_false() {assertTrue(battlePlace.checkPlace(0, 0, 9, 9));}
 
     @Test
-    public void checkPlace_isGood_isAutoGen_true() {assertFalse(bp.checkPlace(0, 0, 9, 9));}
+    public void checkPlace_isGood_isAutoGen_should_return_true() {assertFalse(bp.checkPlace(0, 0, 9, 9));}
 
     @Test
-    public void checkPlace_isBad_isAutoGen_false() { assertFalse(battlePlace.checkPlace(0, 0, 10, 10));}
+    public void checkPlace_isBad_isAutoGen_should_return_false() { assertFalse(battlePlace.checkPlace(0, 0, 10, 10));}
 
     @Test
-    public void func_manualPlace_isAutoGen_false() {assertTrue(battlePlace.manualPlace(2,2, 5,2));}
+    public void func_manualPlace_isAutoGen_should_return_false() {assertTrue(battlePlace.manualPlace(2,2, 5,2));}
 
     @Test
-    public void func_manualPlace_isAutoGen_true() {assertFalse(bp.manualPlace(5,2, 5,6));}
+    public void func_manualPlace_isAutoGen_should_return_true() {assertFalse(bp.manualPlace(5,2, 5,6));}
 
     @Test
-    public void getShipPlace() {assertNotNull(battlePlace.getShipPlace(1,2,1,5));}
+    public void getShipPlace_should_be_NotNull() {assertNotNull(battlePlace.getShipPlace(1,2,1,5));}
 
     @Test
-    public void getShipPlace_bad() {assertNotNull(bp.getShipPlace(1,2,4,2));}
+    public void getShipPlace_should_be_NotNull_different_cord() {assertNotNull(bp.getShipPlace(1,2,4,2));}
 }
 
