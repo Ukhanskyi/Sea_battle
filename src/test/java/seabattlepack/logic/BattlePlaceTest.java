@@ -43,9 +43,7 @@ public class BattlePlaceTest {
     @Test
     public void getShipPlace_should_be_NotNull() {assertNotNull(battlePlace.getShipPlace(1,2,1,5));}
 
-/*
     @Test
     public void getShipPlace_should_be_NotNull_different_cord() {assertNotNull(bp.getShipPlace(1,2,4,2));}
-*/
 }
 
