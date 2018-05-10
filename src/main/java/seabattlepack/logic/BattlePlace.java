@@ -59,6 +59,9 @@ public class BattlePlace {
             this.myState = CellState.SHIP;
         }
 
+        CellState getMyState(){
+            return this.myState;
+        }
         void attack() {
             switch (myState) {
                 case SEA:

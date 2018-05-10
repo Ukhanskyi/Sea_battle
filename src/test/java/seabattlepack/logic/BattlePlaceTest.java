@@ -3,6 +3,9 @@ package seabattlepack.logic;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class BattlePlaceTest {
@@ -45,5 +48,21 @@ public class BattlePlaceTest {
 
     @Test
     public void getShipPlace_should_be_NotNull_different_cord() {assertNotNull(bp.getShipPlace(1,2,4,2));}
+
+    @Test
+    public void atackTest_should_return_true_if_MISS(){
+        BattlePlace.Cell cell = new BattlePlace.Cell();
+        cell.attack();
+        assertEquals(BattlePlace.CellState.MISS, cell.getMyState());
+    }
+
+    @Test
+    public void atackTest_should_KILL_ship_size1(){
+        BattlePlace.Cell cell = new BattlePlace.Cell();
+        BattlePlace.Ship ship = battlePlace.getShipByCoord(1, 0, 0 , 0, 0);
+        cell.setShip(ship);
+        cell.attack();
+        assertEquals(BattlePlace.CellState.SHIP_KILLED, cell.getMyState());
+    }
 }
 
