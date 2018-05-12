@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.assertj:assertj-swing:1.2.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-swing/1.2.0/81cc0de282055d86ec5c1a345b183b1322ea6937/assertj-swing-1.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-swing/1.2.0/bd310d983b87bfd9abb431c2793aedfc7230202f/assertj-swing-1.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

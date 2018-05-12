@@ -37,7 +37,7 @@
         if (header) {
           sortColumn(header, false);
         }
-        return
+
       }
     }
   }

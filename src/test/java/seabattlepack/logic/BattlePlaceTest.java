@@ -3,9 +3,6 @@ package seabattlepack.logic;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.Assert.*;
 
 public class BattlePlaceTest {
@@ -60,6 +57,33 @@ public class BattlePlaceTest {
     public void atackTest_should_KILL_ship_size1(){
         BattlePlace.Cell cell = new BattlePlace.Cell();
         BattlePlace.Ship ship = battlePlace.getShipByCoord(1, 0, 0 , 0, 0);
+        cell.setShip(ship);
+        cell.attack();
+        assertEquals(BattlePlace.CellState.SHIP_KILLED, cell.getMyState());
+    }
+
+    @Test
+    public void atack_Test_should_DAMAGE_ship_size2(){
+        BattlePlace.Cell cell = new BattlePlace.Cell();
+        BattlePlace.Ship ship = battlePlace.getShipByCoord(2, 0, 0, 1, 0);
+        cell.setShip(ship);
+        cell.attack();
+        assertEquals(BattlePlace.CellState.SHIP_KILLED, cell.getMyState());
+    }
+
+    @Test
+    public void atack_Test_should_DAMAGE_ship_size3(){
+        BattlePlace.Cell cell = new BattlePlace.Cell();
+        BattlePlace.Ship ship = battlePlace.getShipByCoord(3, 0, 0, 2, 0);
+        cell.setShip(ship);
+        cell.attack();
+        assertEquals(BattlePlace.CellState.SHIP_KILLED, cell.getMyState());
+    }
+
+    @Test
+    public void atack_Test_should_DAMAGE_ship_size4(){
+        BattlePlace.Cell cell = new BattlePlace.Cell();
+        BattlePlace.Ship ship = battlePlace.getShipByCoord(4, 0, 0, 3, 0);
         cell.setShip(ship);
         cell.attack();
         assertEquals(BattlePlace.CellState.SHIP_KILLED, cell.getMyState());
