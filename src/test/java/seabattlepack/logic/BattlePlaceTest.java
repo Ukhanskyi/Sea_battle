@@ -91,5 +91,12 @@ public class BattlePlaceTest {
         cell.attack();
         assertEquals(BattlePlace.CellState.SHIP_KILLED, cell.getMyState());
     }
-}
 
+    @Test
+    public void atack_Test_should_DAMAGE_size4(){
+        BattlePlace.Cell cell = new BattlePlace.Cell();
+        BattlePlace.Ship ship = bp.getShipByCoord(4, 0, 0, 0, 3);
+        cell.setShip(ship);
+        cell.attack();
+        assertEquals(BattlePlace.CellState.SHIP_KILLED, cell.getMyState()); }
+    }
