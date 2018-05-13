@@ -10,21 +10,16 @@ public class Bot {
     public User.res attack(int i, int j) {
         switch (place.getCellState(i, j)) {
             case SEA:
+            case BORDER:
                 place.attack(i, j);
                 return MISS;
             case SHIP:
-                place.attack(i, j);
-                return GOOD;
             case SHIP_DAMAGED:
                 place.attack(i, j);
                 return GOOD;
             case SHIP_KILLED:
-                return BAD;
             case MISS:
                 return BAD;
-            case BORDER:
-                place.attack(i, j);
-                return MISS;
         }
         return BAD;
     }

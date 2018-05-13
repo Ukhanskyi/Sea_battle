@@ -74,7 +74,6 @@ public class BattlePlace {
                     this.ship.attack();
                     break;
                 case SHIP_KILLED:
-                    break;
                 case MISS:
                     break;
             }

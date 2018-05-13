@@ -3,10 +3,12 @@ package seabattlepack.logic;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 public class BotTest {
     private Bot bot;
+
 
     @Before
     public void setBot(){
@@ -19,6 +21,10 @@ public class BotTest {
     }
 
     @Test
-    public void getBattlePlace_should_be_NotNull() {assertNotNull(bot.getBattlePlace());
+    public void getBattlePlace_should_be_NotNull() {assertNotNull(bot.getBattlePlace());}
+
+    @Test
+    public void hint_should_be_NotNull() {
+
     }
 }
