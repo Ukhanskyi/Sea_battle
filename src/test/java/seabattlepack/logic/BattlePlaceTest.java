@@ -63,13 +63,7 @@ public class BattlePlaceTest {
     }
 
     @Test
-    public void isWin_should_be_true_if_alive_more0() { assertTrue(battlePlace.aliveShips > 0);}
-
-    @Test
-    public void isFull_should_be_NotNull() { assertNotNull(battlePlace.isFull());}
-
-    @Test
-    public void attack_should_be_Null() { assertNotNull(battlePlace.isFull());}
+    public void isWin_should_be_false_if_alive_more0() { assertFalse(battlePlace.aliveShips <= 0);}
 
    @Test
     public void atack_Test_should_DAMAGE_ship_size2(){
