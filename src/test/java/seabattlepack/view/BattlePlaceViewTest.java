@@ -46,4 +46,39 @@ public class BattlePlaceViewTest {
         Path tmpFile = Files.createTempFile(tmpDir, "miss", ".png");
     }
 
+    @Test(expected = IOException.class)
+    public void BattlePlaceView_should_check_in_Directory_file_border() throws IOException {
+        Path tmpDir = Files.createTempDirectory("img");
+        tmpDir.toFile().delete();
+        Path tmpFile = Files.createTempFile(tmpDir, "border", ".png");
+    }
+
+    @Test(expected = IOException.class)
+    public void BattlePlaceView_should_check_in_Directory_file_audio() throws IOException {
+        Path tmpDir = Files.createTempDirectory("img");
+        tmpDir.toFile().delete();
+        Path tmpFile = Files.createTempFile(tmpDir, "audio", ".png");
+    }
+
+    @Test(expected = IOException.class)
+    public void BattlePlaceView_should_check_in_Directory_file_noaudio() throws IOException {
+        Path tmpDir = Files.createTempDirectory("img");
+        tmpDir.toFile().delete();
+        Path tmpFile = Files.createTempFile(tmpDir, "noaudio", ".png");
+    }
+
+    @Test(expected = IOException.class)
+    public void BattlePlaceView_should_check_in_Directory_file_hint() throws IOException {
+        Path tmpDir = Files.createTempDirectory("img");
+        tmpDir.toFile().delete();
+        Path tmpFile = Files.createTempFile(tmpDir, "hint", ".png");
+    }
+
+    @Test(expected = IOException.class)
+    public void BattlePlaceView_should_check_in_Directory_file_background() throws IOException {
+        Path tmpDir = Files.createTempDirectory("img");
+        tmpDir.toFile().delete();
+        Path tmpFile = Files.createTempFile(tmpDir, "background", ".png");
+    }
+
 }
