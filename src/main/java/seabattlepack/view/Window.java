@@ -17,9 +17,7 @@ public class Window extends JFrame {
         setResizable(false);
         setVisible(true);
         pan.playAudio();
-        //music.timerMusic(5);
     }
-    //превірка
 }
 
 
