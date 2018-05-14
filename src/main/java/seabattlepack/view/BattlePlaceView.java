@@ -234,7 +234,7 @@ public class BattlePlaceView extends JPanel {
         }
     }
 
-    private void clear() {
+    public void clear() {
         for (int i = 0; i < 10; i++)
             for (int j = 0; j < 10; j++)
                 try {
