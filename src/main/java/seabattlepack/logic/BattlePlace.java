@@ -3,6 +3,10 @@ package seabattlepack.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by DZYKAN on 13.09.2017.
+ */
+
 public class BattlePlace {
     public enum CellState {
         SEA, SHIP, SHIP_DAMAGED, SHIP_KILLED, MISS, BORDER
