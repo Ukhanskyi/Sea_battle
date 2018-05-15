@@ -12,17 +12,20 @@ public class BattlePlaceViewTest {
 
     BattlePlaceView battlePlaceView;
     private JFrame me;
+    //Robot robot = BasicRobot.robotWithNewAwtHierarchy();
+
 
     @Before
-    public void getBattlePlaceView(){
+    public void getBattlePlaceView() {
         battlePlaceView = new BattlePlaceView(me);
     }
 
+
     @Test(expected = IOException.class)
     public void BattlePlaceView_should_check_in_Directory_file_sea() throws IOException {
-            Path tmpDir = Files.createTempDirectory("img");
-            tmpDir.toFile().delete();
-            Path tmpFile = Files.createTempFile(tmpDir, "sea", ".png");
+        Path tmpDir = Files.createTempDirectory("img");
+        tmpDir.toFile().delete();
+        Path tmpFile = Files.createTempFile(tmpDir, "sea", ".png");
     }
 
     @Test(expected = IOException.class)
@@ -80,5 +83,4 @@ public class BattlePlaceViewTest {
         tmpDir.toFile().delete();
         Path tmpFile = Files.createTempFile(tmpDir, "background", ".png");
     }
-
 }

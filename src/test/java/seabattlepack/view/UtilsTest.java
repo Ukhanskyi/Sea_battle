@@ -15,6 +15,7 @@ public class UtilsTest {
         utils = new Utils();
     }
 
+
     @Test (expected = IOException.class)
     public void refreshBattlePlace_should_check_in_Directory_file_sea() throws IOException {
         Path tmpDir = Files.createTempDirectory("img");

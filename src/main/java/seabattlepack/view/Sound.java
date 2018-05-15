@@ -1,14 +1,15 @@
 package seabattlepack.view;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.util.logging.*;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
     public class Sound {
 
@@ -32,7 +33,7 @@ import java.util.logging.*;
            }
 
     public void play() {
-       myClip.setFramePosition(0);  // Must always rewind!
+        myClip.setFramePosition(0);  // Must always rewind!
         myClip.loop(-1);
         myClip.start();
     }
