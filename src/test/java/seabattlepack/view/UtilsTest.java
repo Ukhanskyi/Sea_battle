@@ -11,7 +11,7 @@ public class UtilsTest {
     Utils utils;
 
     @Before
-    public void refreshBattlePlace(){
+    public void getUtils(){
         utils = new Utils();
     }
 
