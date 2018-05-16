@@ -6,6 +6,7 @@ public class WindowTest {
     Window window;
 
     @Before
+    
     public void getWindow() {
         window = new Window();
     }
