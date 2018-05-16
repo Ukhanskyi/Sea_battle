@@ -83,5 +83,5 @@ public class BattlePlaceViewTest {
         tmpDir.toFile().delete();
         Path tmpFile = Files.createTempFile(tmpDir, "background", ".png");
     }
-    
+
 }

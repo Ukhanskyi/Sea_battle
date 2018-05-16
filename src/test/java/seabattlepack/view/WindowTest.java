@@ -1,14 +1,28 @@
 package seabattlepack.view;
 
-import org.junit.Before;
+import org.assertj.swing.edt.GuiActionRunner;
+import org.assertj.swing.fixture.FrameFixture;
+import org.junit.Test;
 
-public class WindowTest {
-    Window window;
+public class WindowTest extends AssertJSwingJUnitTestCase {
 
-    @Before
+    private FrameFixture windows;
 
-    public void getWindow() {
-        window = new Window();
+    @Override
+    protected void onSetUp() {
+        Window frame = GuiActionRunner.execute(() -> new Window());
+        windows = new FrameFixture(robot(), frame);
+        windows.show();
+    }
+
+    @Test
+    public void shouldFindTitle(){
+        windows.requireTitle(" Sea Battle ");
+    }
+
+    @Test
+    public void shouldBeVisible(){
+        windows.requireVisible();
     }
 
    /* @Test(expected = IOException.class)

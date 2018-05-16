@@ -41,7 +41,7 @@ dependencies {
     compile group: 'de.svenkubiak', name: 'jBCrypt', version: '0.4'
     compile group: 'commons-io', name: 'commons-io', version: '2.5'
     testCompile("junit:junit:4.12")
-    testCompile("org.assertj:assertj-swing-junit:1.2.0")
+    testCompile("org.assertj:assertj-swing:3.8.0")
 }
 
 jar {
