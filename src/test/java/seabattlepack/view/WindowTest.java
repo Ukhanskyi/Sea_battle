@@ -18,11 +18,14 @@ public class WindowTest extends AssertJSwingJUnitTestCase {
     @Test
     public void shouldFindTitle(){
         windows.requireTitle(" Sea Battle ");
+        System.setProperty("java.awt.headless", "true");
+
     }
 
     @Test
     public void shouldBeVisible(){
         windows.requireVisible();
+        System.setProperty("java.awt.headless", "true");
     }
 
    /* @Test(expected = IOException.class)
