@@ -7,15 +7,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GameWindowPanel extends JPanel {
-    private transient Image Background;
+    private transient Image background;
 
     @Override
     public void paintComponent(Graphics gr) {
         try {
-            Background = ImageIO.read(getClass().getResourceAsStream("/img/background.png"));
+            background = ImageIO.read(getClass().getResourceAsStream("/img/background.png"));
         } catch (Exception ex){
             Logger.getAnonymousLogger().log(Level.SEVERE, "an exception was thrown", ex);
         }
-        gr.drawImage(Background, 0, 0, this.getSize().width, this.getSize().height, null);
+        gr.drawImage(background, 0, 0, this.getSize().width, this.getSize().height, null);
     }
 }

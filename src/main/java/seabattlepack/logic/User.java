@@ -1,10 +1,7 @@
 package seabattlepack.logic;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Stack;
+import java.util.*;
 
 import static seabattlepack.logic.User.res.GOOD;
 import static seabattlepack.logic.User.res.MISS;
@@ -53,7 +50,7 @@ public class User {
 
     Directions direction;
 
-    Stack<RetPos> posStack = new Stack<>();
+    Deque<RetPos> posStack = new ArrayDeque<>();
 
     List<Directions> possibleDirection(int i, int j) {
         List<Directions> ret = new ArrayList<>();
@@ -194,7 +191,7 @@ public class User {
                     place.attack(i, j);
                     return GOOD;
                 case SHIP_KILLED:
-                    posStack.empty();
+                    posStack.isEmpty();
                     availableDirections.clear();
                     return autoAttack();
                 case MISS:
