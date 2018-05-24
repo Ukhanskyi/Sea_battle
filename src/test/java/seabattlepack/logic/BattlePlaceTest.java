@@ -91,4 +91,9 @@ public class BattlePlaceTest {
         cell.attack();
         assertEquals(BattlePlace.CellState.SHIP_KILLED, cell.getMyState());
     }
+
+    @Test
+    public void getShipBorder() {
+        assertNotNull(battlePlace.getShipBorder(0,0,2,0));
+    }
 }
