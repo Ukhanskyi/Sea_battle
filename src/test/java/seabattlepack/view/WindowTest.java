@@ -1,3 +1,4 @@
+/*
 package seabattlepack.view;
 
 import org.assertj.swing.edt.GuiActionRunner;
@@ -18,20 +19,26 @@ public class WindowTest extends AssertJSwingJUnitTestCase {
     @Test
     public void shouldFindTitle(){
         windows.requireTitle(" Sea Battle ");
-        System.setProperty("java.awt.headless", "true");
-
+        //System.setProperty("java.awt.headless", "true");
+        //Toolkit tk = Toolkit.getDefaultToolkit();
     }
 
     @Test
     public void shouldBeVisible(){
         windows.requireVisible();
+        //System.setProperty("java.awt.headless", "true");
+    }
+
+    static {
         System.setProperty("java.awt.headless", "true");
     }
 
-   /* @Test(expected = IOException.class)
+   */
+/* @Test(expected = IOException.class)
     public void testCreateTempFile() throws IOException {
         Path tmpDir = Files.createTempDirectory("img");
         tmpDir.toFile().delete();
         Path tmpFile = Files.createTempFile(tmpDir, "icon1", ".png");
-    }*/
-}
+    }*//*
+
+}*/

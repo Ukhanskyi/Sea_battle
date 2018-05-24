@@ -43,4 +43,10 @@ public class UtilsTest {
         tmpDir.toFile().delete();
         Path tmpFile = Files.createTempFile(tmpDir, "miss", ".png");
     }
+
+
+    @Test
+    public void refreshBattlePlace() {
+
+    }
 }
