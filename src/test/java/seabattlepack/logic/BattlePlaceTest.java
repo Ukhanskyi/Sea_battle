@@ -97,5 +97,5 @@ public class BattlePlaceTest {
 
     @Test
     public void getShipBordeaaa() { assertNotNull(bp.getShipBorder(2,3,2,7)); }
-    
+
 }

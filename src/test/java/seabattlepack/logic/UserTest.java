@@ -40,4 +40,8 @@ public class UserTest {
     }
 
 
+    @Test
+    public void autoAttack() {
+        assertNotNull(user.autoAttack());
+    }
 }

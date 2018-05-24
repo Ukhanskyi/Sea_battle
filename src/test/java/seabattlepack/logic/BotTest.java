@@ -23,11 +23,6 @@ public class BotTest {
     public void getBattlePlace_should_be_NotNull() {assertNotNull(bot.getBattlePlace());}
 
     @Test
-    public void hint_should_be_NotNull() {
-
-    }
-
-    @Test
     public void attack() {
         assertNotNull(bot.attack(2,5));
     }
