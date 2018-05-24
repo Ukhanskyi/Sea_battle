@@ -39,5 +39,14 @@ public class UserTest {
         assertNotNull(user.attack(2));
     }
 
-    
+    @Test
+    public void attack_mode3() {
+        assertNotNull(user.attack(3));
+    }
+
+    @Test
+    public void attack_mode4() {
+        assertNotNull(user.attack(4));
+    }
+
 }
