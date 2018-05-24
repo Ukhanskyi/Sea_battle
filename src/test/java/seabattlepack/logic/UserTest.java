@@ -22,4 +22,15 @@ public class UserTest {
     @Test
     public void possibleDirection_should_Be_NotNull() {assertNotNull(user.possibleDirection(2,5));
     }
+
+    @Test
+    public void getBattlePlace() {
+        assertNotNull(user.getBattlePlace());
+
+    }
+
+    @Test
+    public void attack() {
+        assertNotNull(user.attack(1));
+    }
 }
