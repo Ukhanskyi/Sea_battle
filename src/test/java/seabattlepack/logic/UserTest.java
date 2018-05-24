@@ -30,7 +30,14 @@ public class UserTest {
     }
 
     @Test
-    public void attack() {
+    public void attack_mode1() {
         assertNotNull(user.attack(1));
     }
+
+    @Test
+    public void attack_mode2() {
+        assertNotNull(user.attack(2));
+    }
+
+    
 }
