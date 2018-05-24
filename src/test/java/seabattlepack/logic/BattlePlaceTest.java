@@ -98,13 +98,4 @@ public class BattlePlaceTest {
     @Test
     public void getShipBordeaaa() { assertNotNull(bp.getShipBorder(2,3,2,7)); }
 
-    @Test
-    public void getCellState() {
-        assertNotNull(battlePlace.getCellState(0,5));
-    }
-
-    @Test
-    public void getCellStatwsfae() {
-        assertNotNull(bp.getCellState(4,8));
-    }
 }

@@ -39,9 +39,4 @@ public class UserTest {
         assertNotNull(user.attack(2));
     }
 
-
-    @Test
-    public void autoAttack() {
-        assertNotNull(user.autoAttack());
-    }
 }
