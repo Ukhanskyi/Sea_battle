@@ -101,20 +101,24 @@ public class BattlePlaceTest {
     @Test
     public void generate_ship_size4() {
         battlePlace.generate(0);
+        bp.generate(0);
     }
 
     @Test
     public void generate_ship_size3() {
         battlePlace.generate(1);
+        bp.generate(1);
     }
 
     @Test
     public void generate_ship_size2() {
         battlePlace.generate(2);
+        bp.generate(2);
     }
 
     @Test
     public void generate_ship_size1() {
         battlePlace.generate(3);
+        bp.generate(3);
     }
 }
