@@ -3,8 +3,7 @@ package seabattlepack.logic;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class BotTest {
     private Bot bot;
@@ -24,7 +23,7 @@ public class BotTest {
     public void getBattlePlace_should_be_NotNull() {assertNotNull(bot.getBattlePlace());}
 
     @Test
-    public void hint_should_be_NotNull() {
-
+    public void attack() {
+        assertNotNull(bot.attack(2,5));
     }
 }
