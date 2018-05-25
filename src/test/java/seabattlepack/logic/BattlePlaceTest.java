@@ -98,4 +98,31 @@ public class BattlePlaceTest {
     @Test
     public void getShipBordeaaa() { assertNotNull(bp.getShipBorder(2,3,2,7)); }
 
+    @Test
+    public void atackaakljslksjd(){
+        BattlePlace.Ship ship = battlePlace.getShipByCoord(1, 0, 0, 2, 0);
+
+        ship.attack();
+
+        assertEquals(0, ship.life);
+    }
+
+    @Test
+    public void atackaakljslkszvaaajd(){
+        BattlePlace.Ship ship = battlePlace.getShipByCoord(0, 0, 0, 0, 0);
+
+        ship.attack();
+
+        assertEquals(-1, ship.life);
+    }
+
+    @Test
+    public void atackaakljshshslkszvaaajd(){
+        BattlePlace.Ship ship = battlePlace.getShipByCoord(2, 0, 0, 0, 3);
+
+        ship.attack();
+
+        assertEquals(1, ship.life);
+    }
+
 }
