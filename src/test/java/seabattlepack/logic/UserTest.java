@@ -40,6 +40,23 @@ public class UserTest {
     }
 
     @Test
+    public void checkPossibleDirectionWithList() {
+        List<User.Directions> failed = new ArrayList<>();
+        failed.add(User.Directions.UP);
+        failed.add(User.Directions.DOWN);
+        failed.add(User.Directions.LEFT);
+        failed.add(User.Directions.RIGHT);
+
+        List<User.Directions> expected = new ArrayList<>();
+        expected.add(User.Directions.DOWN);
+        expected.add(User.Directions.LEFT);
+
+        List<User.Directions> actual = user.possibleDirection(0, 9, failed);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void checkPossibleDirection() {
         List<User.Directions> expected = new ArrayList<>();
         expected.add(User.Directions.UP);
