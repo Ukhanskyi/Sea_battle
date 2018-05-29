@@ -44,9 +44,4 @@ public class UtilsTest {
         Path tmpFile = Files.createTempFile(tmpDir, "miss", ".png");
     }
 
-
-    @Test
-    public void refreshBattlePlace() {
-
-    }
 }

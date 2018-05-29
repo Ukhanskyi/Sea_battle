@@ -3,7 +3,12 @@ package seabattlepack.logic;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 public class UserTest {
 
@@ -27,6 +32,33 @@ public class UserTest {
     public void getBattlePlace() {
         assertNotNull(user.getBattlePlace());
 
+    }
+
+    @Test
+    public void checkArray() {
+        assertNotNull(user.getBattlePlace());
+    }
+
+    @Test
+    public void checkPossibleDirection() {
+        List<User.Directions> expected = new ArrayList<>();
+        expected.add(User.Directions.UP);
+        expected.add(User.Directions.RIGHT);
+
+        List<User.Directions> actual = user.possibleDirection(9, 0);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkPossibleDirections() {
+        List<User.Directions> expected = new ArrayList<>();
+        expected.add(User.Directions.DOWN);
+        expected.add(User.Directions.LEFT);
+
+        List<User.Directions> actual = user.possibleDirection(0, 9);
+
+        assertEquals(expected, actual);
     }
 
     @Test

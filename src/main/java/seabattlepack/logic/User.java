@@ -78,7 +78,6 @@ public class User {
         return autoAttack();
     }
 
-
     private res autoAttack() {
         if (availableDirections.isEmpty())
             if (posStack.isEmpty()) {
