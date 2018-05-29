@@ -26,6 +26,12 @@ public class BattlePlaceTest {
     public void isWin_should_Return_False() { assertFalse(battlePlace.isWin());}
 
     @Test
+    public void isWin_should_Return_True() {
+        battlePlace.aliveShips = 0;
+        assertTrue(battlePlace.isWin());
+    }
+
+    @Test
     public void func_checkPlace_isAutoGen_should_return_false() {assertTrue(battlePlace.checkPlace(0, 0, 9, 9));}
 
     @Test
