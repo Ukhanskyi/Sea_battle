@@ -28,9 +28,9 @@ public class User {
         return place;
     }
 
-    class RetPos {
-        private int x;
-        private int y;
+    static class RetPos {
+        protected int x;
+        protected int y;
 
         RetPos(int x, int y) {
             this.x = x;

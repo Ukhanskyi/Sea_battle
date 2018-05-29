@@ -6,9 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class UserTest {
 
@@ -37,6 +35,14 @@ public class UserTest {
     @Test
     public void checkArray() {
         assertNotNull(user.getBattlePlace());
+    }
+
+    @Test
+    public void checkRetPost() {
+        User.RetPos ret = new User.RetPos(2, 2);
+
+        assertEquals(2, ret.x);
+        assertEquals(2, ret.y);
     }
 
     @Test
