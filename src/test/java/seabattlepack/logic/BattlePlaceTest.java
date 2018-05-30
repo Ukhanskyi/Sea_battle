@@ -10,6 +10,8 @@ public class BattlePlaceTest {
     private BattlePlace battlePlace;
     private BattlePlace bp;
 
+    
+
     @Before
     public void setBattlePlace(){
         battlePlace = new BattlePlace(false);
