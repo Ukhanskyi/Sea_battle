@@ -14,7 +14,6 @@ public class BattlePlaceViewTest {
     private JFrame me;
     //Robot robot = BasicRobot.robotWithNewAwtHierarchy();
 
-
     @Before
     public void getBattlePlaceView() {
         battlePlaceView = new BattlePlaceView(me);
